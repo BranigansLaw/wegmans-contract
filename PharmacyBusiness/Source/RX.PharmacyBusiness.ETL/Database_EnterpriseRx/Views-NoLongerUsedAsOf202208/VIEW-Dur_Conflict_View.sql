@@ -1,0 +1,81 @@
+
+CREATE OR REPLACE FORCE EDITIONABLE VIEW WEGMANS.DUR_CONFLICT_VIEW (
+  STORE_NUM,
+  RX_NUM,
+  REFILL_NUM,
+  PART_SEQ_NUM,
+  DUR_DATE,
+  PATIENT_NUM,
+  NDC_WO,
+  DRUG_NAME,
+  SDGI,
+  GCN,
+  GCN_SEQ_NUM,
+  DEA_CLASS,
+  CONFLICT_CODE,
+  CONFLICT_DESC,
+  CONFLICT_TYPE,
+  SEVERITY_DESC,
+  RESULT_OF_SERVICE,
+  PROF_SERVICE,
+  LEVEL_OF_EFFORT,
+  REASON_FOR_SERVICE,
+  IS_CRITICAL,
+  IS_EXCEPTION,
+  RX_FILL_SEQ,
+  RX_RECORD_NUM,
+  PRESCRIBER_KEY,
+  USER_KEY,
+  DATE_KEY
+) AS
+SELECT
+    facility.FD_FACILITY_ID AS store_num,
+    dur.RX_NUMBER AS rx_num,
+    dur.REFILL_NUM AS refill_num,
+    (DECODE(dur.PARTIAL_FILL_SEQ,null,0,dur.PARTIAL_FILL_SEQ)) AS part_seq_num,
+    durdate.CAL_DATE AS dur_date,
+    pt.PD_PATIENT_NUM AS patient_num,
+    to_char(drug.DRUG_NDC) AS ndc_wo,
+    drug.DRUG_LABEL_NAME AS drug_name,
+    product.PRD_IS_GENERIC AS sdgi,
+    drug.DRUG_GCN AS gcn,
+    drug.DRUG_GCN_SEQ AS gcn_seq_num,
+    drug.DRUG_DEA_CLASS AS dea_class,
+    cc.DUR_CONFLICT_CODE AS conflict_code,
+    cc.DUR_CONFLICT_CODE_DESC AS conflict_desc,
+    ctype.DUR_CONFLICT_DESC AS conflict_type,
+    sevtype.DUR_SEVERITY_DESC AS severity_desc,
+    dur.RESULT_SERVICE_CODE AS result_of_service,
+    dur.PROF_SERVICE_CODE AS prof_service,
+    dur.LEVEL_OF_EFFORT_NUM AS level_of_effort,
+    dur.REASON_FOR_SERVICE_CODE AS reason_for_service,
+    durind.IS_CRITICAL AS is_critical,
+    durind.IS_EXCEPTION AS is_exception,
+    dur.FILL_SEQ_NUM AS rx_fill_seq,
+    dur.RX_RECORD_NUM AS rx_record_num,
+    dur.PRS_PRESCRIBER_KEY AS prescriber_key,
+    dur.SYS_USER_KEY AS user_key,
+    dur.DATE_KEY
+FROM TREXONE_DW_DATA.DUR_CONFLICT_FACT dur
+    LEFT OUTER JOIN TREXONE_DW_DATA.DATE_DIM durdate
+       ON dur.DATE_KEY = durdate.DATE_KEY
+    LEFT OUTER JOIN TREXONE_DW_DATA.FACILITY facility
+       ON dur.FD_FACILITY_KEY = facility.FD_FACILITY_KEY
+    LEFT OUTER JOIN TREXONE_DW_DATA.PATIENT pt
+       ON dur.PD_PATIENT_KEY = pt.PD_PATIENT_KEY
+    LEFT OUTER JOIN TREXONE_DW_DATA.PRODUCT product
+       ON dur.PRD_PRODUCT_KEY = product.PRD_PRODUCT_KEY
+    LEFT OUTER JOIN TREXONE_DW_DATA.DRUG drug
+       ON product.PRD_DRUG_NUM = drug.DRUG_NUM
+    LEFT OUTER JOIN TREXONE_DW_DATA.DUR_CONFLICT_CODE cc
+       ON dur.DUR_CONFLICT_CODE_KEY = cc.DUR_CONFLICT_CODE_KEY
+    LEFT OUTER JOIN TREXONE_DW_DATA.DUR_CONFLICT_TYPE ctype
+       ON dur.DUR_CONFLICT_TYPE_KEY = ctype.DUR_CONFLICT_TYPE_KEY
+    LEFT OUTER JOIN TREXONE_DW_DATA.DUR_SEVERITY_TYPE sevtype
+       ON dur.DUR_SEVERITY_TYPE_KEY = sevtype.DUR_SEVERITY_TYPE_KEY
+    LEFT OUTER JOIN TREXONE_DW_DATA.DUR_INDICATOR durind
+       ON dur.DUR_INDICATOR_KEY = durind.DUR_INDICATOR_KEY
+
+WITH READ ONLY;
+/ 
+

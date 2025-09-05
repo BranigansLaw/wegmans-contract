@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <engineHost instrumentationKey="ba78a19f-cdba-460a-be25-9611f66e5051" xdt:Transform="SetAttributes"/>
+  <appSettings>
+    <add key="ETL.StorageAccount" value="DefaultEndpointsProtocol=https;AccountName=rxetlstgcert;AccountKey=lEyrOtjsRIjHb50wtFGHB7BpoNjN0/XsSDoGn2oDWms8bb+IUStqUPqbo6aqAtXniMiGo+STxTnGTBoC14q4Zg==;EndpointSuffix=core.windows.net" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="ETL.JobSettingsTable" value="JobSettings" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="JobSettings.PrefixPartitonKeyWithMachineName" value="false" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_TraceOption" value="1" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_TraceFileLocation" value="X:\Batch\PharmacyBusiness\Output" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_TraceLevel" value="0" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_WalletLocation" value="C:\Oracle\Wallet" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_TnsAdmin" value="C:\Oracle\product\11.2.0\client_1\Network\Admin" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+
+    <!-- Settings for sending emails.
+         Mail Addresses values should be comma separated having display names in escaped quotes (&quot;) surrounding display names, and having escaped tags (&lt; and &gt;) surrounding email addresses. 
+         Proper syntax example: value="&quot;Pharmacy Development, The Worlds Best!&quot; &lt;Pharmacy.Development@wegmans.com&gt;, &quot;McCarthy, Chris&quot; &lt;Chris.McCarthy@wegmans.com&gt;"
+    -->
+    <add key="RXS516.EmailFrom" value="PharmacyIT@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS516.EmailToCSV" value="Chris.McCarthy@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS516.EmailCcCSV" value="" xdt:Locator="Match(key)"/>
+    <add key="RXS516.EmailBccCSV" value="" xdt:Locator="Match(key)"/>
+    <add key="RXS516.AlertThreshhold" value="1"/>
+    <add key="RXS573.ALL.EmailFrom" value="PharmacyIT@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.ALL.EmailToCSV" value="Jonathan.Paeplow@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.ALL.EmailCcCSV" value="Deanna.Cartenuto@wegmans.com,Chris.McCarthy@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.ALL.EmailBccCSV" value="" xdt:Locator="Match(key)"/>
+    <add key="RXS573.EXCELLUS.EmailFrom" value="PharmacyIT@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.EXCELLUS.EmailToCSV" value="Jonathan.Paeplow@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.EXCELLUS.EmailCcCSV" value="Deanna.Cartenuto@wegmans.com,Chris.McCarthy@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.EXCELLUS.EmailBccCSV" value="" xdt:Locator="Match(key)"/>
+    <add key="RXS573.HEALTHNOW.EmailFrom" value="PharmacyIT@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.HEALTHNOW.EmailToCSV" value="Chris.McCarthy@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.HEALTHNOW.EmailCcCSV" value="Chris.McCarthy@wegmans.com,Chris.McCarthy@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.HEALTHNOW.EmailBccCSV" value="" xdt:Locator="Match(key)"/>
+    <add key="RXS573.IHA.EmailFrom" value="PharmacyIT@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.IHA.EmailToCSV" value="Jonathan.Paeplow@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.IHA.EmailCcCSV" value="Deanna.Cartenuto@wegmans.com,Chris.McCarthy@wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="RXS573.IHA.EmailBccCSV" value="" xdt:Locator="Match(key)"/>
+    <add key="EmailHost" value="smtp.wegmans.com" xdt:Locator="Match(key)"/>
+    <add key="EmailPort" value="25" xdt:Locator="Match(key)"/>
+    <add key="RXS516.FinalizationURL" value="https://entrx-xrt3.enterpriserx.ndchealth.com:15300/wegu01/TRexOneSoap/pos" xdt:Locator="Match(key)"/>
+  </appSettings>
+</configuration>

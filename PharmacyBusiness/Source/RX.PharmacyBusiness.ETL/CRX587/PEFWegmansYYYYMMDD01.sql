@@ -1,0 +1,1 @@
+﻿SELECT * FROM TABLE(wegmans.SURESCRIPTS_PKG.GET_MED_HIST(:RunDate, 'P'))

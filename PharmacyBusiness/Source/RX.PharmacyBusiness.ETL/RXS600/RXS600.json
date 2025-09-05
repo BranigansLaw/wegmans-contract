@@ -1,0 +1,9 @@
+[
+  {
+    "directoryPath": "\\\\Batch_Server_Domain_Name_VARIABLE\\Batch",
+    "retentionDays": 90,
+    "fileExtensions": [ "*.txt", "*.csv", "*.tif", "*.log" ],
+    "recursive": true,
+    "removeEmptyDirectories": false
+  }
+]

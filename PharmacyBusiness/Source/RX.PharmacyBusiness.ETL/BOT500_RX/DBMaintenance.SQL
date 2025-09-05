@@ -1,0 +1,1 @@
+﻿Delete from [ContainerReturns].[dbo].[Transaction] where TxDate < getdate() - 7

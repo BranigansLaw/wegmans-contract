@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <engineHost instrumentationKey="42041730-c20e-4b66-b506-3b0373a15362" xdt:Transform="SetAttributes"/>
+  <appSettings>
+    <add key="ETL.StorageAccount" value="DefaultEndpointsProtocol=https;AccountName=rxetlstgprod;AccountKey=xP5NYBbBg0wOlPNSIrEhYPDp+pFfoNHDDzy30yNUeSg42VrWMZroD0Z645dFTvemerHG8vNAVnUy11ZzZdYFeQ==;BlobEndpoint=https://rxetlstgprod.blob.core.windows.net/;QueueEndpoint=https://rxetlstgprod.queue.core.windows.net/;TableEndpoint=https://rxetlstgprod.table.core.windows.net/;FileEndpoint=https://rxetlstgprod.file.core.windows.net/;" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="ETL.JobSettingsTable" value="JobSettings" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="JobSettings.PrefixPartitonKeyWithMachineName" value="false" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="EmailToCSV" value="&quot;Pharmacy Accounting&quot; &lt;pharmaccgtproject@wegmans.com&gt;" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_TnsDescriptor_ERx" value="(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=206.227.246.65)(PORT=5002)))(CONNECT_DATA=(SID=dwwegp01)))" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_TraceOption" value="1" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_TraceFileLocation" value="X:\Batch\PharmacyBusiness\Output" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_TraceLevel" value="0" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_WalletLocation" value="C:\Oracle\Wallet" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="OracleConfiguration_TnsAdmin" value="C:\Oracle\product\11.2.0\client_1\Network\Admin" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+		<add key="OracleConfiguration_TnsDescriptor_ERx" value="(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=206.227.246.65)(PORT=5002)))(CONNECT_DATA=(SID=dwwegp01)))" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+
+    <!-- Settings for sending emails.
+         Mail Addresses values should be comma separated having display names in escaped quotes (&quot;) surrounding display names, and having escaped tags (&lt; and &gt;) surrounding email addresses. 
+         Proper syntax example: value="&quot;Pharmacy Development, The Worlds Best!&quot; &lt;Pharmacy.Development@wegmans.com&gt;, &quot;McCarthy, Chris&quot; &lt;Chris.McCarthy@wegmans.com&gt;"
+    -->
+    <add key="CRX542.EmailToCSV" value="PharmacyIT@wegmans.com,pharmaccgtproject@wegmans.com,RXBusinessSolutionsTeam@wegmans.com,rick.krienke@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS516_EmailFrom" value="PharmacyIT@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS516_RXBSTEmailFrom" value="PharmacyBusinessSo@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="RXS516_StoreEmailToCSV" value="Pharmacy.StoreTHREE_DIGIT_STORE_NBR@wegmans.com,PharmacyManager.StoreTHREE_DIGIT_STORE_NBR@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="RXS516_AdminEmailToCSV" value="Chris.McCarthy@wegmans.com, RXBusinessSolutionsTeam@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="RXS516_EmailCcCSV" value="Kristin.Ashby@wegmans.com,PharmacyIT@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="RXS516_EmailBccCSV" value="Chris.McCarthy@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="RXS516_AlertThreshhold" value="100" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="RXS516_FinalizationURL" value="https://entrx-xrt1.enterpriserx.ndchealth.com:15100/wegp01/TRexOneSoap/pos" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS625.EmailFrom" value="PharmacyIT@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS625.EmailToCSV" value="RXBusinessSolutionsTeam@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS625.EmailCcCSV" value="" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS625.EmailBccCSV" value="" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS777.EmailToCSV" value="Kristin.Ashby@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS812.EmailToCSV" value="Central.Rx@wegmans.com,Mike.Scozzaro@wegmans.com,Nancy.Lepel@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS812.EmailCcCSV" value="" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="RXS812.EmailBccCSV" value="Chris.McCarthy@wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="EmailHost" value="smtp.wegmans.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="EmailPort" value="25" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+	<add key="JobNotifier.EmailToCSV" value="pharmaccgtproject@wegmans.com,Kristin.Ashby@wegmans.com,jeanette.jardine@wegmans.com,Chris.Gardiner@wegmans.com,mike.rosilio@wegmans.com,ITTCSPharmacySupport@wegmans.com,support@1010data.com" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="JobNotifier.EmailCcCSV" value="" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+    <add key="JobNotifier.EmailBccCSV" value="" xdt:Transform="SetAttributes" xdt:Locator="Match(key)"/>
+  </appSettings>
+  <connectionStrings>
+	  <add name="BOTTLES" providerName="System.Data.SqlClient" connectionString="Data Source=wfm-it-db-01;Initial Catalog=ContainerReturns;Integrated Security=SSPI;" xdt:Transform="SetAttributes" xdt:Locator="Match(name)"/>
+	  <add name="GMS" providerName="System.Data.SqlClient" connectionString="Data Source=wcn-spo-db-01,10425;Initial Catalog=Gratuity;Integrated Security=SSPI;" xdt:Transform="SetAttributes" xdt:Locator="Match(name)" />
+      <add name="EDW_RX_NETEZZA" providerName="System.Data.OleDb" connectionString="Data Source=ANZPEDW; User ID=AZURE_NETZ_WEG_BATCH_ID; Password=AZURE_NETZ_WEG_BATCH_SECRET; Initial Catalog=AZURE_NETZ_WEG_BATCH_DB; Provider=NZOLEDB; Persist Security Info=True;" xdt:Transform="SetAttributes" xdt:Locator="Match(name)" />
+	  <add name="ENTERPRISE_RX_AZURE" providerName="System.Data.SqlClient" connectionString="Server=tcp:cps-dw.database.windows.net,1433;Initial Catalog=CPS;Persist Security Info=False;User id=cps_weg_batch;Password=AZURE_CPS_WEG_BATCH_SECRET;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;" xdt:Transform="SetAttributes" xdt:Locator="Match(name)"/>
+  </connectionStrings>
+</configuration>

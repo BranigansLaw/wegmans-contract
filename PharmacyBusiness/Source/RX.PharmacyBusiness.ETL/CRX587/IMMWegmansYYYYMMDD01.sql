@@ -1,0 +1,1 @@
+﻿SELECT * FROM TABLE(wegmans.SURESCRIPTS_PKG.GET_PNL(:RunDate, 'ALL', 'P'))

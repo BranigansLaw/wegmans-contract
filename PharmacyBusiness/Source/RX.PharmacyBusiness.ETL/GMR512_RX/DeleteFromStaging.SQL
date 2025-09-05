@@ -1,0 +1,1 @@
+﻿   delete from gratuity.staging.sales

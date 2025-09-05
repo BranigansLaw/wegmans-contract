@@ -1,0 +1,5 @@
+RawData1_StoreNbr,RawData2_RegisterId,RawData3_TransactionDateTime,RawData4_ItemUpc,RawData5_ItemWeightInPounds,RawData6_ItemPricePerPound,DerivedData1_ItemPromotionDescription,DerivedData2_ItemFinalCostAfterDiscountApplied
+1,A,07/01/2024 08:00:00,111,0.56,3.99,No discount under one pound,2.23
+1,B,07/01/2024 09:00:00,111,1.23,3.99,Buy one pound save ten percent,4.42
+1,C,07/01/2024 10:00:00,111,2.34,3.99,Buy two pounds save twenty percent,7.47
+2,D,07/01/2024 11:00:00,222,0.78,4.44,No discounts,3.46

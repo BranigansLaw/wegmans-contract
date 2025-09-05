@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F9A911F0-D31D-4042-A71E-A8FEECB21EE7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RX.PharmacyBusiness.ETL</RootNamespace>
+    <AssemblyName>RX.PharmacyBusiness.ETL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.12.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\\packages\DotNetZip.1.12.0\lib\net20\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.ApplicationInsights.2.9.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.TraceListener, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.ApplicationInsights.TraceListener.2.9.1\lib\net45\Microsoft.ApplicationInsights.TraceListener.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.0\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.Data.Edm.5.8.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.Data.OData.5.8.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Microsoft.Data.Services.Client.5.8.4\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\\packages\WindowsAzure.Storage.9.3.3\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.12.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Moq.4.12.0\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=2.0.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.Core.2.19.70\lib\netstandard2.0\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="POS">
+      <HintPath>RXS516\POS.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Spatial, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.8.4\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Wegmans.EnterpriseLibrary, Version=4.9.1.0, Culture=neutral, PublicKeyToken=f1cb8721b16ec1b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.EnterpriseLibrary.4.9.1.39468\lib\net472\Wegmans.EnterpriseLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.EnterpriseLibrary.Extensions, Version=4.9.1.0, Culture=neutral, PublicKeyToken=f1cb8721b16ec1b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.EnterpriseLibrary.Extensions.4.9.1.39468\lib\net472\Wegmans.EnterpriseLibrary.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.EnterpriseLibrary.Logging, Version=4.6.0.0, Culture=neutral, PublicKeyToken=f1cb8721b16ec1b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.EnterpriseLibrary.Logging.4.6.1\lib\net46\Wegmans.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.InterfaceEngine, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.InterfaceEngine.Host.1.6.0\lib\net462\Wegmans.InterfaceEngine.exe</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.InterfaceEngine.Core, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.InterfaceEngine.Core.1.6.0\lib\net462\Wegmans.InterfaceEngine.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.Metabase.Client.Proxies, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.Metabase.Client.Proxies.1.5.2\lib\net46\Wegmans.Metabase.Client.Proxies.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.Metabase.Core, Version=1.8.0.0, Culture=neutral, PublicKeyToken=37351cb07f33d6d5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.Metabase.Diagnostics.1.8.2\lib\net46\Wegmans.Metabase.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.Metabase.Diagnostics, Version=1.8.0.0, Culture=neutral, PublicKeyToken=37351cb07f33d6d5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.Metabase.Diagnostics.1.8.2\lib\net46\Wegmans.Metabase.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.Metabase.Proxies, Version=1.8.0.0, Culture=neutral, PublicKeyToken=37351cb07f33d6d5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.Metabase.Proxies.1.8.2\lib\net46\Wegmans.Metabase.Proxies.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.PharmacyLibrary, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.PharmacyLibrary.1.2.1\lib\net471\Wegmans.PharmacyLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.PharmacyLibrary.Database.AppInsights, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.PharmacyLibrary.Database.AppInsights.1.2.1\lib\net471\Wegmans.PharmacyLibrary.Database.AppInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.PharmacyLibrary.ETL, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.PharmacyLibrary.ETL.1.2.1\lib\net471\Wegmans.PharmacyLibrary.ETL.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.PharmacyLibrary.ETL.ApplicationInsights, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.PharmacyLibrary.ETL.ApplicationInsights.1.2.1\lib\net471\Wegmans.PharmacyLibrary.ETL.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.PharmacyLibrary.InterfaceEngine, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.PharmacyLibrary.InterfaceEngine.1.2.1\lib\net471\Wegmans.PharmacyLibrary.InterfaceEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.PharmacyLibrary.Logging, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.PharmacyLibrary.Logging.1.2.1\lib\net471\Wegmans.PharmacyLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Wegmans.PharmacyLibrary.UnitTesting, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wegmans.PharmacyLibrary.UnitTesting.1.2.1\lib\net471\Wegmans.PharmacyLibrary.UnitTesting.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\EmptyJob.cs">
+      <Link>EmptyJob.cs</Link>
+    </Compile>
+    <Compile Include="BOT500_RX\DownloadBottleTransactions.cs" />
+    <Compile Include="CRX000\DownloadSomething.cs" />
+    <Compile Include="CRX515\DownloadOmnisysClaim.cs" />
+    <Compile Include="CRX525\Business\InventoryRecordsExporter.cs" />
+    <Compile Include="CRX525\Business\InventoryFileReader.cs" />
+    <Compile Include="CRX525\Core\ShelfInventoryRecord.cs" />
+    <Compile Include="CRX525\Core\WcbInventoryRecord.cs" />
+    <Compile Include="CRX525\DownloadWcbInventories.cs" />
+    <Compile Include="CRX540\Business\DerivePrescriptionSaleData.cs" />
+    <Compile Include="CRX540\Business\MailSalesExporter.cs" />
+    <Compile Include="CRX540\Business\MailSalesImporter.cs" />
+    <Compile Include="CRX540\Business\RetailItemFactory.cs" />
+    <Compile Include="CRX540\Business\Rules\IsAlternativePaymentRefundRule.cs" />
+    <Compile Include="CRX540\Business\Rules\IsFullRefundRule.cs" />
+    <Compile Include="CRX540\Business\Rules\IsItemPrescriptionSaleRule.cs" />
+    <Compile Include="CRX540\Business\Rules\IsItemShippingChargeRule.cs" />
+    <Compile Include="CRX540\Business\Rules\IsItemThirdPartyPaymentRule.cs" />
+    <Compile Include="CRX540\Business\Rules\IsPartialRefundRule.cs" />
+    <Compile Include="CRX540\Business\Rules\IsSoldRule.cs" />
+    <Compile Include="CRX540\Contracts\IRetailItemFactory.cs" />
+    <Compile Include="CRX540\Contracts\IRule.cs" />
+    <Compile Include="CRX540\Core\FillStateCodes.cs" />
+    <Compile Include="CRX540\Core\FillStatusTypes.cs" />
+    <Compile Include="CRX540\Core\GeneralAccountingRetailItem.cs" />
+    <Compile Include="CRX540\Core\GeneralAccountingRetailItemSummary.cs" />
+    <Compile Include="CRX540\Core\GeneralAccountingRetailItemTypes.cs" />
+    <Compile Include="CRX540\Core\ItemUniversalProductNumbers.cs" />
+    <Compile Include="CRX540\Core\PaymentTypes.cs" />
+    <Compile Include="CRX540\Core\PrescriptionSale.cs" />
+    <Compile Include="CRX540\Core\PrescriptionSaleTypes.cs" />
+    <Compile Include="CRX540\Core\WorkflowSteps.cs" />
+    <Compile Include="CRX540\DownloadMailSales.cs" />
+    <Compile Include="CRX542\Business\PosAlerts.cs" />
+    <Compile Include="CRX542\Business\PosExporter.cs" />
+    <Compile Include="CRX542\Business\PosImporter.cs" />
+    <Compile Include="CRX542\Core\BrickAndMortarPosRecord.cs" />
+    <Compile Include="CRX542\Core\PosFor1010dataRecord_SFTP.cs" />
+    <Compile Include="CRX542\Core\PosFor1010dataRecord_TENUP.cs" />
+    <Compile Include="CRX542\Core\PosGapsInTime.cs" />
+    <Compile Include="CRX542\Core\PosRecord.cs" />
+    <Compile Include="CRX542\DownloadPos.cs" />
+    <Compile Include="CRX572\DownloadIQVIAData.cs" />
+    <Compile Include="CRX572\DownloadsForIMS.cs" />
+    <Compile Include="CRX575\DownloadsForPharmacyBusiness.cs" />
+    <Compile Include="CRX576\DownloadsForTenTenDataSFTP.cs" />
+    <Compile Include="CRX578\DownloadsForMedicare.cs" />
+    <Compile Include="CRX578\FDSHistory2021.cs" />
+    <Compile Include="CRX582\Business\BooleanExtensions.cs" />
+    <Compile Include="CRX582\Business\InsurancePayerFactory.cs" />
+    <Compile Include="CRX582\Business\MessageAdapter.cs" />
+    <Compile Include="CRX582\Business\RequestMessageParser.cs" />
+    <Compile Include="CRX582\Contracts\IInsurancePayerFactory.cs" />
+    <Compile Include="CRX582\Core\FillFact.cs" />
+    <Compile Include="CRX582\Core\FillFactStatus.cs" />
+    <Compile Include="CRX582\Core\HipaaPortionOfClaim.cs" />
+    <Compile Include="CRX582\Core\InsurancePayer.cs" />
+    <Compile Include="CRX582\Core\SupplementalData.cs" />
+    <Compile Include="CRX582\Core\ThirdPartyClaim.cs" />
+    <Compile Include="CRX582\Core\ThirdPartyClaimRecord.cs" />
+    <Compile Include="CRX582\Core\TransactionCode.cs" />
+    <Compile Include="CRX582\DownloadThirdPartyClaims.cs" />
+    <Compile Include="CRX582\Exporters\SmartRxClaimsFor1010data.cs" />
+    <Compile Include="CRX582\Exporters\SmartRxClaimsForInmar.cs" />
+    <Compile Include="CRX582\Exporters\SmartRxVolumeSummary.cs" />
+    <Compile Include="CRX582\NotifyThirdPartyClaims.cs" />
+    <Compile Include="CRX587\DownloadsForSureScripts.cs" />
+    <Compile Include="CRX650\DownloadNetSales.cs" />
+    <Compile Include="CRX801\DownloadsForRiskManagement.cs" />
+    <Compile Include="EmailHelper.cs" />
+    <Compile Include="ExtensionsHelper.cs" />
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="GMR512_RX\Core\GMSRecord.cs" />
+    <Compile Include="GMR512_RX\InsertGMSSales.cs" />
+    <Compile Include="NetezzaHelper.cs" />
+    <Compile Include="OracleHelper.cs" />
+    <Compile Include="RXS501\DownloadAllActive.cs" />
+    <Compile Include="RXS501\DownloadERxAccess.cs" />
+    <Compile Include="RXS506\Core\RowCountRecord.cs" />
+    <Compile Include="RXS506\McKessonETLCheck.cs" />
+    <Compile Include="RXS512\DownloadDailyDrug.cs" />
+    <Compile Include="RXS516\Core\APICallFailures.cs" />
+    <Compile Include="RXS516\Core\NotificationsSent.cs" />
+    <Compile Include="RXS516\POSMessaging.cs" />
+    <Compile Include="RXS524\Core\SmartOrderPointRecord.cs" />
+    <Compile Include="RXS524\MergeOrderPointsForPilotStores.cs" />
+    <Compile Include="RXS527\Core\IVROutboundCallRecord.cs" />
+    <Compile Include="RXS527\Core\McKessonRxRecord.cs" />
+    <Compile Include="RXS527\DownloadIVROutboundCalls.cs" />
+    <Compile Include="RXS532\Core\CpsRecord.cs" />
+    <Compile Include="RXS532\Core\VaccinationRecordForCDC.cs" />
+    <Compile Include="RXS532\Core\VaccinationRecordFromMcKessonOracleDW.cs" />
+    <Compile Include="RXS532\DownloadForCDCWithOldCvx.cs" />
+    <Compile Include="RXS532\DownloadForCDC.cs" />
+    <Compile Include="RXS573\DownloadHealthScreening.cs" />
+    <Compile Include="RXS578\Core\CpsRecord.cs" />
+    <Compile Include="RXS578\Core\LogileIntervalRecord.cs" />
+    <Compile Include="RXS578\Core\LogileMatrixRecord.cs" />
+    <Compile Include="RXS578\Core\LogileTotalRecord.cs" />
+    <Compile Include="RXS578\DownloadWorkloadBalance.cs" />
+    <Compile Include="RXS580\IVRMDFeed.cs" />
+    <Compile Include="RXS582\Core\NdcConversionRecord.cs" />
+    <Compile Include="RXS582\HistoricalDownloadForSTC.cs" />
+    <Compile Include="RXS609\DownloadSoldDetail.cs" />
+    <Compile Include="RXS611\DownloadSmartOrderPointsMinMax.cs" />
+    <Compile Include="RXS625\NotifyJanssenXarelto.cs" />
+    <Compile Include="RXS555\NYNonResidentZeroReports.cs" />
+    <Compile Include="RXS660\DownloadPOAudit.cs" />
+    <Compile Include="RXS661\DownloadPOFact.cs" />
+    <Compile Include="RXS666\Core\EmployeeRecord.cs" />
+    <Compile Include="RXS666\DownloadActiveDirectory.cs" />
+    <Compile Include="RXS720\DownloadAtebDeceased.cs" />
+    <Compile Include="RXS777\Core\ERxAccessData.cs" />
+    <Compile Include="RXS777\NotifyERxUnauthorized.cs" />
+    <Compile Include="RXS812\Core\ReportRecord.cs" />
+    <Compile Include="RXS812\DownloadNaloxone.cs" />
+    <Compile Include="RX_Data_Transfers\Core\MultipurposeString.cs" />
+    <Compile Include="RX_Data_Transfers\Core\OracleSchemaRowCount.cs" />
+    <Compile Include="RX_Data_Transfers\Core\OracleSchema.cs" />
+    <Compile Include="RX_Data_Transfers\Business\OracleTo1010Converter.cs" />
+    <Compile Include="RX_Data_Transfers\Core\MedicareReportRequest_1010.cs" />
+    <Compile Include="RX_Data_Transfers\Core\MedicareReportRequest_Scripts.cs" />
+    <Compile Include="RX_Data_Transfers\DownloadRxData.cs" />
+    <Compile Include="RX_Data_Transfers\ArchiveScriptsTo1010.cs" />
+    <Compile Include="RX_Job_Notifier\JobNotifier.cs" />
+    <Compile Include="TenTenHelper.cs" />
+    <Compile Include="RXS516\Core\ProcessedPosException.cs" />
+    <Compile Include="RXS516\Core\UnresolvedPosExceptionRecord.cs" />
+    <Compile Include="RXS516\POSExceptionAPICalls.cs" />
+    <Content Include="BOT500_RX\DBMaintenance.SQL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BOT500_RX\SelectBottleTransactions.SQL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX515\Omnisys_Claim_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX525\McKesson_Oracle_DW.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX540\MightBeRefundTransactions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX540\MightBeSoldTransactions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX542\MCKESSON_OnlySoldPos_Insert.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX542\MCKESSON_POS_BulkInsert.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX542\MCKESSON_POS_DeleteByRunDate.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX542\SCRIPTS_POS_BulkInsert.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX542\SCRIPTS_POS_DeleteByRunDate.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX572\WEG_086_YYYYMMDD_01_For198.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202101.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202102.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202103.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202104.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202105.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202106.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202107.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202108.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202109.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202111.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory202110.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDS_Pharmacies.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDS_Prescriptions.SQL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX582\GetFillFacts.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX582\GettHipaaClaimElements.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX650\GetNetSales.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database_EnterpriseRx\Packages\THIRD_PARTY_CLAIMS_PKG.sql" />
+    <Content Include="Database_EnterpriseRx\Tables\Table-TEMP_WORKFLOW_GROUP.sql" />
+    <Content Include="Database_EnterpriseRx\Tables\Table-TEMP_WORKFLOW_CLEAN.sql" />
+    <Content Include="Database_EnterpriseRx\Tables\Table-TEMP_WORKFLOW_STEP.sql" />
+    <Content Include="Database_EnterpriseRx\Tables\Table-THIRD_PARTY_CLAIMS_STAGING.sql" />
+    <Content Include="Database_EnterpriseRx\Tables\Table-VTRACKS.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\THIRD_PARTY_CLAIMS_VIEW.sql" />
+    <Content Include="FileHelper_ReadMe.txt" />
+    <Content Include="GMR512_RX\DeleteFromStaging.SQL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GMR512_RX\InsertIntoGMS.SQL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="CRX572\Run_DownloadIQVIAData.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RXS501\RunDownloadAllActive.cmd" />
+    <Content Include="RXS501\SelectAllActiveSystemUser.sql" />
+    <Content Include="RXS501\SelectSystemEventAuditYYYYMMDD.sql" />
+    <Content Include="RXS501\SelectSystemUserYYYYMMDD.sql" />
+    <Content Include="RXS506\ETLCheck_Azure_CPS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS506\ETLCheck_Oracle_DW.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS506\ETLInfoForLogging_Azure_CPS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS506\ETLInfoForLogging_Oracle_DW.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS506\RowCounts_Azure_CPS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS512\DailyDrug_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS527\Get_IVR_Outbound_Calls.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS532\McKesson_Azure_CPS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS532\McKesson_Oracle_DW_WithOldCvx.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS532\McKesson_Oracle_DW.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="RXS582\Core\CpsRecord.cs" />
+    <Compile Include="RXS582\Core\VaccinationRecordForSTC.cs" />
+    <Compile Include="RXS582\Core\VaccinationRecordFromMcKessonOracleDW.cs" />
+    <Compile Include="RXS582\DownloadForSTC.cs" />
+    <Compile Include="RXS605\DownloadAlternativePayments.cs" />
+    <Compile Include="RXS608\DownloadCCPayments.cs" />
+    <Compile Include="RXS610\DownloadSuperClaim.cs" />
+    <Compile Include="RXS613\DownloadPatients.cs" />
+    <Compile Include="RXS614\DownloadPatientAddresses.cs" />
+    <Compile Include="RXS617\DownloadVeriFonePayments.cs" />
+    <Compile Include="RXS710\DownloadNDCP3.cs" />
+    <Compile Include="RXS710\NDCP3DetailIn.cs" />
+    <Compile Include="RXS710\NDCP3DetailOut.cs" />
+    <Compile Include="RXS710\NDCP3HeaderIn.cs" />
+    <Compile Include="RXS710\NDCP3HeaderOut.cs" />
+    <Compile Include="RXS710\ExtensionMethods.cs" />
+    <Compile Include="SqlServerHelper.cs" />
+    <Content Include="RXS578\TEMP_WORKFLOW_STEP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\McKesson_Azure_CPS_Affluria_20220810_thru_20220930.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\McKesson_Azure_CPS_FluVax_20230801_thru_20230919.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\McKesson_Azure_CPS_NewYork_20220801_thru_20230920.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\McKesson_Oracle_DW_FluVax_20230801_thru_20230919.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\McKesson_Oracle_DW_NewYork_20220801_thru_20230920.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\McKesson_Oracle_DW_Affluria_20220810_thru_20220930.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\McKesson_Oracle_DW_COVID.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS609\Sold_Detail_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS578\Super_Workflow_Steps_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS580\AtebMaster_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS580\Run_IVRMDFeed.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS610\DEBUG_Super_Duper_Claim_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS610\RxReady_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS611\GetSmartOrderPointsMinMax.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS660\GetPOAudit_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS661\GetPOFact_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS710\SelectNDCP3Detail.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS710\SelectNDCP3Header.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS720\Deceased_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS777\SelectERxUnauthorized.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS812\McKesson_DW_Naloxone.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\SelectOracleSchema.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\UAT_Blacklist_Order_Points.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\UAT_HipaaBreachRisk.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\UAT_HipaaDisclosure.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\UAT_HipaaInc_View.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\UAT_Incident_Reporting.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\UAT_Medicare_Report_Requests.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\UAT_MES_Request_Queue.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\UAT_Resolved_IVR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\UAT_Resolved_POS_Exceptions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CRX572\Run_DownloadsForIMS.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX572\WEG_086_YYYYMMDD_01.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\TAT_Excellus_MaxRx_Prior_Week_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\TAT_Excellus_Prior_Week_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\TAT_Excellus_Raw_Data_Prior_Week_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\TAT_IHA_Prior_Week_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\TAT_IHA_Raw_Data_Prior_Week_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\TAT_Specialty_Prior_Week_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\TAT_Specialty_Raw_Data_Prior_Week_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\TAT_Specialty_YTD_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\DurConflict_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\EXTENDED_DRUG_FILE_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\InvAdj_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\PetPtNums_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\PRESCRIBERADDRESS_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\PRESCRIBER_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\Run_DownloadsForTenTenDataSFTP.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\RxTransfer_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\RX_READY_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\ServiceLevel_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\SupplierPriceDrugFile_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX576\TagPatientGroups_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\MedicarePatientTableUpdateCount.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\Run_DownloadsForMedicare.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\RxDrugList.sql" />
+    <Content Include="CRX578\Wegmans_HPOne_Pharmacies_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\Wegmans_HPOne_Prescriptions_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX587\IMMWegmansPAYYYYMMDD01.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX587\IMMWegmansYYYYMMDD01.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX587\PEFWegmansYYYYMMDD01.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX587\Run_DownloadsForSureScripts.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX801\Run_DownloadsForRiskManagement.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX801\WorkersCompMonthly_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database_EnterpriseRx\Functions\FUNCTION-Clean_String_ForTenUp.sql" />
+    <Content Include="Database_EnterpriseRx\Functions\FUNCTION-KEEP_ONLY_ALPHANUMERIC.sql" />
+    <Content Include="Database_EnterpriseRx\Functions\FUNCTION-Set_To_Fixed_Width.sql" />
+    <Content Include="Database_EnterpriseRx\Indexes\Indexes-SENT_TO_SURE_SCRIPTS.sql" />
+    <Content Include="Database_EnterpriseRx\Packages\FORMAT_WLB_PKG.sql" />
+    <Content Include="Database_EnterpriseRx\Packages\SCRIPTS_WORKLOAD_BALANCING.sql" />
+    <Content Include="Database_EnterpriseRx\Packages\SURESCRIPTS_PKG.sql" />
+    <Content Include="Database_EnterpriseRx\Packages\TURN_AROUND_TIME_PKG.sql" />
+    <Content Include="Database_EnterpriseRx\Packages\TURN_AROUND_TIME_PKG_tests.sql" />
+    <Content Include="Database_EnterpriseRx\Tables\Table-SENT_TO_SURE_SCRIPTS.sql" />
+    <Content Include="Database_EnterpriseRx\Types\Type-TAT_ORDERS_RTP_TABLE_TYPE.sql" />
+    <Content Include="Database_EnterpriseRx\Types\Type-TAT_RAW_DATA_TABLE_TYPE.sql" />
+    <Content Include="Database_EnterpriseRx\Types\Type-TAT_SUMMARY_MAXRX_TABLE_TYPE.sql" />
+    <Content Include="Database_EnterpriseRx\Types\Type-TAT_SUMMARY_TABLE_TYPE.sql" />
+    <Content Include="Database_EnterpriseRx\Types\Types-SURESCRIPTS.sql" />
+    <Content Include="Database_EnterpriseRx\Types\T_WLB_INTERVALS_TABLE.sql" />
+    <Content Include="Database_EnterpriseRx\Types\T_WLB_TOTALS_TABLE.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\VIEW-Dur_Conflict_View.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\VIEW-EXTENDED_DRUG_FILE.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\VIEW-IMS_View.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\VIEW-PRESCRIBERADDR_WITH_PHONE_VIEW.SQL" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\VIEW-PRESCRIBER_WITH_IDS_VIEW.SQL" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\VIEW-RX_READY.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\VIEW-Rx_Transfer_View.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\Home_Delivery_Payments_VIEW.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\PATIENTS_VIEW.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\PATIENT_ADDRESSES_VIEW.sql" />
+    <Content Include="Database_EnterpriseRx\Views-NoLongerUsedAsOf202208\VIEW-WORKERS_COMP_MONTHLY.sql" />
+    <Content Include="IMS\bin\deid721_prod.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\LSDI_translate_zip.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\README.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\translate_fname.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\translate_zip.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\WEG_086_TEST_20170221.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS573\GetExcellusClinics_GoodDataIntegrity.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS573\GetExcellusClinics_REJECTS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS573\GetHealthNowClinics_GoodDataIntegrity.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS573\GetHealthNowClinics_REJECTS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS573\GetIHAClinics_GoodDataIntegrity.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS573\GetIHAClinics_REJECTS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS578\McKesson_Azure_CPS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS578\Workflow_Steps_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\McKesson_Azure_CPS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\McKesson_Oracle_DW.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\KeepForFutureEnReference\STCdata_YYYYMMDD.sql" />
+    <Content Include="RXS600\log4net.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS600\log4net.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS605\Alternative_Payments_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS605\Run_DownloadAlternativePayments.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS608\CC_Payments_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS608\Run_DownloadCCPayments.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS610\Run_DownloadSuperClaim.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS610\Super_Duper_Claim_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS613\Patients_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS613\Run_DownloadPatients.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS614\Patient_Addresses_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS614\Run_DownloadPatientAddresses.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS617\Run_DownloadVeriFonePayments.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS617\VeriFone_Payments_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="CRX540\Run_DownloadMailSales.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\TAT_IHA_MaxRx_Prior_Week_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX540\Run_DownloadMailSalesJustTenTen.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX575\Run_DownloadsForPharmacyBusiness.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\CommandLine.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\DeID72_Quick_Start_Guide.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\df_086_72.prn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\df_086_72.prn.2017-06-08.old">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\df_086_72.prn.9-7-2017">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\df_086_72.prn.old">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMS\bin\Test_DEID72_20170221.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX582\Run_DownloadThirdPartyClaims.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX525\Run_DownloadWcbInventories.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX000\Run_DownloadSomething.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX542\Run_DownloadPos.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX542\Run_DownloadPosJustTenTenSFTP.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX582\Run_NotifyThirdPartyClaims.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX515\Run_DownloadOmnisysClaim.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX578\FDSHistory2021.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX542\Run_DownloadPosJustTenTenTENUP.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX542\Run_DownloadPosJustTenTenTENUP_ERXCERT.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX582\Run_DownloadSmartRx_TENUP_ERXCERT.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX540\Run_DownloadMailSalesJustTenTenERXCERT.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CRX650\Run_DownloadNetSales.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BOT500_RX\Run_DownloadBottleTransactions.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GMR512_RX\Run_InsertGMSSales.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="RXS578\Run_DownloadWorkloadBalance.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS578\Run_DownloadWorkloadBalance1010.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS578\Run_DownloadWorkloadBalanceLOGILE.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\Run_DownloadForSTC.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\Docs\CPSDataWarehouseAccess.pdf" />
+    <Content Include="RXS582\Docs\ImmsLink Flat File Support and Guidance.pdf" />
+    <Content Include="RXS532\Run_DownloadForCDC.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS506\Run_McKessonETLCheck.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS506\Run_CpsRecordCounts.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS506\VerifyReturnCode.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS512\Run_DownloadDailyDrug.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS527\Run_DownloadIVROutboundCalls.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS506\VerifyReturnCodeFixTest.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SecureCerts\interface_wegmans.cer">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS524\MergePilotStores.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="RXS501\Run_DownloadERxUnauthorized.cmd" />
+    <None Include="RXS532\Docs\CDC COVID-19 Vaccination Reporting Specification_v2.5_CLEARED_202011111.xlsx" />
+    <None Include="RXS532\Docs\Covid data required elements.xlsx" />
+    <Content Include="RXS600\RXS600.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS600\LibraryLogging.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS600\RXS600.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS600\RXS600.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS532\Run_DownloadForCDCmod.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS573\Run_DownloadExcellusClinics.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS573\Run_DownloadHealthNowClinics.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS573\Run_DownloadIHAClinics.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS710\Run_DownloadForNDCP3.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS610\Run_DownloadSuperClaimHISTORY.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS610\AutoRerunSuperClaim.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS578\AutoRerunWorkflowSteps.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS578\Run_DownloadWorkloadBalanceWFS.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\Run_DownloadRxData.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS720\Run_DownloadAtebDeceased.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS609\Run_DownloadSoldDetail.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS516\Run_POSExceptionAPICalls.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS666\Run_DownloadActiveDirectory.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS610\Run_DownloadSuperClaimERXCERT.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS578\Run_DownloadWorkloadBalanceERXCERT.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\Run_HistoricalDownloadForSTC.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS625\Run_NotifyJanssenXarelto.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RX_Data_Transfers\ArchiveScripts.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS532\Run_DownloadForCDC_Bundle.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS555\Run_NYNonResidentZeroReports.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS777\Run_NotifyERxUnauthorized.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\Run_DownloadForSTC_AFFLURIA2022.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\Run_DownloadForSTC_FLUVAX2023.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS582\Run_DownloadForSTC_NEWYORK2023.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS812\Run_DownloadNaloxone.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS611\Run_DownloadSmartOrderPointsMinMax.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS660\Run_DownloadPOAudit.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RXS661\Run_DownloadPOFact.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="RX_Data_Transfers\base64encode.plsql" />
+    <Content Include="RX_Job_Notifier\Run_JobNotifier.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Wegmans.InterfaceEngine.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Wegmans.InterfaceEngine.exe.config.Prod">
+      <DependentUpon>Wegmans.InterfaceEngine.exe.config</DependentUpon>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Wegmans.InterfaceEngine.exe.config.Cert">
+      <DependentUpon>Wegmans.InterfaceEngine.exe.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Wegmans.InterfaceEngine.exe.config.Test">
+      <DependentUpon>Wegmans.InterfaceEngine.exe.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database_EnterpriseRx\Constraints\" />
+    <Folder Include="Database_EnterpriseRx\Procedures\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
+</Project>
