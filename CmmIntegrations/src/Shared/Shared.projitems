@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>240116a8-c91d-4269-b9a3-4f4300923e25</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AuthorizationOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureAdAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JsonSnakeCaseNamingPolicy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MtomEncoder\MtomMessageEncoder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MtomEncoder\MtomMessageEncoderBindingElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MtomEncoder\MtomMessageEncoderFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MtomEncoder\MtomPart.cs" />
+  </ItemGroup>
+</Project>

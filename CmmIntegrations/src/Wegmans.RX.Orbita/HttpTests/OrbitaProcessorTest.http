@@ -1,0 +1,7 @@
+POST http://localhost:7071/admin/functions/OrbitaProcessor HTTP/1.1
+Content-Type: application/json
+
+{"input":"{\"firstName\": \"Test\", \"lastName\": \"ABC\", \"dateOfBirth\": \"20000101\", \"phoneNumber\": \"5855551212\", \"emailAddress\": \"abc@123.com\", \"transactionId\": \"999\"}"}
+
+
+#[{"firstName": "Test", "lastName": "ABC", "dateOfBirth": "20000101", "phoneNumber": "5855551212", "emailAddress": "abc@123.com", "transactionId": "999"}]

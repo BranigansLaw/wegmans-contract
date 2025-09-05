@@ -1,0 +1,115 @@
+# Continuous Integration / Continuous Deployment Pipeline
+# imports: build.yml, deploy.yml, deploy.aadApp.yml (EA)
+
+# Build Stage
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - src/Wegmans.RX.Orbita
+    exclude:
+      - src/Wegmans.RX.Cmm.AzureFunctions
+
+resources:
+    repositories:
+    - repository: azure_pipeline_templates
+      type: git
+      name: Azure/pipeline-templates
+      ref: refs/heads/releases/2021.07.26
+
+stages:
+- stage: build
+  displayName: Build
+  jobs:
+    - template: build.yml
+      parameters:
+        id: Orbita
+        project: ./src/Wegmans.RX.Orbita/Wegmans.RX.Orbita.csproj
+        # testsProject: ./src/Wegmans.RX.Cmm.AzureFunctions.Tests/Wegmans.RX.Cmm.AzureFunctions.Tests.csproj #TODO: Change This to your CSPROJ
+        artifact: orbita
+        zipAfterPublish: true
+
+    - job: publish_deployment
+      displayName: Publish Bicep Template
+      pool:
+        vmImage: ubuntu-latest
+      steps:
+        - checkout: self
+        - task: CopyFiles@2
+          displayName: Copying Bicep Templates
+          inputs:
+            SourceFolder: $(Build.SourcesDirectory)
+            Contents: |
+              src/Wegmans.RX.Orbita/environment/*.bicep
+              src/Wegmans.RX.Orbita/environment/*.json
+            TargetFolder: $(Build.ArtifactStagingDirectory)
+        - publish: $(Build.ArtifactStagingDirectory)
+          artifact: bicepTemplates
+
+- stage: Dev_Deploy
+  displayName: Dev Deployment
+  dependsOn: build
+  condition: succeeded('build')
+  variables:
+  - group: special-orbita-dev
+  jobs:
+  - template: deploy.yml
+    parameters:
+      region: eastus
+      resourceGroup: pharm-special-orbita-rg-east-dev
+      azureServiceConnectionId: 'AZURE (Pharmacy - NON-PROD)'
+      environment: Development
+      isProduction: false
+
+- stage: Cert_Deploy
+  displayName: Cert Deployment
+  dependsOn:
+    - build
+    - Dev_Deploy
+  condition: and(succeeded('build'), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
+  variables:
+  - group: special-orbita-cert
+  jobs:
+  - template: deploy.yml
+    parameters:
+      region: eastus
+      resourceGroup: pharm-special-orbita-rg-east-cert
+      azureServiceConnectionId: 'AZURE (Pharmacy - NON-PROD)'
+      environment: Staging
+      isProduction: false
+
+- stage: Prod_Deploy
+  displayName: Prod Deployment
+  dependsOn:
+    - build
+    - Cert_Deploy
+  condition: and(succeeded('build'), startsWith(variables['Build.SourceBranch'], 'refs/heads/releases'))
+  variables:
+  - group: special-orbita-prod
+  
+  jobs:
+  - template: jobs/deployment.changeRequest.yml@azure_pipeline_templates
+    parameters:
+      serviceConnection: 'ITSM API'
+      summary: 'Orbita Specialty'
+      service: 'Pharmacy Service'
+
+  - template: deploy.yml
+    parameters:
+      region: eastus
+      resourceGroup: pharm-special-orbita-rg-east-prod
+      azureServiceConnectionId: 'AZURE (Pharmacy - PROD)'
+      environment: Production
+      isProduction: true
+
+  - template: jobs/deployment.changeRequest.yml@azure_pipeline_templates
+    parameters:
+      serviceConnection: 'ITSM API'
+      dependsOn:
+        - change_request_create
+        - DeployFunctionApp
+      close: true

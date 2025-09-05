@@ -1,0 +1,20 @@
+{
+  "version": "2.0",
+  "extensions": {
+    "http": {
+      "routePrefix": "cmm/api"
+    }
+  },
+  "logging": {
+    "logLevel": {
+      "Function.HealthProbe": "Warning",
+      "Function.SpecialtyDrugsPatientEnroll": "Debug"
+    },
+    "applicationInsights": {
+      "samplingExcludedTypes": "Request",
+      "samplingSettings": {
+        "isEnabled": true
+      }
+    }
+  }
+}

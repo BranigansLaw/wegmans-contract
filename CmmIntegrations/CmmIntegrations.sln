@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30218.91
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wegmans.RX.Cmm.AzureFunctions", "src\Wegmans.RX.Cmm.AzureFunctions\Wegmans.RX.Cmm.AzureFunctions.csproj", "{9FA83BE6-B792-4F52-AB8A-48AABC791C2D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "src\Shared\Shared.shproj", "{240116A8-C91D-4269-B9A3-4F4300923E25}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wegmans.RX.Cmm.AzureFunctions.Tests", "src\Wegmans.RX.Cmm.AzureFunctions.Tests\Wegmans.RX.Cmm.AzureFunctions.Tests.csproj", "{83D880E9-2E56-44A2-AD2D-71FC8FA4A890}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wegmans.RX.Orbita", "src\Wegmans.RX.Orbita\Wegmans.RX.Orbita.csproj", "{5F7B4FE5-EF52-456B-BEB1-64E0122442D6}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\Shared\Shared.projitems*{240116a8-c91d-4269-b9a3-4f4300923e25}*SharedItemsImports = 13
+		src\Shared\Shared.projitems*{5f7b4fe5-ef52-456b-beb1-64e0122442d6}*SharedItemsImports = 5
+		src\Shared\Shared.projitems*{9fa83be6-b792-4f52-ab8a-48aabc791c2d}*SharedItemsImports = 5
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FA83BE6-B792-4F52-AB8A-48AABC791C2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FA83BE6-B792-4F52-AB8A-48AABC791C2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FA83BE6-B792-4F52-AB8A-48AABC791C2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FA83BE6-B792-4F52-AB8A-48AABC791C2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83D880E9-2E56-44A2-AD2D-71FC8FA4A890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83D880E9-2E56-44A2-AD2D-71FC8FA4A890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83D880E9-2E56-44A2-AD2D-71FC8FA4A890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83D880E9-2E56-44A2-AD2D-71FC8FA4A890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F7B4FE5-EF52-456B-BEB1-64E0122442D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F7B4FE5-EF52-456B-BEB1-64E0122442D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F7B4FE5-EF52-456B-BEB1-64E0122442D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F7B4FE5-EF52-456B-BEB1-64E0122442D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85A847ED-0A28-4A3C-9FE1-5F27EE43A8C2}
+	EndGlobalSection
+EndGlobal

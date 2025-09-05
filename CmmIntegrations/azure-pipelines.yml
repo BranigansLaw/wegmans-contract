@@ -1,0 +1,153 @@
+# Continuous Integration / Continuous Deployment Pipeline
+# imports: build.yml, deploy.yml, deploy.aadApp.yml (EA)
+
+# Build Stage
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+      - src/Wegmans.RX.Orbita
+    include:
+      - src/Wegmans.RX.Cmm.AzureFunctions
+
+resources:
+    repositories:
+    - repository: azure_pipeline_templates
+      type: git
+      name: Azure/pipeline-templates
+      ref: refs/tags/2020.12.15
+
+stages:
+- stage: build
+  displayName: Build
+  jobs:
+    - template: ./.azure/pipelines/build.yml
+      parameters:
+        id: Function_App
+        project: ./src/Wegmans.RX.Cmm.AzureFunctions/Wegmans.RX.Cmm.AzureFunctions.csproj #TODO: Change This to your CSPROJ
+        testsProject: ./src/Wegmans.RX.Cmm.AzureFunctions.Tests/Wegmans.RX.Cmm.AzureFunctions.Tests.csproj #TODO: Change This to your CSPROJ
+        artifact: function-app
+        zipAfterPublish: true
+
+    - job: publish_deployment
+      displayName: Publish Arm Template
+      pool:
+        vmImage: ubuntu-latest
+      steps:
+        - checkout: self
+        - task: CopyFiles@2
+          displayName: Copying Arm Templates
+          inputs:
+            SourceFolder: $(Build.SourcesDirectory)
+            Contents: |
+              .azure/environment/*.json
+            TargetFolder: $(Build.ArtifactStagingDirectory)
+        - publish: $(Build.ArtifactStagingDirectory)
+          artifact: armTemplates
+
+- stage: Dev_Deploy
+  displayName: Dev Deployment
+  dependsOn: build
+  condition: succeeded('build')
+  variables:
+    - group: special-cmm-dev
+  jobs:
+    - deployment: CMM
+      environment: 'Specialty - Dev'
+
+    - template: ./.azure/pipelines/environment.yml
+      parameters:
+        primaryRegion: 'eastus'
+        primaryResourceGroup: 'pharm-special-cmm-rg-east-dev'
+        primaryFunctionName: 'pharm-special-cmmproxy-api-east-dev'
+        secondaryRegion: 'westus'
+        secondaryResourceGroup: 'pharm-special-cmm-rg-west-dev'
+        secondaryFunctionName: 'pharm-special-cmmproxy-api-west-dev'
+        frontDoorResourceGroup: 'pharm-special-frontdoor-rg-dev'
+        azureServiceConnectionId: 'AZURE (Pharmacy - NON-PROD)'
+        frontDoorName: 'WegmansSpecialtyPharmacyDev'
+        frontDoorFriendlyUri: 'specialtypharmacy.dev.wegmans.cloud'
+        cmmGlobalResourceGroup: 'pharm-special-cmm-global-rg-dev'
+        storageAccountName: 'cmmastuteproxydevsa'
+        environment: 'Development'
+        appRegistrationName: 'Pharmacy Specialty Cmm Proxy - Dev'
+        disableSpecialtyDrugsPatientStatusUpdate: "true"
+
+- stage: Cert_Deploy
+  displayName: Cert Deployment
+  dependsOn:
+    - build
+    - Dev_Deploy
+  condition: and(succeeded('build'), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
+  variables:
+    - group: special-cmm-cert
+  jobs:
+    - deployment: CMM
+      environment: 'Specialty - Cert'
+
+    - template: ./.azure/pipelines/environment.yml
+      parameters:
+        primaryRegion: 'eastus'
+        primaryResourceGroup: 'pharm-special-cmm-rg-east-cert'
+        primaryFunctionName: 'pharm-special-cmmproxy-api-east-cert'
+        secondaryRegion: 'westus'
+        secondaryResourceGroup: 'pharm-special-cmm-rg-west-cert'
+        secondaryFunctionName: 'pharm-special-cmmproxy-api-west-cert'
+        frontDoorResourceGroup: 'pharm-special-frontdoor-rg-cert'
+        azureServiceConnectionId: 'AZURE (Pharmacy - NON-PROD)'
+        frontDoorName: 'WegmansSpecialtyPharmacyCert'
+        frontDoorFriendlyUri: 'specialtypharmacy.cert.wegmans.cloud'
+        cmmGlobalResourceGroup: 'pharm-special-cmm-global-rg-cert'
+        storageAccountName: 'cmmastuteproxycertsa'
+        environment: 'Staging'
+        appRegistrationName: 'Pharmacy Specialty Cmm Proxy - Cert'
+        disableSpecialtyDrugsPatientStatusUpdate: "false"
+
+- stage: Prod_Deploy
+  displayName: Prod Deployment
+  dependsOn:
+    - build
+    - Cert_Deploy
+  condition: and(succeeded('build'), startsWith(variables['Build.SourceBranch'], 'refs/heads/releases'))
+  variables:
+    - group: special-cmm-prod
+  jobs:
+    - deployment: CMM
+      environment: 'Specialty - Prod'
+
+    - template: jobs/deployment.changeRequest.yml@azure_pipeline_templates
+      parameters:
+        serviceConnection: 'ITSM API'
+        summary: 'CMM Astute Proxy'
+        service: 'Pharmacy Service'
+
+    - template: ./.azure/pipelines/environment.yml
+      parameters:
+        primaryRegion: 'eastus'
+        primaryResourceGroup: 'pharm-special-cmm-rg-east-prod'
+        primaryFunctionName: 'pharm-special-cmmproxy-api-east-prod'
+        secondaryRegion: 'westus'
+        secondaryResourceGroup: 'pharm-special-cmm-rg-west-prod'
+        secondaryFunctionName: 'pharm-special-cmmproxy-api-west-prod'
+        frontDoorResourceGroup: 'pharm-special-frontdoor-rg-prod'
+        azureServiceConnectionId: 'AZURE (Pharmacy - PROD)'
+        frontDoorName: 'WegmansSpecialtyPharmacy'
+        frontDoorFriendlyUri: 'specialtypharmacy.wegmans.cloud'
+        cmmGlobalResourceGroup: 'pharm-special-cmm-global-rg-prod'
+        storageAccountName: 'cmmastuteproxyprodsa'
+        environment: 'Production'
+        appRegistrationName: 'Pharmacy Specialty Cmm Proxy - Prod'
+        disableSpecialtyDrugsPatientStatusUpdate: "false"
+
+    - template: jobs/deployment.changeRequest.yml@azure_pipeline_templates
+      parameters:
+        serviceConnection: 'ITSM API'
+        dependsOn:
+          - change_request_create
+          - DeployPrimarySystem
+          - DeploySecondarySystem
+        close: true

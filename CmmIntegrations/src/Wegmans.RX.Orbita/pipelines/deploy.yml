@@ -1,0 +1,75 @@
+parameters:
+  - name: region
+    type: string
+  - name: resourceGroup
+    type: string
+  - name: azureServiceConnectionId
+    type: string
+  - name: environment
+    type: string
+    default: Development
+    values:
+    - Production
+    - Development
+    - Staging
+  - name: isProduction
+    type: boolean
+    default: false
+
+jobs:
+- job: DeployInfrastructure
+  displayName: Deploy Infrastructure
+  pool: 
+    vmImage: windows-latest
+  steps:
+    - checkout: none
+    - download: current
+      displayName: Download Artifacts
+      artifact: bicepTemplates
+    - template: steps/itsm/get-api-subscription-key.yml@azure_pipeline_templates  
+      parameters:    
+        azServiceConnectionId: '${{ parameters.azureServiceConnectionId }}'
+        production: ${{ parameters.isProduction }}
+    - task: AzureCLI@2
+      displayName: 'Azure Deployment of Resources(BICEP) on ${{ parameters.resourceGroup }}'
+      name: ArmTemplateOutputs
+      inputs:
+        azureSubscription: '${{ parameters.azureServiceConnectionId }}'
+        scriptType: pscore
+        scriptLocation: inlineScript
+        inlineScript: |
+          az --version
+          az account show
+          az group create --name ${{ parameters.resourceGroup }} --location ${{ parameters.region }}
+          $var = (az deployment group create --resource-group ${{ parameters.resourceGroup }} --template-file '$(Pipeline.Workspace)/bicepTemplates/src/Wegmans.RX.Orbita/environment/orbita.bicep' --parameters '$(Pipeline.Workspace)/bicepTemplates/src/Wegmans.RX.Orbita/environment/orbita.${{ parameters.environment }}.parameters.json' --parameters 'orbitaApiKey=$(orbitaApiKey)' 'astutePassword=$(astutePassword)' --parameters 'itsmSubscriptionKey=$(ItsmApiSubscription.Key)' | ConvertFrom-Json).Properties.outputs
+
+          $functionAppName=$var.functionAppName.value
+          $functionAppDefaultHostName=$var.functionAppDefaultHostName.value
+          $appInsightsKey=$var.appInsightsKey.value
+          $datahubStorageAccountName=$var.datahubStorageAccountName.value
+
+          Write-Host "##vso[task.setvariable variable=functionAppName;isOutput=true]$functionAppName"
+          Write-Host "##vso[task.setvariable variable=functionAppDefaultHostName;isOutput=true]$functionAppDefaultHostName"
+          Write-Host "##vso[task.setvariable variable=datahubStorageAccountName;isOutput=true]datahubStorageAccountName"
+          Write-Host "##vso[task.setvariable variable=appInsightsKey;isOutput=true]$appInsightsKey"
+
+- job: DeployFunctionApp
+  displayName: Deploy Function App
+  dependsOn: 
+  - DeployInfrastructure
+  variables:
+    functionAppName: $[ dependencies.DeployInfrastructure.outputs['ArmTemplateOutputs.functionAppName'] ]
+  pool:
+    vmImage: windows-latest
+  steps:
+    - checkout: none
+    - download: current
+      displayName: Download Function App Artifacts
+      artifact: orbita  
+    - task: AzureFunctionApp@1
+      displayName: 'Deploy FunctionApp'
+      inputs:
+        azureSubscription: '${{ parameters.azureServiceConnectionId }}'
+        appName: $(functionAppName)
+        package: $(Pipeline.Workspace)/orbita/Wegmans.RX.Orbita.zip
+        deploymentMethod: runFromPackage

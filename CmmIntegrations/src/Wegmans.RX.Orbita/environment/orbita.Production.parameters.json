@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "functionAppName": {
+            "value": "pharm-special-orbita-prod"
+        },
+        "environment": {
+            "value": "Production"
+        },
+        "orbitaStorageName": {
+            "value": "orbitaprod"
+        },
+        "appAstuteClientAddressUrl": {
+            "value": "https://socialconnect.myastutesolutions.com/WegmansPharmaProdAIS/AddressService.svc"
+        },
+        "appAstuteClientCaseUrl": {
+            "value": "https://socialconnect.myastutesolutions.com/WegmansPharmaProdAIS/CaseService.svc"
+        },
+        "appAstuteClientSecurityUserName": {
+            "value": "orbitaapiuser"
+        },
+        "azureWebJobsGetAstutePatientsDisabled": {
+            "value": true
+        },
+        "getAstutePatientsTimerTrigger": {
+            "value": "0 0 * * * *"
+        },
+      "orbitaClientServerAddress": {
+        "value": "https://janssen-select.orbita.cloud"
+      },
+        "itsmUrl":{
+            "value": "https://itsm-api.wegmans.io/"
+        }
+    }
+}

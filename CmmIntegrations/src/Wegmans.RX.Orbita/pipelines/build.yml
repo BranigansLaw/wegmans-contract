@@ -1,0 +1,99 @@
+parameters:
+  - name: project
+    type: string
+
+  # - name: testsProject
+  #   type: string
+
+  - name: id
+    type: string
+
+  - name: artifact
+    type: string
+    default: ''
+
+  - name: configuration
+    type: string
+    default: Release
+    values:
+    - Release
+    - Debug
+
+  - name: zipAfterPublish
+    type: boolean
+    default: false
+
+jobs:
+- job: build_${{ parameters.id }}
+  displayName: Build ${{ parameters.id }}
+
+  pool:
+    vmImage: windows-latest
+
+  variables:
+    BUILD_CONFIGURATION: ${{ parameters.configuration }}
+
+  steps:
+    - checkout: self
+
+    #Dump all environment variables to the log
+    - task: CmdLine@2
+      inputs:
+        script: 'cmd /k set'
+
+    - task: NuGetToolInstaller@1
+      inputs:
+        versionSpec: 5.4.x
+
+    - task: UseDotNet@2
+      displayName: Setting DotNet version
+      inputs:
+        packageType: sdk
+        version: 3.1.x
+
+    - task: NuGetAuthenticate@0
+      displayName: Restore packages
+      inputs:
+        command: restore
+        projects: ${{ parameters.project }}
+
+    - task: DotNetCoreCLI@2
+      displayName: Restore packages
+      inputs:
+        command: restore
+        projects: ${{ parameters.project }}
+        feedsToUse: config
+        nugetConfigPath: ./src/Wegmans.RX.Orbita/nuget.config
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: ${{ parameters.project }}
+        arguments: >-
+          --configuration $(BUILD_CONFIGURATION)
+          --no-incremental
+
+    # - task: DotNetCoreCLI@2
+    #   displayName: Unit Test
+    #   inputs:
+    #     command: test
+    #     projects: ${{ parameters.testsProject }}
+    #     arguments: >-
+    #       --configuration $(BUILD_CONFIGURATION)
+
+    - task: DotNetCoreCLI@2
+      displayName: Publish
+      inputs:
+        command: publish
+        projects: ${{ parameters.project }}
+        arguments: >-
+          --configuration $(BUILD_CONFIGURATION)
+          --output $(Build.ArtifactStagingDirectory)
+          --no-build
+          --no-restore
+        zipAfterPublish: ${{ parameters.zipAfterPublish }}
+        publishWebProjects: false
+
+    - publish: $(Build.ArtifactStagingDirectory)
+      artifact: ${{ coalesce(parameters.artifact, parameters.id) }}
