@@ -1,0 +1,256 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
+    - Source/RX.*/*
+    - Documentation/*
+
+variables:
+##
+# Frequently Changed Variablesa
+##
+  # The version number assigned to the assemblies and nugets
+  version: "1.2.0"
+
+# Set the Build Number to a semver like number based on the variables and date
+name: '$(version)+$(Build.BuildId).$(SourceBranchName)'
+
+resources:
+  repositories:
+  - repository: PharmacyPipelineTools
+    type: git
+    name: PharmacyPipelineTools
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    variables:
+      SrcPath: '$(Build.SourcesDirectory)\PharmacyBusiness'
+      SolutionsToBuild: '$(SrcPath)\source\PharmacyBusiness.sln'
+      ToolsPath: '$(Build.SourcesDirectory)\PharmacyPipelineTools\nuget\Tools'
+      NugetConfigPath: '$(SrcPath)\source\.nuget\nuget.config'
+      RunSettingsFile: '$(SrcPath)\source\CodeCoverage.runsettings'
+      BuildConfiguration: Release
+      BuildPlatform: Any CPU
+      AssembliesToTest: |
+        **\bin\$(BuildConfiguration)\*test*.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      TestSearchFolder: '$(SrcPath)'      
+    pool:  
+      vmImage: windows-latest
+    continueOnError: false
+    workspace:
+        clean: all
+    steps:
+    - checkout: self
+    # Common build tools are in the PharmacyPipelineTools repository
+    - checkout: PharmacyPipelineTools
+
+    # Update the AssemblyInfo.cs files to use the correct version number 
+    - powershell: |
+        $files = Get-ChildItem -Path "$(SrcPath)" -Recurse -Include "AssemblyInfo.cs"
+        foreach ($file in $files) {
+          Write-Host "Updating file:  $file"
+          Set-Content -Path $file -Value $(Get-Content $file | ForEach-Object {
+              $_ `
+              -replace '(?<=AssemblyFileVersion\(")([^"]+)(?="\))',"$(version)+$(Build.BuildId)" `
+              -replace '(?<=AssemblyVersion\(")([^"]+)(?="\))',"$(version)"
+            })
+        }
+      displayName: Set version
+
+    # Transform Configs
+    - powershell: |
+        # Load the transfomation dll
+        Add-Type -LiteralPath "$(ToolsPath)\Microsoft.Web.XmlTransform.dll"
+        
+        # Find all of the files we might want to transform
+        $environmentalConfigs = @( 
+            @{transform = "$(SrcPath)\source\RX.PharmacyBusiness.ETL\Wegmans.InterfaceEngine.exe.config.Test"; 
+                   base = "$(SrcPath)\source\RX.PharmacyBusiness.ETL\Wegmans.InterfaceEngine.exe.config"}
+            @{transform = "$(SrcPath)\source\RX.PharmacyBusiness.ETL\Wegmans.InterfaceEngine.exe.config.Cert";
+                   base = "$(SrcPath)\source\RX.PharmacyBusiness.ETL\Wegmans.InterfaceEngine.exe.config"} 
+            @{transform = "$(SrcPath)\source\RX.PharmacyBusiness.ETL\Wegmans.InterfaceEngine.exe.config.Prod";
+                   base = "$(SrcPath)\source\RX.PharmacyBusiness.ETL\Wegmans.InterfaceEngine.exe.config"} 
+          );
+        
+        # Loop over all of those files
+        foreach ($fileConfig in $environmentalConfigs) {
+          $file = $fileConfig.transform
+          $baseFile = $fileConfig.base
+          Write-Host "Processing file:  $file"
+
+          try
+          {
+              # We can only transfom files that were made to be transformed, so make sure this is one of them
+              Write-Host "Checking if file is transform file"
+              $xmldoc = New-Object Microsoft.Web.XmlTransform.XmlTransformableDocument;
+              $xmldoc.PreserveWhitespace = $true
+              $xmldoc.Load("$file");
+              $xtd = $xmldoc.SelectSingleNode('/configuration').Attributes.GetNamedItem("xmlns:xdt").Value
+              $isTransform = $xtd -eq 'http://schemas.microsoft.com/XML-Document-Transform'
+              if (-not $isTransform)
+              {
+                  Write-Error "File isn't a transform file: $file"
+                  return
+              }
+
+              # We can only transfom files that were made to be transformed, so make sure this is one of them
+              $xmldoc = New-Object Microsoft.Web.XmlTransform.XmlTransformableDocument;
+              $xmldoc.PreserveWhitespace = $true
+              $xmldoc.Load($baseFile);
+          
+              $transf = New-Object Microsoft.Web.XmlTransform.XmlTransformation($file);
+              if ($transf.Apply($xmldoc) -eq $false)
+              {
+                  Write-Error "Transformation failed"
+                  return
+              }
+
+              # Overwrite the transform file with the transformed version
+              Write-Host "Transformation complete, saving file: $file"
+              $xmldoc.Save($file);    
+              Write-Host "Save Complete"
+          }
+          catch 
+          {
+              Write-Error "Error transforming file: $file"
+              return
+          }          
+        }
+      displayName: Transform Configs
+
+    ################################################################################
+    ## Build and Test
+
+    # Restore Nugets for all solutions
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore'
+      inputs:
+        feedsToUse: config
+        nugetConfigPath: '$(NugetConfigPath)'
+        noCache: true   
+        
+    # Build Solutions
+    - task: VSBuild@1
+      displayName: 'Build solution(s)'
+      inputs:
+        clean: 'true'
+        platform: "$(BuildPlatform)"
+        configuration: "$(BuildConfiguration)"
+        maximumCpuCount: true
+        solution:  '$(SolutionsToBuild)'
+
+    # Run Tests
+    - task: VSTest@2
+      displayName: 'VsTest - testAssemblies'
+      inputs:
+        testSelector: 'testAssemblies' 
+        runSettingsFile: '$(RunSettingsFile)'
+        testAssemblyVer2: '$(AssembliesToTest)'
+        searchFolder: '$(TestSearchFolder)'
+        runInParallel: true
+        runTestsInIsolation: true
+        codeCoverageEnabled: true
+
+    ################################################################################
+    ## Publish     
+    - task: PowerShell@2
+      displayName: 'Split the dlls from the jobs'
+      inputs:
+        targetType: inline      
+        script: | 
+          $tenTenJobs = @("RX_Job_Notifier", "CRX650")
+          $batchJobs = @("BOT500_RX", "CRX000", "CRX515", "CRX525", "CRX540", "CRX542", "CRX572", "CRX575", "CRX576", "CRX578", "CRX582", "CRX587", "CRX801", "GMR512_RX", "IMS", "RX_Data_Transfers", "RXS501", "RXS506", "RXS512", "RXS516", "RXS524", "RXS527", "RXS532", "RXS573", "RXS578", "RXS580", "RXS582", "RXS600", "RXS605", "RXS608", "RXS609", "RXS610", "RXS613", "RXS614", "RXS617", "RXS625", "RXS666", "RXS710", "RXS720", "RXS777")
+
+          $jobSourcePath = "$(SrcPath)\source\RX.PharmacyBusiness.ETL\bin\$(BuildConfiguration)"
+          $batchArtficatBasePath = "$(Build.ArtifactStagingDirectory)\ETL"
+          $tentenArtficatBasePath = "$(Build.ArtifactStagingDirectory)\TenTen"
+          $batchBinariesDestination = "$batchArtficatBasePath\PharmacyBusiness"
+          $tentenBinariesDestination = "$tentenArtficatBasePath\PharmacyBusiness"
+
+          # Make the folder that will contain everything that will be put in the ETL artifact
+          New-Item -ItemType "directory" -Path $batchBinariesDestination | Out-Null
+          New-Item -ItemType "directory" -Path $tentenBinariesDestination | Out-Null
+
+          # Loop over all RXS folders from the binaries
+          Get-ChildItem -Path $jobSourcePath -Directory -Filter "*RX*" | ForEach-Object {
+            Write-Host "Processing $_"
+            if ($tenTenJobs -contains $_.Name) {
+                Write-Host "$_.Name belongs on the 1010 server"
+                $dest = $tentenArtficatBasePath
+            } elseif ($batchJobs -contains $_.Name) {
+              Write-Host "$_.Name belongs on the batch server"
+              $dest = $batchArtficatBasePath
+            } else {
+              Write-Host "$_.Name is unknown"
+            }
+
+            # Create a bin folder under the *RX* folder
+            $binFolder = Join-Path $_.FullName "bin"
+            New-Item -ItemType "directory" -Path $binFolder | Out-Null
+
+            # Move everything into the bin folder
+            Get-ChildItem -Path $_.FullName -Recurse -Exclude "bin" | Move-Item -Destination $binFolder
+
+            # Move the *RX* folder to be at the same level as RX.PharmacyBusiness.ETL
+            Move-Item -Path $_.FullName -Destination $dest
+          }
+
+          # Move the ETL binaries into the folder and rename from "relase" to "RX.PharmacyBusiness.ETL"
+          Get-ChildItem -Path $jobSourcePath | %{ 
+              Copy-Item $_.FullName -destination "$batchBinariesDestination\bin" -recurse 
+              Copy-Item $_.FullName -destination "$tentenBinariesDestination\bin" -recurse 
+          }   
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish ETL Artifact
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)\ETL'
+        ArtifactName: "ETL"
+        ArtifactType: "Container"
+        FileCopyOptions: /S /E
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish TenTen Artifact
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)\TenTen'
+        ArtifactName: "TenTen"
+        ArtifactType: "Container"
+        FileCopyOptions: /S /E
+
+    # Publish ARM Artifact
+    - task: PublishBuildArtifacts@1
+      displayName: Publish ARM Artifact
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)\RX.PharmacyBusiness.ARM'
+        ArtifactName: "ARM"
+        ArtifactType: "Container" 
+
+    # Publish Docs Artifact
+
+    - powershell: |
+        if (!(Test-Path "$(SrcPath)\Docs")) { 
+            New-Item -ItemType "directory" -Path "$(SrcPath)\Docs" | Out-Null
+            New-Item -ItemType "file" -Path "$(SrcPath)\Docs\Index.md" | Out-Null
+        }
+      displayName:  "Make Docs folder if needed"
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Docs Artifact
+      inputs:
+        PathtoPublish: '$(SrcPath)\Docs'
+        ArtifactName: "Docs"
+        ArtifactType: "Container"
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish ReleaseScripts Artifact
+      inputs:
+        PathtoPublish: '$(SrcPath)\ReleaseScripts'
+        ArtifactName: "ReleaseScripts"
+        ArtifactType: "Container"
