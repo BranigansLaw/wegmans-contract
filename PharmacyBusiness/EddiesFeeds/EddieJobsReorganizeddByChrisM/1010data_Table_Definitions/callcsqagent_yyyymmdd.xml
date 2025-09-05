@@ -1,0 +1,23 @@
+<table name="wegmans.wegmansdata.dwfeeds.ciscodata.callcsqagent_yyyymmdd">
+  <cols>
+    <th name="node_id" type="i" format="type:nocommas" desc="Field 1">Node ID</th>
+    <th name="session_id" type="a" format="type:char" desc="Field 2">Session ID</th>
+    <th name="sequence_num" type="i" format="type:nocommas" desc="Field 3">Sequence num</th>
+    <th name="session_id_seq" type="a" format="type:char" desc="Field 4">Session`id seq</th>
+    <th name="start_time" type="f" format="type:datehms24" desc="Field 5">Call Start Time</th>
+    <th name="end_time" type="f" format="type:datehms24" desc="Field 6">Call End Time</th>
+    <th name="contract_disposition" type="i" format="type:nocommas" desc="Field 7">Contract`Disposition</th>
+    <th name="originator_dn" type="a" format="type:char" desc="Field 8">Originator #</th>
+    <th name="destination_dn" type="a" format="type:char" desc="Field 9">Destination #</th>
+    <th name="called_number" type="a" format="type:char" desc="Field 10">Called #</th>
+    <th name="application_name" type="a" format="type:char" desc="Field 11">Application</th>
+    <th name="qindex" type="i" format="type:nocommas" desc="Field 12">qindex</th>
+    <th name="csq_names" type="a" format="type:char" desc="Field 13">CSQ Names</th>
+    <th name="queue_time" type="f" format="type:num" desc="Field 14">Queue time</th>
+    <th name="agent_name" type="a" format="type:char" desc="Field 15">Agent name</th>
+    <th name="ring_time" type="f" format="type:num" desc="Field 16">Ring time</th>
+    <th name="talk_time" type="f" format="type:num" desc="Field 17">Talk time</th>
+    <th name="work_time" type="f" format="type:num" desc="Field 18">Work time</th>
+    <th name="latestsynchedtime" type="a" format="type:char" desc="Field 19">latestsynchedtime</th>
+  </cols>
+</table>

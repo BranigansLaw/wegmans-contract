@@ -1,0 +1,95 @@
+<table name="wegmans.wegmansdata.dwfeeds.rxerp_load.rxerp0_yyyymmdd">
+  <cols>
+	<th name="erp_chg_date" type="i" format="type:date;dec:0;width:8" desc="Field 1">RX ERP`ChangeDate</th>
+	<th name="patient_num" type="f" format="type:nocommas" desc="Field 2">Patient #</th>
+	<th name="store_num" type="i" format="type:nocommas;width:5;dec:0" desc="Field 3">Store #</th>
+	<th name="rx_num" type="i" format="type:nocommas;width:10;dec:0" desc="Field 4">RX #</th>
+	<th name="rx_num_txt" type="a" format="type:char;width:9" desc="Field 5">Rx # (Txt)</th>
+	<th name="ndcwo" type="a" format="type:char" desc="Field 6">NDCwo</th>
+	<th name="drug_name" type="a" format="type:char" desc="Field 7">Drug Name</th>
+	<th name="days_supply" type="f" format="type:num;width:3" desc="Field 8">Days`Supply</th>
+	<th name="refills_authorized" type="i" format="type:nocommas;width:2;dec:0" desc="Field 9">Refills`Authorized</th>
+	<th name="last_fill_date" type="i" format="type:date;dec:0;width:8" desc="Field 10">Last`Fill Date</th>
+	<th name="erp_orig_target_date" type="i" format="type:date;dec:0;width:8" desc="Field 11">ERP`Orig Target Date</th>
+	<th name="erp_target_date" type="i" format="type:date;dec:0;width:8" desc="Field 12">ERP`Target Date</th>
+	<th name="erp_enroll_status" type="a" format="type:char" desc="Field 13">ERP`Enroll Status</th>
+	<th name="erp_enroll_status_date" type="f" format="type:datehms24" desc="Field 14">ERP`Enroll Status`DateTime</th>
+	<th name="erp_enroll_reason" type="a" format="type:char" desc="Field 15">ERP`Enroll Reason</th>
+	<th name="erp_exclude_reason" type="a" format="type:char" desc="Field 16">ERP`Exclude Reason</th>
+	<th name="erp_delivery_method" type="a" format="type:char" desc="Field 17">ERP`Delivery Method</th>
+	<th name="erp_delivery_method_persist" type="a" format="type:char" desc="Field 18">ERP`Delivery Method Persist</th>
+	<th name="is_consent_to_fill" type="a" format="type:char" desc="Field 19">Is`Consent To Fill</th>
+	<th name="user_consent_to_fill" type="a" format="type:char" desc="Field 20">User`Consent To Fill</th>
+	<th name="date_consent_to_fill" type="i" format="type:date;dec:0;width:8" desc="Field 21">Date`Consent To Fill</th>
+	<th name="eff_start_date" type="f" format="type:datehms24" desc="Field 22">RX Record`Eff DateTime</th>
+	<th name="record_type" type="a" format="type:char" desc="Field 23">Record Type</th>
+	<th name="erp_usermodified_target_date" type="i" format="type:date;dec:0;width:8" desc="Field 24">Erp Usermodified Target Date</th>
+	<th name="erp_modified_usertype" type="a" format="type:char;width:10" desc="Field 25">Erp Modified Usertype</th>
+	<th name="erp_modified_user" type="a" format="type:char" desc="Field 26">Erp Modified User</th>
+	<th name="erp_usermodified_rectype" type="a" format="type:char;width:2" desc="Field 27">Erp Usermodified Rectype</th>
+	<th name="erp_usermodified_ondate" type="i" format="type:date;dec:0;width:8" desc="Field 28">Erp Usermodified Ondate</th>
+	<th name="rec_updates" type="i" format="type:nocommas;dec:0;width:2" desc="Field 29">Rec Updates</th>
+	<th name="pt_autofill_enroll_status" type="a" format="type:char" desc="Field 30">Patient`Autofill Enroll Status</th>
+	<th name="pt_erp_enroll_status" type="a" format="type:char" desc="Field 31">Patient`ERP Enroll Status</th>
+	<th name="pt_erp_enroll_date" type="i" format="type:date;dec:0;width:8" desc="Field 32">Patient` ERP Enroll Date</th>
+	<th name="pt_autoenroll_future_rxs" type="a" format="type:char" desc="Field 33">Patient` Auto-enroll Future Rxs</th>
+	<th name="pt_preferred_delivery_method" type="a" format="type:char;width:12" desc="Field 34">Patient` Preferred Delivery Method</th>
+	<th name="pt_prefers_mail_delivery" type="a" format="type:char;width:1" desc="Field 35">Patient` Prefers Mail Delivery</th>
+	<th name="pt_erp_payment_method" type="a" format="type:char;width:10" desc="Field 36">Patient` ERP Payment Method</th>
+	<th name="pt_req_consent_tofill" type="a" format="type:char;width:1" desc="Field 37">Patient` Req Consent To Fill</th>
+	<th name="pt_req_consent_toerp" type="a" format="type:char;width:1" desc="Field 38">Patient` Req Consent To Erp</th>
+	<th name="pt_external_id" type="a" format="type:char;width:10" desc="Field 39">Patient` External ID</th>
+	<th name="prohibit_renewal_request" type="a" format="type:char" desc="Field 40">Prohibit Renewal Request</th>
+	<th name="csr_diagnosis_code" type="a" format="type:char" desc="Field 41">CSR Diagnosis Code</th>
+	<th name="drug_form" type="a" format="type:char" desc="Field 42">Drug Form</th>
+	<th name="qty_authorized" type="f" format="type:num;width:12;dec:2" desc="Field 43">Qty Authorized</th>
+	<th name="refill_qty" type="i" format="type:nocommas;width:2;dec:0" desc="Field 44">Refill Qty</th>
+	<th name="expire_date" type="i" format="type:date;dec:0;width:8" desc="Field 46">Expire Date</th>
+	<th name="reassigned_rx_num" type="a" format="type:char;width:10" desc="Field 47">Reassigned Rx Num</th>
+	<th name="create_date" type="i" format="type:date;width:8;dec:0" desc="Field 48">RX Created`Date</th>
+	<th name="create_user" type="a" format="type:char;width:10" desc="Field 49">RX Created`User</th>
+	<th name="rx_origin_code" type="a" format="type:char;width:12" desc="Field 50">Rx Origin Code</th>
+	<th name="rx_status" type="a" format="type:char;width:6" desc="Field 51">Rx Status</th>
+	<th name="rx_record_num" type="f" format="type:nocommas;width:21" desc="Field 52">Rx Record Num</th>
+	<th name="first_fill_qty" type="f" format="type:num;width:12;dec:2" desc="Field 53">First Fill Qty</th>
+	<th name="date_prescribed" type="i" format="type:date;dec:0;width:8" desc="Field 54">Date Prescribed</th>
+	<th name="original_ndcwo" type="a" format="type:char" desc="Field 55">Original Ndcwo</th>
+	<th name="original_drug_name" type="a" format="type:char" desc="Field 56">Original Drug Name</th>
+	<th name="original_qty" type="f" format="type:num;width:12;dec:2" desc="Field 57">Original Qty</th>
+	<th name="serial" type="a" format="type:char;width:8" desc="Field 58">Serial</th>
+	<th name="daw_code" type="a" format="type:char;width:2" desc="Field 59">Daw Code</th>
+	<th name="selected_upc" type="a" format="type:char" desc="Field 60">Selected Upc</th>
+	<th name="ack_code" type="a" format="type:char;width:2" desc="Field 61">Ack Code</th>
+	<th name="letter_on_file" type="a" format="type:char;width:2" desc="Field 62">Letter On File</th>
+	<th name="emp_login_name" type="a" format="type:char;width:10" desc="Field 63">Emp Login Name</th>
+	<th name="last_ack_change_date" type="i" format="type:date;dec:0;width:8" desc="Field 64">Last`Ack Change Date</th>
+	<th name="last_ack_change_user" type="a" format="type:char;width:10" desc="Field 65">Last`Ack Change User</th>
+	<th name="last_ack_change_username" type="a" format="type:char;width:20" desc="Field 66">Last`Ack Change Username</th>
+	<th name="orig_fill_date" type="i" format="type:date;dec:0;width:8" desc="Field 67">Orig Fill Date</th>
+	<th name="total_daily_dose" type="f" format="type:num;width:12;dec:2" desc="Field 68">Total`Daily Dose</th>
+	<th name="total_qty_disp" type="f" format="type:num;width:12;dec:2" desc="Field 69">Total`Qty Disp</th>
+	<th name="total_qty_xferred" type="f" format="type:num;width:12;dec:2" desc="Field 70">Total`Qty Xferred</th>
+	<th name="legal_fills" type="f" format="type:num;width:3" desc="Field 71">Legal Fills</th>
+	<th name="latest_fill" type="f" format="type:nocommas;width:20" desc="Field 72">Latest`Fill</th>
+	<th name="latest_fill_dur" type="f" format="type:nocommas;width:20" desc="Field 73">Latest`Fill Duration</th>
+	<th name="latest_fill_non_inprocess" type="f" format="type:nocommas;width:20" desc="Field 74">Latest`Fill Non Inprocess</th>
+	<th name="latest_fill_canceled" type="f" format="type:nocommas;width:20" desc="Field 75">Latest`Fill Canceled</th>
+	<th name="last_disp_fill" type="f" format="type:nocommas;width:20" desc="Field 76">Last`Disp Fill</th>
+	<th name="last_fill_refill" type="f" format="type:nocommas;width:20" desc="Field 77">Last`Fill Refill</th>
+	<th name="last_fill_released" type="f" format="type:nocommas;width:20" desc="Field 78">Last`Fill Released</th>
+	<th name="last_sold_fill" type="f" format="type:nocommas;width:20" desc="Field 79">Last`Sold Fill</th>
+	<th name="profile_include_date" type="i" format="type:date;dec:0;width:8" desc="Field 80">Profile Include Date</th>
+	<th name="first_fill" type="f" format="type:nocommas;width:20" desc="Field 81">First`Fill</th>
+	<th name="first_refill" type="f" format="type:nocommas;width:20" desc="Field 82">First`Refill</th>
+	<th name="earliest_fill_date" type="i" format="type:date;dec:0;width:8" desc="Field 83">Earliest`Fill Date</th>
+	<th name="prev_fill_released" type="f" format="type:nocommas;width:20" desc="Field 84">Prev Fill Released</th>
+	<th name="sync_date" type="i" format="type:date;dec:0;width:8" desc="Field 85">Sync Date</th>
+	<th name="is_linked" type="a" format="type:char;width:2" desc="Field 86">Is Linked</th>
+	<th name="cancel_reason" type="a" format="type:char;width:10" desc="Field 87">Cancel Reason</th>
+	<th name="prescriber_num" type="i" format="type:nocommas;width:20" desc="Field 88">Prescriber Num</th>
+	<th name="prescriber_address_num" type="i" format="type:nocommas;width:20" desc="Field 89">Prescriber Address Num</th>
+	<th name="prescriber_order_num" type="a" format="type:char;width:20" desc="Field 90">Prs Order #</th>
+	<th name="is_epcs" type="a" format="type:char;width:2" desc="Field 91">Is EPCS</th>
+    <th name="rrr_denied" type="a" format="type:char;width:2" desc="Field 92">Rrr Denied</th>
+  </cols>
+</table>

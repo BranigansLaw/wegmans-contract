@@ -1,0 +1,17 @@
+<table name="wegmans.wegmansdata.cps.measurefact">
+  <title>CPS Measures</title>
+  <cols>
+    <th name="patient_num" type="f" format="type:nocommas;width:19" desc="A unique number assigned to each patient in DataWarehouse">Patient #</th>
+    <th name="updated_by_emp" type="a" format="type:char;width:20" desc="User who created the measure (keyvalue)">Update`Employee</th>
+    <th name="create_date" type="i" format="type:date;width:8;dec:0" desc="Date time the measure was created (trigger field for this table)">Date`Created</th>
+    <th name="cps_key_name" type="a" format="type:char;width:28" desc="Short text name for the CPS measurement (keyvalue) sometimes this is a system generated key">CPS Key Name</th>
+    <th name="ques_desc" type="a" format="type:char;width:28" desc="Question asked during questionnaire">Question`Desc.</th>
+    <th name="ans_value" type="a" format="type:char;width:28" desc="Answer or value to the Question">Answer`Value</th>
+    <th name="program_name" type="a" format="type:char;width:31" desc="Name of the CPS program that triggered this questionnaire">Program`Name</th>
+    <th name="program_tag" type="a" format="type:char;width:3" desc="Tag to help identify the Program">Program`Tag</th>
+    <th name="program_type" type="a" format="type:char;width:21" desc="Type of clinical program such as Self-Directed Program or Vendor Program">Program`Type</th>
+    <th name="enroll_type" type="a" format="type:char;width:23" desc="Type of enrollments allowed in this program such as Patient Enrollment or No Enrollment">Enroll`Type</th>
+    <th name="key_value_num" type="f" format="type:nocommas;width:9" desc="A unique number assigned to each measure event">KeyValue`Num</th>
+    <th name="ques_num" type="f" format="type:nocommas;width:8" desc="A number assigned to each Questionnaire">Questionnaire`Number</th>
+  </cols>
+</table>

@@ -1,0 +1,10 @@
+<table name="wegmans.wegmansdata.cps.pcspref_full">
+<title>PCS Preference (Full)</title>
+<sdesc></sdesc>
+<cols>
+<th name="patient_num" type="f" format="type:nocommas;width:9" desc="A unique number assigned to each patient in DataWarehouse.">Patient#</th>
+<th name="phone_num" type="a" format="type:char;width:15" desc="The patient's phone area code populated in the 'phone call' field for the patient's communication preferences in CPS.">Phone`Call</th>
+<th name="email_domain" type="a" format="type:char;width:35" desc="The domain of the patient's email address as populated in 'Email' field for the patient's communication preferences in CPS.">Email`Domain</th>
+<th name="text_message" type="a" format="type:char;width:15" desc="The patient's cell-phone area code populated in the 'text message' field for the patient's communication preferences in CPS.">Text`Message</th>
+</cols>
+</table>

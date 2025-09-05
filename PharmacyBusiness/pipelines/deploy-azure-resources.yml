@@ -1,0 +1,118 @@
+parameters:
+- name: environment
+  type: string
+- name: serviceConnectionId
+  type: string
+- name: resourceGroupName
+  type: string
+- name: bicepTemplateArtifactName
+  type: string
+- name: isDeveloperBuild
+  type: boolean
+
+jobs:
+- job: Create_Resource_Group_And_App
+  displayName: Create Resource Group and Application
+  steps:
+  - template: steps/resource-groups/create.yml@azure_pipeline_templates
+    parameters:
+      serviceConnection: ${{ parameters.serviceConnectionId }}
+      resourceGroupName: ${{ parameters.resourceGroupName }}
+
+  - template: steps/aad/deploy-app.yml@azure_pipeline_templates
+    parameters:
+      azServiceConnectionId: ${{ parameters.serviceConnectionId }}
+      outputVariable: applicationDetails
+      properties:
+        displayName: Pharmacy Business Control-M EXE - ${{ upper(parameters.environment) }}
+        identifierUris:
+        - "api://pharmacy-business-${{ lower(parameters.environment) }}/73e9d5c3-08e1-44df-91ff-f5955b7cea64"
+        signInAudience: AzureADMyOrg
+
+# Creates the AppCredentials to connect to Azure resources. These are "outputs" in later steps
+- job: Create_App_Credentials
+  displayName: Create Application Credentials
+  dependsOn: Create_Resource_Group_And_App
+  variables:
+    appId: $[ dependencies.Create_Resource_Group_And_App.outputs['applicationDetails.AppId'] ]
+  steps:
+  - template: steps/aad/application/password/key-vault/create.yml@azure_pipeline_templates
+    parameters:
+      outputVariable: applicationSecret
+      appId: '$(appId)'
+      azServiceConnectionId: ${{ parameters.serviceConnectionId }}
+      expiresDays: 120
+      rotationDays: 30
+      resourceGroupName: ${{ parameters.resourceGroupName }}
+      keyVaultName: pb-pipeline-kv-${{ parameters.environment }}
+      tags: |
+        wfm-application: Pharmacy Business Control-M EXE - ${{ upper(parameters.environment) }}
+        wfm-data-classification: Restricted
+        wfm-data-classification-ephi: false
+        wfm-data-classification-pci: false
+        wfm-data-classification-pi: false
+        wfm-data-classification-employee: false
+        wfm-data-classification-customer: false
+        wfm-data-protection: Business Critical
+        wfm-data-usage: Permanent
+        wfm-data-encrypted: false
+        wfm-data-sharing: None
+
+# Using the AppCredentials from the previous step, setup the Azure resources in main.bicep and output the related URLs used in the configuration deploy.yml
+- job: Run_Bicep
+  displayName: Run Bicep
+  pool:
+    vmImage: windows-latest
+  dependsOn: Create_Resource_Group_And_App
+  variables:
+    appServicePrincipalId: $[ dependencies.Create_Resource_Group_And_App.outputs['applicationDetails.ServicePrincipalId'] ]
+    appId: $[ dependencies.Create_Resource_Group_And_App.outputs['applicationDetails.AppId'] ]
+  steps:
+  - download: current
+    displayName: Download Artifacts
+    artifact: ${{ parameters.bicepTemplateArtifactName }}
+
+  - task: AzureCLI@2
+    displayName: 'Azure Deployment of Resources(BICEP) on ${{ parameters.resourceGroupName }}'
+    name: deployBicepFile
+    inputs:
+      azureSubscription: '${{ parameters.serviceConnectionId }}'
+      scriptType: pscore
+      scriptLocation: inlineScript
+      inlineScript: |
+        az --version
+        az account show
+        az deployment group create --resource-group ${{ parameters.resourceGroupName }} --template-file '$(Pipeline.Workspace)/bicepTemplates/environment/main.bicep' --parameters 'applicationPrincipalId=$(appServicePrincipalId)' --parameters '$(Pipeline.Workspace)/bicepTemplates/environment/pharmacybus.${{ parameters.environment }}.parameters.json' | Tee-Object -Variable deployment
+        $AzDeployment = $deployment | ConvertFrom-Json
+
+        $applicationKeyVaultName = $($AzDeployment.properties.outputs.applicationKeyVaultName.value)
+        $applicationKeyVaultUri = $($AzDeployment.properties.outputs.applicationKeyVaultUri.value)
+        $applicationInsightsConnectionString = $($AzDeployment.properties.outputs.applicationInsightsConnectionString.value)
+        $applicationInsightsName = $($AzDeployment.properties.outputs.applicationInsightsName.value)
+        $subscriptionId = $($AzDeployment.properties.outputs.subscriptionId.value)
+        $applicationInsightsPortalUrl = "https://portal.azure.com/#@wegmans.onmicrosoft.com/resource/subscriptions/$($subscriptionId)/resourceGroups/pharmacy-business-${{ parameters.environment }}/providers/Microsoft.Insights/components/$($applicationInsightsName)/overview"
+
+        $snowflakeAppUserId = "APPLICATION_$(appId)".Replace('-', '')
+
+        Write-Host "##vso[task.setvariable variable=applicationKeyVaultName;isoutput=true]$applicationKeyVaultName"
+        Write-Host "##vso[task.setvariable variable=applicationKeyVaultUri;isoutput=true]$applicationKeyVaultUri"
+        Write-Host "##vso[task.setvariable variable=applicationInsightsConnectionString;isoutput=true]$applicationInsightsConnectionString"
+        Write-Host "##vso[task.setvariable variable=applicationInsightsPortalUrl;isoutput=true]$applicationInsightsPortalUrl"
+        Write-Host "##vso[task.setvariable variable=snowflakeRole;isoutput=true]$snowflakeAppUserId"
+        Write-Host "##vso[task.setvariable variable=snowflakeWarehouse;isoutput=true]$snowflakeAppUserId"
+
+# Setup the PIM role that allows the PharmacyTeam to write (but not read) Azure Vault credentials
+- job: Setup_PIM_Roles
+  displayName: Setup PIM Roles
+  dependsOn: Run_Bicep
+  condition: eq('${{ parameters.isDeveloperBuild }}', 'false')
+  variables:
+    applicationKeyVaultName: $[ dependencies.Run_Bicep.outputs['deployBicepFile.applicationKeyVaultName'] ]
+  steps:
+    - template: steps/privileged-roles/assignment.yml@azure_pipeline_templates
+      parameters:
+        serviceConnection: ${{ parameters.serviceConnectionId }}
+        resourceGroup: ${{ parameters.resourceGroupName }} 
+        resource: Microsoft.KeyVault/vaults/$(applicationKeyVaultName)
+        role: b86a8fe4-44ce-4948-aee5-eccb2c155cd7 # Key Vault Data Officer
+        group: aca0594b-0faa-4222-8fb1-4c7620af1553 # Azure - Pharmacy Team

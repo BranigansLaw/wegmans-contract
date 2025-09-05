@@ -1,0 +1,26 @@
+<table name="wegmans.wegmansdata.cps.messagefact">
+  <title>CPS Messages</title>
+  <cols>
+    <th name="patient_num" type="f" format="type:nocommas;width:19" desc="A unique number assigned to each patient in DataWarehouse">Patient #</th>
+    <th name="store_num" type="i" format="type:nocommas;width:3;dec:0" desc="Store where the patient enrolled">Store#</th>
+    <th name="store_num_resolve" type="i" format="type:nocommas;width:3;dec:0" desc="Store where the message was resolved">Resolved`Store#</th>
+    <th name="receive_date" type="i" format="type:date;width:8;dec:0" desc="Date the message was received">Date`Received</th>
+    <th name="update_date" type="i" format="type:date;width:8;dec:0" desc="Date the message was updated (trigger field for this table)">Update`Date</th>
+    <th name="message_text" type="a" format="type:char;width:18" desc="Text of the message- may contain html tags">Message`Text</th>
+    <th name="message_status" type="a" format="type:char;width:9" desc="Status of the message as of the update date">Message`Status</th>
+    <th name="message_type" type="a" format="type:char;width:15" desc="Type of message triggered">Message`Type</th>
+    <th name="message_pri" type="a" format="type:char;width:6" desc="Priority of message">Message`Priority</th>
+    <th name="message_key" type="f" format="type:nocommas;width:8" desc="Unique identifier key for this particular message">Message`Key</th>
+    <th name="message_num" type="f" format="type:nocommas;dec:0">Message`Num</th>
+    <th name="program_name" type="a" format="type:char;width:31" desc="Name of the CPS program that triggered this message">Program`Name</th>
+    <th name="program_tag" type="a" format="type:char;width:3" desc="Tag to help identify the Program that triggered the message">Program`Tag</th>
+    <th name="program_type" type="a" format="type:char;width:21" desc="Type of clinical program such as Self-Directed Program or Vendor Program for this message">Program`Type</th>
+    <th name="enroll_type" type="a" format="type:char;width:23" desc="Type of enrollments allowed in this program such as Patient Enrollment or No Enrollment">Enroll`Type</th>
+    <th name="due_date" type="i" format="type:date;width:8;dec:0" desc="Date this message was set to be due">Date`Due</th>
+    <th name="expire_date" type="i" format="type:date;width:8;dec:0" desc="Date this message was set to expire">Date`Expired</th>
+    <th name="updated_by_emp" type="a" format="type:char;width:20" desc="User who updated the message">UpdatedBy`Employee</th>
+    <th name="rx_num" type="i" format="type:nocommas;width:8;dec:0" desc="The prescription number of the drug that was dispensed">RX#</th>
+    <th name="refill_num" type="i" format="type:nocommas;width:2" desc="The refill number of the drug that was dispensed">Refill#</th>
+    <th name="msg_assignee" type="a" format="type:char;width:20" desc="Message Assignee">Message`Assignee</th>
+  </cols>
+</table>

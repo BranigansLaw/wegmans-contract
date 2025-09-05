@@ -1,0 +1,70 @@
+parameters:
+- name: runIntegrationTests
+  displayName: Run the Integration Tests command line when deployed
+  type: boolean
+  default: true
+- name: environment
+  displayName: Environment
+  type: string
+  default: Testing
+  values:
+  - Testing
+  - Certification
+  - Production
+
+trigger: none
+
+# This is a modification of the normal deployment pipeline to be used by developers
+# It will deploy to a user-specific directory (based on the user who kicked off the build) and then run integration tests if that step is enabled
+# Allows for deployment to production server for specific testing situations, but will still deploy to a user-specific directory
+
+resources:
+  repositories:
+  - repository: azure_pipeline_templates
+    type: git
+    name: Azure/pipeline-templates
+    ref: refs/tags/2024.01.31
+
+variables:
+  ${{ if eq(parameters.environment, 'Production') }}:
+    deployStageName: 'deploy_prod'
+  ${{ elseif eq(parameters.environment, 'Certification') }}:
+    deployStageName: 'deploy_cert'
+  ${{ elseif eq(parameters.environment, 'Testing') }}:
+    deployStageName: 'deploy_test'
+
+stages:
+  - template: build.yml
+    parameters:
+      project: Source/INN.JobRunner/INN.JobRunner.csproj
+      nugetConfigPath: Source/.nuget/nuget.config
+      artifactName: drop
+      bicepTemplateArtifactName: bicepTemplates
+      isDeveloperBuild: true
+
+  - template: deploy.yml
+    parameters:
+      stageName: ${{ variables.deployStageName }}
+      dependsOn: build
+      artifactName: drop
+      bicepTemplateArtifactName: bicepTemplates
+      # Here is the special deployment path based on who requested the build
+      deployPath: 'D:\Batch\Development\$(Build.QueuedById)\Innovation'
+      isDeveloperBuild: true
+
+  # Run the integration-tests command
+  - template: run-integration-tests.yml
+    parameters:
+      deployedProjectServerPath: 'D:\Batch\Development\$(Build.QueuedById)\Innovation\INN.JobRunner\INN.JobRunner.exe integration-tests'
+      condition: >-
+        and(
+          succeeded('${{ variables.deployStageName }}'),
+          eq('${{ parameters.runIntegrationTests }}', 'True')
+        )
+      ${{ if eq(parameters.environment, 'Production') }}:
+        environment: prod
+      ${{ elseif eq(parameters.environment, 'Certification') }}:
+        environment: cert
+      ${{ elseif eq(parameters.environment, 'Testing') }}:
+        environment: test
+      dependsOn: ${{ variables.deployStageName }}

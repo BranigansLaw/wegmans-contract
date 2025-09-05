@@ -1,0 +1,1 @@
+Since we cannot use YAML for releases yet, this folder will contain scripts that will be used by the different stages of the release process.  If we could use YAML for deployments, these would be embedded in the YAML.

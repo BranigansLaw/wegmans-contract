@@ -1,0 +1,18 @@
+<table name="wegmans.wegmansdata.dwfeeds.sold_detail">
+  <title>Sold Detail</title>
+  <sdesc>Sold Rxs to compare against PHAT/POS</sdesc>
+  <cols>
+    <th name="store_num" type="i" format="type:nocommas;width:3">Store Number</th>
+    <th name="rx_num" type="i" format="type:nocommas;width:8;dec:0">Rx Number</th>
+    <th name="refill_num" type="i" format="type:nocommas;width:3">Refill Number</th>
+    <th name="part_seq_num" type="i" format="type:nocommas;width:3">Partial Fill`Sequence Number</th>
+    <th name="sold_date" type="i" format="type:date;width:10">Sold Date</th>
+    <th name="order_num" type="a" format="type:char;width:10">Order Number</th>
+    <th name="qty_disp" type="f" format="type:num;width:10;dec:2">Qty Dispensed</th>
+    <th name="ndc_wo" type="a" format="type:char;width:11">NDC Wo</th>
+    <th name="acq_cost" type="f" format="type:num;width:10;dec:2">Acquisition`Cost</th>
+    <th name="tp_pay" type="f" format="type:num;width:10;dec:2">TP Pay</th>
+    <th name="patient_pay" type="f" format="type:num;width:10;dec:2">Patient Pay</th>
+    <th name="tx_price" type="f" format="type:num;width:10;dec:2">Tx Price</th>
+  </cols>
+</table>

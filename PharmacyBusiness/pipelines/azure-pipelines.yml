@@ -1,0 +1,95 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
+    - Source/RX.*/*
+    - Documentation/*
+
+# This can be deleted once Snyk is decommissions (around March 2025)
+variables:
+  bypassSnyk: false
+
+resources:
+  repositories:
+  - repository: azure_pipeline_templates
+    type: git
+    name: Azure/pipeline-templates
+    ref: refs/tags/2024.01.31
+
+stages:
+  - template: build.yml
+    parameters:
+      project: Source/INN.JobRunner/INN.JobRunner.csproj
+      nugetConfigPath: Source/.nuget/nuget.config
+      artifactName: drop
+      bicepTemplateArtifactName: bicepTemplates
+
+  - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+    - template: deploy.yml
+      parameters:
+        stageName: deploy_developer_folder_test
+        dependsOn: build
+        artifactName: drop
+        bicepTemplateArtifactName: bicepTemplates
+        deployPath: 'D:\Batch\Development\$(Build.QueuedById)\Innovation'
+        isDeveloperBuild: true
+
+    - template: run-integration-tests.yml
+      parameters:
+        deployedProjectServerPath: 'D:\Batch\Development\$(Build.QueuedById)\Innovation\INN.JobRunner\INN.JobRunner.exe integration-tests'
+        condition: succeeded('deploy_developer_folder_test')
+        environment: test
+        dependsOn: deploy_developer_folder_test
+  - ${{ else }}:
+    - template: deploy.yml
+      parameters:
+        stageName: deploy_test
+        dependsOn: build
+        artifactName: drop
+        bicepTemplateArtifactName: bicepTemplates
+
+    - template: run-integration-tests.yml
+      parameters:
+        deployedProjectServerPath: 'D:\Batch\Innovation\INN.JobRunner\INN.JobRunner.exe integration-tests'
+        condition: succeeded('deploy_test')
+        environment: test
+        dependsOn: deploy_test
+
+    - stage: base_preProdStaging
+      displayName: Create CR for Production Deployment
+      dependsOn: deploy_test
+      jobs:
+      - deployment: base_injectCR
+        environment: Pharmacy Business - Prod Deployment
+        pool:
+          vmImage: ubuntu-latest
+        variables: 
+          - name: injectCR
+            value: true
+          - name: CR_Service
+            value: Pharmacy Service
+          - name: CR_Summary
+            value: Deploy Proof of Concept Control-M EXE to Batch Servers
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - download: none
+
+    - template: deploy.yml
+      parameters:
+        stageName: deploy_prod
+        dependsOn: base_preProdStaging
+        artifactName: drop
+        bicepTemplateArtifactName: bicepTemplates
+
+    # Run the integration-tests command
+    - template: run-integration-tests.yml
+      parameters:
+        deployedProjectServerPath: 'D:\Batch\Innovation\INN.JobRunner\INN.JobRunner.exe integration-tests'
+        condition: succeeded('deploy_prod')
+        environment: prod
+        dependsOn: deploy_prod

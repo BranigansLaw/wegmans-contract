@@ -1,0 +1,127 @@
+parameters:
+- name: project
+  type: string
+- name: stageName
+  default: build
+- name: buildConfiguration
+  type: string
+  default: 'Release'
+- name: artifactName
+  type: string
+- name: bicepTemplateArtifactName
+  type: string
+- name: isDeveloperBuild
+  type: boolean
+  default: false
+- name: nugetConfigPath
+  type: string
+
+stages:
+- stage: ${{ parameters.stageName }}
+  displayName: Build
+  pool:
+    # Can be removed or changes to "Linux" when projects can be compiled as Linux
+    # Currently, certain SQL database connections require the old Windows-only libraries for data mapping meaning the project has to be compiled as Windows
+    # When these requirements are removed, this can changed to "Linux" and should give a massive bump to build speed
+    vmImage: windows-latest
+  jobs:
+  - job:
+    displayName: Build
+    steps:
+    - task: NuGetToolInstaller@1
+      inputs:
+        versionSpec: 6.x
+
+    - task: UseDotNet@2
+      displayName: Setting DotNet version
+      inputs:
+        packageType: sdk
+        version: 8.x
+
+    - task: NuGetAuthenticate@1
+      displayName: NuGet Authenticate
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore'
+      inputs:
+        feedsToUse: config
+        nugetConfigPath: ${{ parameters.nugetConfigPath }}
+        noCache: true   
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: ${{ parameters.project }}
+        arguments: >-
+          --configuration ${{ parameters.buildConfiguration }}
+          --no-incremental
+          --output $(Build.ArtifactStagingDirectory)
+          /p:TreatWarningsAsErrors="${{ eq(parameters.isDeveloperBuild, false) }}"
+
+    - ${{ if eq(parameters.isDeveloperBuild, false) }}:
+      - task: DotNetCoreCLI@2
+        displayName: Unit Test
+        inputs:
+          command: test
+          projects: Source/ZZZTest.*/*.csproj
+          arguments: >-
+            --configuration ${{ parameters.buildConfiguration }}
+            --collect:"XPlat Code Coverage" 
+            -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+
+    - task: DotNetCoreCLI@2
+      displayName: Create Single EXE
+      inputs:
+        command: publish 
+        projects: ${{ parameters.project }}
+        publishWebProjects: false
+        zipAfterPublish: false
+        arguments: >-
+          --configuration ${{ parameters.buildConfiguration }}
+          --self-contained true
+          --output $(Build.ArtifactStagingDirectory)/exe
+          -r win-x64 
+
+    - publish: $(Build.ArtifactStagingDirectory)/exe
+      displayName: Publish Artifact
+      artifact: ${{ parameters.artifactName }}
+
+    - ${{ if eq(parameters.isDeveloperBuild, false) }}:
+      - task: PublishCodeCoverageResults@2
+        displayName: 'Publish code coverage report'
+        inputs:
+          codeCoverageTool: 'Cobertura'
+          summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+
+  - job: publish_bicep
+    displayName: Publish Bicep Template
+    pool:
+      vmImage: windows-latest
+    steps:
+    - checkout: self
+
+    - task: AzureCLI@2
+      name: validate_bicep
+      displayName: Validate Bicep
+      condition: eq('${{ parameters.isDeveloperBuild }}', false)
+      inputs:
+        azureSubscription: 'AZURE (Pharmacy - NON-PROD)'
+        scriptType: pscore
+        scriptLocation: inlineScript
+        powerShellErrorActionPreference: stop
+        failOnStandardError: false
+        inlineScript: |
+          az bicep build --file $(Build.SourcesDirectory)/environment/main.bicep
+
+    - task: CopyFiles@2
+      displayName: Copying Bicep Templates
+      inputs:
+        SourceFolder: $(Build.SourcesDirectory)
+        Contents: |
+          environment/*.bicep
+          environment/*.json
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+
+    - publish: $(Build.ArtifactStagingDirectory)
+      artifact: ${{ parameters.bicepTemplateArtifactName }}

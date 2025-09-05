@@ -1,0 +1,21 @@
+<table name="wegmans.wegmansdata.dwfeeds.ciscodata.callrecdetail_yyyymmdd">
+  <cols>
+    <th name="agent_name" type="a" format="type:char" desc="Field 1">Agent Name</th>
+    <th name="agent_login_id" type="a" format="type:char" desc="Field 2">Agent Login</th>
+    <th name="agent_extension" type="a" format="type:char" desc="Field 3">Agent Ext</th>
+    <th name="agent_nonipcc_extn" type="a" format="type:char" desc="Field 4">Agent Ext2</th>
+    <th name="call_start_time" type="f" format="type:datehms24" desc="Field 5">Start Time</th>
+    <th name="call_end_time" type="f" format="type:datehms24" desc="Field 6">End Time</th>
+    <th name="call_duration" type="f" format="type:nocommas;dec:0" desc="Field 7">Duration</th>
+    <th name="called_number" type="a" format="type:char" desc="Field 8">Called Number</th>
+    <th name="called_ani" type="a" format="type:char" desc="Field 9">Called Ani</th>
+    <th name="call_routed_csq" type="a" format="type:char" desc="Field 10">Call Routed CSQ</th>
+    <th name="other_csqs" type="a" format="type:char" desc="Field 11">Other CSQs</th>
+    <th name="call_skills" type="a" format="type:char" desc="Field 12">Call Skills</th>
+    <th name="talk_time" type="f" format="type:num" desc="Field 13">Talk Time</th>
+    <th name="hold_time" type="f" format="type:num" desc="Field 14">Hold Time</th>
+    <th name="wrapup_time" type="f" format="type:num" desc="Field 15">WrapUp Time</th>
+    <th name="type_call" type="a" format="type:char" desc="Field 16">Type Call</th>
+    <th name="latestsynchedtime" type="a" format="type:char" desc="Field 17">latestsynchedtime</th>
+  </cols>
+</table>

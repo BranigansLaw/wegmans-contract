@@ -1,0 +1,39 @@
+parameters:
+- name: deployedProjectServerPath
+  type: string
+- name: condition
+  default: 'true'
+  type: string
+- name: dependsOn
+  type: string
+- name: environment
+  type: string
+  values:
+  - prod
+  - cert
+  - test
+
+stages:
+  - stage: run_integration_tests_${{ parameters.environment }}
+    displayName: 'Integration Tests (${{ parameters.environment }})'
+    dependsOn: ${{ parameters.dependsOn }}
+    condition: ${{ parameters.condition }}
+    jobs:
+    - deployment:
+      displayName: Run Integration Tests Command
+      environment:
+        ${{ if eq(parameters.environment, 'test') }}:
+          name: Pharmacy Accounting-Dev
+          resourceName: TST-RX-BAT-01
+        ${{ if eq(parameters.environment, 'cert') }}:
+          name: Pharmacy Accounting-Cert
+          resourceName: CRT-RX-BAT-01
+        ${{ if eq(parameters.environment, 'prod') }}:
+          name: Pharmacy Accounting-Prod
+          resourceName: RDC-RX-BAT-01
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - pwsh: |
+                ${{ parameters.deployedProjectServerPath }}

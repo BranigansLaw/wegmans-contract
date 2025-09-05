@@ -1,0 +1,156 @@
+parameters:
+- name: stageName
+  type: string
+- name: artifactName
+  type: string
+- name: bicepTemplateArtifactName
+  type: string
+- name: dependsOn
+  type: object
+- name: deployPath
+  type: string
+  default: 'D:\Batch\Innovation'
+- name: isDeveloperBuild
+  type: boolean
+  default: false
+
+stages:
+- stage: ${{ parameters.stageName }}
+  ${{ if eq(parameters.stageName, 'deploy_prod') }}:
+    displayName: Deploy Production
+  ${{ elseif eq(parameters.stageName, 'deploy_cert') }}:
+    displayName: Deploy Certification
+  ${{ elseif eq(parameters.stageName, 'deploy_test') }}:
+    displayName: Deploy Test
+  ${{ elseif eq(parameters.stageName, 'deploy_developer_folder_test') }}:
+    displayName: Deploy to Developer Folder
+  condition: >-
+    and(
+      succeeded('${{ parameters.dependsOn }}'),
+      or(
+        startsWith(variables['Build.SourceBranch'], 'refs/heads/master'),
+        eq('${{ parameters.isDeveloperBuild }}', 'True')
+      )
+    )
+  dependsOn: ${{ parameters.dependsOn }}
+  variables:
+    bypassSnyk: true 
+  jobs:
+  # Setup Azure Resources and contains output variables like the AppCredentials, ApplicationInsights connection key info, AzureVault url, and others
+  - template: deploy-azure-resources.yml
+    parameters:
+      bicepTemplateArtifactName: ${{ parameters.bicepTemplateArtifactName }}
+      isDeveloperBuild: ${{ parameters.isDeveloperBuild }}
+      ${{ if eq(parameters.stageName, 'deploy_prod') }}:
+        environment: 'prod'
+      ${{ elseif eq(parameters.stageName, 'deploy_cert') }}:
+        environment: 'cert'
+      ${{ elseif or( eq(parameters.stageName, 'deploy_test'), eq(parameters.stageName, 'deploy_developer_folder_test')) }}:
+        environment: 'test'
+      ${{ if eq(parameters.stageName, 'deploy_prod') }}:
+        serviceConnectionId: 'AZURE (Pharmacy - PROD)'
+      ${{ else }}:
+        serviceConnectionId: 'AZURE (Pharmacy - NON-PROD)'
+      ${{ if eq(parameters.stageName, 'deploy_prod') }}:
+        resourceGroupName: pharmacy-business-prod
+      ${{ elseif eq(parameters.stageName, 'deploy_cert') }}:
+        resourceGroupName: pharmacy-business-cert
+      ${{ else }}:
+        resourceGroupName: pharmacy-business-test
+
+  # Deploy the EXE to the batch server. The variables listed in this step will replace values in appsettings.json and are pulled from previous steps (ex. deploy-azure-resource.yml)
+  # Some are constants that are changed based on the environment being deployed
+  - deployment:
+    displayName: Deploy EXE to Batch Server
+    dependsOn: [ 'Create_Resource_Group_And_App', 'Create_App_Credentials', 'Run_Bicep' ]
+    variables:
+      TenantId: $[ dependencies.Create_Resource_Group_And_App.outputs['applicationDetails.TenantId'] ]
+      ClientId: $[ dependencies.Create_Resource_Group_And_App.outputs['applicationDetails.AppId'] ]
+      ClientSecret: $[ dependencies.Create_App_Credentials.outputs['applicationSecret.Password'] ]
+      AzureVaultUrl: $[ dependencies.Run_Bicep.outputs['deployBicepFile.applicationKeyVaultUri'] ]
+      ApplicationInsightsConnectionString: $[ dependencies.Run_Bicep.outputs['deployBicepFile.applicationInsightsConnectionString'] ]
+      AppInsightsLink: $[ dependencies.Run_Bicep.outputs['deployBicepFile.applicationInsightsPortalUrl'] ]
+      # SnowflakeUser is blanked out because the application authenticates using Azure credentials over user authentication
+      SnowflakeUser: ''
+      SnowflakeRole: $[ dependencies.Run_Bicep.outputs['deployBicepFile.snowflakeRole'] ]
+      SnowflakeWarehouse: $[ dependencies.Run_Bicep.outputs['deployBicepFile.snowflakeWarehouse'] ]
+      ${{ if eq(parameters.stageName, 'deploy_prod') }}:
+        TenTenTablePath: 'wegmans.devpharm.prod'
+        TenTenAzureBlobEnvironmentFolderName: 'prod'
+        OverrideTenTenFullTablePath: true
+        NotificationEmailTo: 'pharmaccgtproject@wegmans.com,RXBusinessSolutionsTeam@wegmans.com'
+        EmplifiNotificationEmailTo: 'Nichole.Cipparuolo@wegmans.com,Melissa.Hatch@wegmans.com'
+        EmplifiDispenseNotificationEmailTo: 'Melissa.Hatch@wegmans.com'
+        EmplifiTriageNotificationEmailTo: 'Melissa.Hatch@wegmans.com,Nichole.Cipparuolo@wegmans.com,Lindsey.Csati@wegmans.com,Jenna.Mitchell@wegmans.com'
+        EmplifiEligibilityNotificationEmailTo: 'Melissa.Hatch@wegmans.com,Nichole.Cipparuolo@wegmans.com'
+        ParquetUploadNotificationEmailTo: 'steven.stine@symphonyai.com,jakub.tobolski@symphonyai.com,alex.casanova@symphonyai.com,Chris.Gardiner@wegmans.com,PharmacyIT@wegmans.com'
+        SnowflakeDWDatabase: 'PRD_MRXTS_DL_US_INT_ERXDW_DATAINSIGHTS'
+        SnowflakeAUDDatabase: 'PRD_MRXTS_DL_US_INT_ERXAUD_DATAINSIGHTS'
+      ${{ elseif eq(parameters.stageName, 'deploy_cert') }}:
+        TenTenTablePath: 'wegmans.devpharm.cert'
+        TenTenAzureBlobEnvironmentFolderName: 'test'
+        ParquetUploadNotificationEmailTo: 'steven.stine@symphonyai.com,jakub.tobolski@symphonyai.com,alex.casanova@symphonyai.com,Chris.Gardiner@wegmans.com,PharmacyIT@wegmans.com'
+        SnowflakeDWDatabase: 'UAT_MRXTS_DL_US_INT_ERXDW_DATAINSIGHTS'
+        SnowflakeAUDDatabase: 'UAT_MRXTS_DL_US_INT_ERXAUD_DATAINSIGHTS'
+      ${{ elseif or( eq(parameters.stageName, 'deploy_test'), eq(parameters.stageName, 'deploy_developer_folder_test') ) }}:
+        TenTenTablePath: 'wegmans.devpharm.test'
+        TenTenAzureBlobEnvironmentFolderName: 'dev'
+        NotificationEmailTo: 'PharmacyIT@wegmans.com'
+        EmplifiNotificationEmailTo: 'PharmacyIT@wegmans.com,Nichole.Cipparuolo@wegmans.com,Melissa.Hatch@wegmans.com'
+        EmplifiDispenseNotificationEmailTo: 'PharmacyIT@wegmans.com,Melissa.Hatch@wegmans.com'
+        EmplifiTriageNotificationEmailTo: 'PharmacyIT@wegmans.com,Melissa.Hatch@wegmans.com'
+        EmplifiEligibilityNotificationEmailTo: 'PharmacyIT@wegmans.com,Melissa.Hatch@wegmans.com'
+        ParquetUploadNotificationEmailTo: 'steven.stine@symphonyai.com,jakub.tobolski@symphonyai.com,alex.casanova@symphonyai.com,Chris.Gardiner@wegmans.com,PharmacyIT@wegmans.com'
+        SnowflakeDWDatabase: 'UAT_MRXTS_DL_US_INT_ERXDW_DATAINSIGHTS'
+        SnowflakeAUDDatabase: 'UAT_MRXTS_DL_US_INT_ERXAUD_DATAINSIGHTS'
+      ${{ if eq(parameters.isDeveloperBuild, true) }}:
+        ConsoleLogLevel: 'Debug'
+        AppInsightsLogLevel: 'Warning'
+      ${{ else }}:
+        ConsoleLogLevel: 'Warning'
+        AppInsightsLogLevel: 'Warning'
+      ${{ if eq(parameters.isDeveloperBuild, true) }}:
+        'ApplicationInsightsSettings:LogTenTenAzureUploadDependencies': true
+        'ApplicationInsightsSettings:LogSnowflakeDependencies': true
+
+    workspace:
+      clean: all
+    environment:
+      ${{ if or( eq(parameters.stageName, 'deploy_test'), eq(parameters.stageName, 'deploy_developer_folder_test') ) }}:
+        name: Pharmacy Accounting-Dev
+        resourceName: TST-RX-BAT-01
+      ${{ if eq(parameters.stageName, 'deploy_cert') }}:
+        name: Pharmacy Accounting-Cert
+        resourceName: CRT-RX-BAT-01
+      ${{ if eq(parameters.stageName, 'deploy_prod') }}:
+        name: Pharmacy Accounting-Prod
+        resourceName: RDC-RX-BAT-01
+      resourceType: virtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: ${{ parameters.artifactName }}
+          # This step does the file transform. Where any variable listed above has a name that matches a value in appsettings.json, it's value is replaced with the variable value
+          - task: FileTransform@2
+            displayName: 'Add AppSettings for Azure Access to EXE'
+            inputs:
+              folderPath: '$(Pipeline.Workspace)/${{ parameters.artifactName }}'
+              jsonTargetFiles: '**/appsettings.json'
+              xmlTransformationRules: ''
+          # Copies the files to the server. Retries 5 times and then fails. Usually fails because a job is already running
+          - task: CopyFiles@2
+            displayName: 'Copy Files to Batch Server'
+            retryCountOnTaskFailure: 5
+            inputs:
+              SourceFolder: '$(Pipeline.Workspace)/${{ parameters.artifactName }}'
+              Contents: '**'
+              TargetFolder: ${{ parameters.deployPath }}
+              CleanTargetFolder: true
+        on:
+          success:
+            steps:
+            - pwsh: |
+                get-childitem -Path $(Pipeline.Workspace) -exclude s -recurse | remove-item -recurse
+              displayName: Purge Agent

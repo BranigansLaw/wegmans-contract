@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "teamNotificationEmailList": {
+            "value": "tyler.findlay@wegmans.com"
+        },
+        "notifyPharmacyTeamActionGroupName": {
+            "value": "pharmacyBusinessAlertGroup-crt"
+        },
+        "alertOnExceptionMetricName": {
+            "value": "alert-on-exception-crt"
+        },
+        "keyVaultName": {
+            "value": "pharmbus-kv-crt"
+        },
+        "applicationInsightsName": {
+            "value": "pharmbus-ai-cert"
+        },
+        "dataProtectionLevel": {
+            "value": "Administrative"
+        }
+    }
+}
+
+

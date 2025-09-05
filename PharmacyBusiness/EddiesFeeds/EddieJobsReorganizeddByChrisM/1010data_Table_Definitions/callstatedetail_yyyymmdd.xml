@@ -1,0 +1,12 @@
+<table name="wegmans.wegmansdata.dwfeeds.ciscodata.callstatedetail_yyyymmdd">
+  <cols>
+    <th name="agent_name" type="a" format="type:char" desc="Field 1">Agent name</th>
+    <th name="agent_login_id" type="a" format="type:char" desc="Field 2">Agent Login</th>
+    <th name="agent_extension" type="a" format="type:char" desc="Field 3">Agent Ext</th>
+    <th name="transition_time" type="f" format="type:datehms24" desc="Field 4">Transition`Time</th>
+    <th name="agent_state" type="a" format="type:char" desc="Field 5">Agent State</th>
+    <th name="reason_code" type="a" format="type:char" desc="Field 6">Reason Code</th>
+    <th name="duration" type="f" format="type:num" desc="Field 7">Call`Duration</th>
+    <th name="latestsynchedtime" type="a" format="type:char" desc="Field 8">latestsynchedtime</th>
+  </cols>
+</table>
