@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
+    <Version>1.0.1</Version>
+    <LangVersion>latest</LangVersion>
+    <_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
+    <UserSecretsId>3379f522-0dad-46ff-875d-f32965aea300</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="API\customers-2022-08-01.yaml" />
+    <None Remove="API\Price API - swagger.json" />
+    <None Remove="API\ProductAPI.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Azure.Storage.Files.DataLake" Version="12.8.0" />
+    <PackageReference Include="Flurl.Http" Version="4.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="2.0.0-preview" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.DurableTask" Version="2.12.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Http" Version="3.2.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage.Blobs" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage.Queues" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Tables" Version="1.3.1" />
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.5.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+	<PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Wegmans.EnterpriseLibrary.Data.Hubs" Version="8.1.109" />
+    <PackageReference Include="Wegmans.EnterpriseLibrary.Data.Hubs.Blobs" Version="8.1.60" />
+    <PackageReference Include="Wegmans.EnterpriseLibrary.Diagnostics.HealthChecks.Azure.Storage" Version="8.1.60" />
+    <PackageReference Include="Wegmans.EnterpriseLibrary.Diagnostics.HealthChecks.Azure.EventGrid" Version="8.1.60" />
+    <PackageReference Include="AspNetCore.HealthChecks.AzureStorage" Version="3.3.1" />
+    <PackageReference Include="Extensions.Microsoft.Diagnostics.HealthChecks.ApplicationInsights" Version="1.3.0" />
+    <PackageReference Include="Wegmans.EnterpriseLibrary.Events" Version="8.1.109" />
+    <PackageReference Include="Wegmans.EnterpriseLibrary.Events.Publisher" Version="8.1.109" />
+    <PackageReference Include="Wegmans.EnterpriseLibrary.Http" Version="8.0.33" />
+    <PackageReference Include="Wegmans.EnterpriseLibrary.Http.Authentication.AzureAD" Version="8.0.33" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="API\product-API.json" ClassName="ProductAPI" />
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <OpenApiReference Include="API\customers-2022-08-01.yaml" CodeGenerator="NSwagCSharp" Namespace="Wegmans.Enterprise.Services" Options="/GenerateClientClasses:True /GenerateClientInterfaces:True /UseBaseUrl:False" ClassName="CustomerClient" />
+    <OpenApiReference Include="API\ProductAPI.json" CodeGenerator="NSwagCSharp" Namespace="Wegmans.Enterprise.Services" Options="/GenerateClientClasses:True /GenerateClientInterfaces:True /UseBaseUrl:False" ClassName="ProductAPI" />
+    <OpenApiReference Include="API\Price API - swagger.json" CodeGenerator="NSwagCSharp" Namespace="Wegmans.Price.Services" ClassName="PriceAPI">
+      <Options>/GenerateClientClasses:True /GenerateClientInterfaces:True /UseBaseUrl:False /AdditionalNamespaceUsages:Wegmans.Enterprise.Services /GenerateExceptionClasses:false</Options>
+    </OpenApiReference>
+  </ItemGroup>
+</Project>
+

@@ -1,0 +1,10 @@
+{
+    "moduleAliases": {
+        "ts": {
+            "wegmans": {
+                "subscription": "f211da81-4b80-49dc-8ff4-4463da1362f0",
+                "resourceGroup": "template-specs"
+            }
+        }
+    }
+}

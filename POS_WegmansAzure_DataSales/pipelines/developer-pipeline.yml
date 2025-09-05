@@ -1,0 +1,99 @@
+trigger: none
+
+resources:
+  repositories:
+    - repository: azure_pipeline_templates
+      type: git
+      name: Azure/pipeline-templates
+      ref: refs/heads/releases/2023.09.07
+
+stages:
+- stage: build
+  displayName: build
+
+  jobs:
+  - template: build.yml
+    parameters:
+      id: Function_App
+      project: ./Wegmans.POS.DataHub/Wegmans.POS.DataHub/Wegmans.POS.DataHub.csproj
+      artifact: function-app-code
+      zipAfterPublish: true
+
+  - job: publish_deployment
+    displayName: Publish Bicep Template
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - checkout: self
+      - task: CopyFiles@2
+        displayName: Copying Bicep Templates
+        inputs:
+          SourceFolder: $(Build.SourcesDirectory)
+          Contents: |
+            environment/*.bicep
+            environment/*.json
+          TargetFolder: $(Build.ArtifactStagingDirectory)
+      - publish: $(Build.ArtifactStagingDirectory)
+        artifact: bicepTemplates
+  
+# //////////////// #
+# Agent Job - TEST #
+# //////////////// #
+- stage: Deploy_bicep_test
+  displayName: TEST Deploy bicep to Azure
+  dependsOn: build
+  condition: succeeded('build')
+  variables:
+  - group: pointOfSale-events-test
+  - group: possalesdatahub-test
+  - name: appName
+    value: possalesdatahub-test-eastus2
+  - name: function_app_name
+    value: possalesdatahub-test-eastus2
+  - name: workspaceName
+    value: possalesdatahub-test-eastus2
+  - name: applicationInsightsName
+    value: possalesdatahub-test-eastus2
+  - name: location
+    value: eastus2
+  - name: resourceGroupName
+    value: possalesdatahub-test-eastus2
+  - name: storageAccountName
+    value: possalesdatahubtest
+  - name: vnetName
+    value: vnet-nonprod-eastus2
+  - name: privateLinkAddressPrefix
+    value: 172.27.203.0/28
+  - name: subnetName
+    value: private-link-test
+  - name: vnetResourceGroupName
+    value: er-vnet-nonprod-eastus2
+  - name: dataProtectionTag
+    value: Administrative
+  - name: customerClientServerAddress
+    value: https://nonprod.api.wegmans.io/customers/
+  - name: productApiConfigBaseAddress
+    value: https://wegmans-es.azure-api.net/product/
+  - name: itemFunctionAppURL
+    value: https://possalesdatahub-test-eastus2.azurewebsites.net/
+  - name: priceApiConfigBaseAddress
+    value: https://wegmans-es.azure-api.net/price/
+  - name: priceFunctionAppURL
+    value: https://possalesdatahub-test-eastus2.azurewebsites.net/
+  jobs:
+  - template: deploy.yml
+    parameters: 
+      azureSubscription: 'Azure (POS - Point of Sale - NON-PROD)'
+      deployment: Deploy_bicep_test
+      displayName: Deploy bicep and function app code
+      environment: DataHub_test
+      what_env: test
+      isProduction: false
+      usergroupid: 60acc713-2029-42eb-9ca8-187009d38f16
+
+- stage: NonProd_Integration_Tests
+  displayName: Integration Tests
+  jobs: 
+  - template: integTest.yml
+    parameters:
+        zipAfterPublish: false

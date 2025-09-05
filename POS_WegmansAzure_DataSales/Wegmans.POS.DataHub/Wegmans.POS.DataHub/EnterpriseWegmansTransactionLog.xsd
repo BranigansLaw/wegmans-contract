@@ -1,0 +1,3568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xs:simpleType name="PackedDecimalType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="-?[0-9]+" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TransactionLog">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="Transaction">
+					<xs:complexType>
+						<xs:choice minOccurs="1" maxOccurs="unbounded">
+							<xs:element name="TransactionRecord_00">
+								<xs:complexType id="TransactionRecord_00">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="00" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="NumberOfStrings" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Password" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="GrossPositive" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="GrossNegative" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="RingTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SpecialTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="InactiveTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat1" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+													<xs:element name="Bit16" type="xs:boolean" />
+													<xs:element name="Bit17" type="xs:boolean" />
+													<xs:element name="Bit18" type="xs:boolean" />
+													<xs:element name="Bit19" type="xs:boolean" />
+													<xs:element name="Bit20" type="xs:boolean" />
+													<xs:element name="Bit21" type="xs:boolean" />
+													<xs:element name="Bit22" type="xs:boolean" />
+													<xs:element name="Bit23" type="xs:boolean" />
+													<xs:element name="Bit24" type="xs:boolean" />
+													<xs:element name="Bit25" type="xs:boolean" />
+													<xs:element name="Bit26" type="xs:boolean" />
+													<xs:element name="Bit27" type="xs:boolean" />
+													<xs:element name="Bit28" type="xs:boolean" />
+													<xs:element name="Bit29" type="xs:boolean" />
+													<xs:element name="Bit30" type="xs:boolean" />
+													<xs:element name="Bit31" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="AltPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="VoidTrc" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_01">
+								<xs:complexType id="TransactionRecord_01">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="01" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ExtendedPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DepartmentNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CouponFamilyNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat1" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+													<xs:element name="Bit16" type="xs:boolean" />
+													<xs:element name="Bit17" type="xs:boolean" />
+													<xs:element name="Bit18" type="xs:boolean" />
+													<xs:element name="Bit19" type="xs:boolean" />
+													<xs:element name="Bit20" type="xs:boolean" />
+													<xs:element name="Bit21" type="xs:boolean" />
+													<xs:element name="Bit22" type="xs:boolean" />
+													<xs:element name="Bit23" type="xs:boolean" />
+													<xs:element name="Bit24" type="xs:boolean" />
+													<xs:element name="Bit25" type="xs:boolean" />
+													<xs:element name="Bit26" type="xs:boolean" />
+													<xs:element name="Bit27" type="xs:boolean" />
+													<xs:element name="Bit28" type="xs:boolean" />
+													<xs:element name="Bit29" type="xs:boolean" />
+													<xs:element name="Bit30" type="xs:boolean" />
+													<xs:element name="Bit31" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Indicat2" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Indicat3" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat4" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+													<xs:element name="Bit16" type="xs:boolean" />
+													<xs:element name="Bit17" type="xs:boolean" />
+													<xs:element name="Bit18" type="xs:boolean" />
+													<xs:element name="Bit19" type="xs:boolean" />
+													<xs:element name="Bit20" type="xs:boolean" />
+													<xs:element name="Bit21" type="xs:boolean" />
+													<xs:element name="Bit22" type="xs:boolean" />
+													<xs:element name="Bit23" type="xs:boolean" />
+													<xs:element name="Bit24" type="xs:boolean" />
+													<xs:element name="Bit25" type="xs:boolean" />
+													<xs:element name="Bit26" type="xs:boolean" />
+													<xs:element name="Bit27" type="xs:boolean" />
+													<xs:element name="Bit28" type="xs:boolean" />
+													<xs:element name="Bit29" type="xs:boolean" />
+													<xs:element name="Bit30" type="xs:boolean" />
+													<xs:element name="Bit31" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										
+										<xs:element name="OrdinalNumber" minOccurs="0" type="PackedDecimalType"/>
+										
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_02">
+								<xs:complexType id="TransactionRecord_02">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="02" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="MultiPricingGroup" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DealQuantity" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="PricingMethod" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SaleQuantity" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SalePrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="QtyOrWgtOrVol" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat1" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_03">
+								<xs:complexType id="TransactionRecord_03">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="03" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="DiscountGroup" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountRate" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountTaxExemptAmount"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptId" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TaxExemptAmountA" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountB" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountC" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountD" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountA" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountB" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountC" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountD" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountE" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountF" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountG" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountH" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountE" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountF" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountG" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountH" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_04">
+								<xs:complexType id="TransactionRecord_04">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="04" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="DiscountGroup" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountRate" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountTaxExemptAmount"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptId" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TaxExemptAmountA" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountB" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountC" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountD" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountA" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountB" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountC" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountD" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountE" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountF" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountG" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxExemptAmountH" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountE" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountF" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountG" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxableExemptAmountH" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_05">
+								<xs:complexType id="TransactionRecord_05">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="05" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TenderEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="TenderType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderCashingFee" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CustomerAccount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Status" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_06">
+								<xs:complexType id="TransactionRecord_06">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="06" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TenderEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="TenderType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderCashingFee" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CustomerAccount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Status" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_07">
+								<xs:complexType id="TransactionRecord_07">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="07" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TaxAAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxBAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxCAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxDAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxASales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxBSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxCSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxDSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxEAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxFAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxGAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxHAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxESales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxFSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxGSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxHSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_08">
+								<xs:complexType id="TransactionRecord_08">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="08" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TaxAAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxBAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxCAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxDAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxASales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxBSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxCSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxDSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxEAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxFAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxGAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxHAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxESales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxFSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxGSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TaxHSales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_09">
+								<xs:complexType id="TransactionRecord_09">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="09" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TenderType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_10">
+								<xs:complexType id="TransactionRecord_10">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="10" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+
+							<xs:element name="TransactionRecord_11">
+								<xs:complexType id="TransactionRecord_11">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.454D45">
+								<xs:complexType id="TransactionRecord_11.454D45">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Status" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.555352">
+								<xs:complexType id="TransactionRecord_11.555352">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserData1" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData2" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.BB">
+								<xs:complexType id="TransactionRecord_11.BB">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AccountNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused1" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused2" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused3" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused4" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused5" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.BD">
+								<xs:complexType id="TransactionRecord_11.BD">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Indicator" minOccurs="0" type="xs:string" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UnitPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DepartmentNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CouponItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CouponPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CouponDepartment" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.CC">
+								<xs:complexType id="TransactionRecord_11.CC">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ManufacturerCouponAmount"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="StoreCouponAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ManufacturerCouponCount"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="StoreCouponCount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.CE">
+								<xs:complexType id="TransactionRecord_11.CE">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Value" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="MoreFlags" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Families" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat1" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+													<xs:element name="Bit16" type="xs:boolean" />
+													<xs:element name="Bit17" type="xs:boolean" />
+													<xs:element name="Bit18" type="xs:boolean" />
+													<xs:element name="Bit19" type="xs:boolean" />
+													<xs:element name="Bit20" type="xs:boolean" />
+													<xs:element name="Bit21" type="xs:boolean" />
+													<xs:element name="Bit22" type="xs:boolean" />
+													<xs:element name="Bit23" type="xs:boolean" />
+													<xs:element name="Bit24" type="xs:boolean" />
+													<xs:element name="Bit25" type="xs:boolean" />
+													<xs:element name="Bit26" type="xs:boolean" />
+													<xs:element name="Bit27" type="xs:boolean" />
+													<xs:element name="Bit28" type="xs:boolean" />
+													<xs:element name="Bit29" type="xs:boolean" />
+													<xs:element name="Bit30" type="xs:boolean" />
+													<xs:element name="Bit31" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Indicat2" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Indicat3" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat4" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+													<xs:element name="Bit16" type="xs:boolean" />
+													<xs:element name="Bit17" type="xs:boolean" />
+													<xs:element name="Bit18" type="xs:boolean" />
+													<xs:element name="Bit19" type="xs:boolean" />
+													<xs:element name="Bit20" type="xs:boolean" />
+													<xs:element name="Bit21" type="xs:boolean" />
+													<xs:element name="Bit22" type="xs:boolean" />
+													<xs:element name="Bit23" type="xs:boolean" />
+													<xs:element name="Bit24" type="xs:boolean" />
+													<xs:element name="Bit25" type="xs:boolean" />
+													<xs:element name="Bit26" type="xs:boolean" />
+													<xs:element name="Bit27" type="xs:boolean" />
+													<xs:element name="Bit28" type="xs:boolean" />
+													<xs:element name="Bit29" type="xs:boolean" />
+													<xs:element name="Bit30" type="xs:boolean" />
+													<xs:element name="Bit31" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Unused" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.DB">
+								<xs:complexType id="TransactionRecord_11.DB">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="CustomerAccountID" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TargetedCoupon" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused1" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused2" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused3" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused4" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused5" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.DD">
+								<xs:complexType id="TransactionRecord_11.DD">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Unused" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="LogFlags" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="CampaignNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ManufacturerNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="PromotionCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="AssociatedItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.DE">
+								<xs:complexType id="TransactionRecord_11.DE">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ClubNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Points" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="RedeemedPoints" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="BonusPoints" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Sales" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused1" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused2" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.EE">
+								<xs:complexType id="TransactionRecord_11.EE">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="CustomerAccountID" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Points" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CouponAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CouponCount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="MessageCount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransferredTransactionCount"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="TransferredTransactionAmount"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="BonusPoints" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="RedeemedPoints" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="EntryMethod" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.FF">
+								<xs:complexType id="TransactionRecord_11.FF">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="CustomerAccountID" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="NosaleData" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="StoreNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="EntryMethod" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.Alias">
+								<xs:complexType id="TransactionRecord_11.Alias">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused1" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unused2" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_11.DataEntry">
+								<xs:complexType id="TransactionRecord_11.DataEntry">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="11" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="UserData1" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData2" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData3" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData4" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData5" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData6" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_13">
+								<xs:complexType id="TransactionRecord_13">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="13" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:sequence maxOccurs="unbounded">
+											<xs:choice>
+												<xs:element name="NumberOfLoans" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="AmountLoans" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="NumberOfPickups" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="AmountPickups" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="TenderType" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="TenderAmount" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="Negative" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="NegativeTenderType" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="NegativeTenderAmount"
+													minOccurs="0" type="PackedDecimalType" />
+												<xs:element name="UserValue" minOccurs="0"
+													type="xs:string" />
+											</xs:choice>
+										</xs:sequence>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_16">
+								<xs:complexType id="TransactionRecord_16">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="16" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="HostID" minOccurs="0" type="xs:string" />
+										<xs:element name="TotalsType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TotalAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0" type="xs:string" />
+										<xs:element name="ActionCode" minOccurs="0" type="xs:string" />
+										<xs:element name="RRN" minOccurs="0" type="xs:string" />
+										<xs:element name="Sequence" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="MessageType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ResponseCode" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ReasonCode" minOccurs="0" type="xs:string" />
+										<xs:element name="ExpirationDate" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CashBack" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Account" minOccurs="0" type="xs:string" />
+										<xs:element name="EntryMethod" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ID1" minOccurs="0" type="xs:string" />
+										<xs:element name="ID2" minOccurs="0" type="xs:string" />
+										<xs:element name="ApprovalCode" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="RCDescription" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ApprovalCodeSource" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AccountType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="VoucherNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AcquireInstitutionNumber"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="OriginalHostResponseCode"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="HostResponseIndicator" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="CardValidationNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="EntryMethodSecondID" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Flags1" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="QualifiedHealthPlanAmount"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="PrescriptionAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionAmount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="AlternateTenderID" minOccurs="0"
+											type="PackedDecimalType" />
+										
+										<xs:element name="Token" minOccurs="0" type="xs:string"/>
+										
+										<xs:element name="KeyedReason" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="HashedAccount" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_21">
+								<xs:complexType id="TransactionRecord_21">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="21" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat1" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat2" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="AutoPickup" minOccurs="0" type="xs:string" />
+										<xs:element name="CloseProcedure" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_80.1">
+								<xs:complexType id="TransactionRecord_80.1">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="80"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Identifier" minOccurs="0" type="xs:string"/>
+										<xs:element name="AgencyID" minOccurs="0" type="xs:string"/>
+										<xs:element name="Category" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="Subcategory" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="BenefitCategory" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="PurchaseQuantity" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="ZeroPurchaseQuantity" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="Cost" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="ZeroCost" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="TransactionEntryIndex" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="ItemCode" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="ChildrenArray" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="ZeroChildrenArray" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="Continuation" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="OriginalUPC" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="ItemCodeTypeIndicator" minOccurs="0" type="xs:string"/>
+										<xs:element name="WICItemFlag" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="TransactionRecord_80.2">
+								<xs:complexType id="TransactionRecord_80.2">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="80"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Identifier" minOccurs="0" type="xs:string"/>
+										<xs:element name="AgencyID" minOccurs="0" type="xs:string"/>
+										<xs:element name="PANLength" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="PAN" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="ClaimAmount" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="POSDataCode" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="IssuingAgency" minOccurs="0" type="xs:string"/>
+										<xs:element name="FirstDateToSpend" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="LastDateToSpend" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="DiscountAmount" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="TransactionSignature" minOccurs="0" type="xs:string"/>
+										<xs:element name="TransactionDateTime" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="WICSummaryFlag" minOccurs="0" type="PackedDecimalType"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="TransactionRecord_80.3">
+								<xs:complexType id="TransactionRecord_80.3">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="80"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Identifier" minOccurs="0" type="xs:string"/>
+										<xs:element name="ChildrenArray" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="ZeroChildrenArray" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="Continuation" minOccurs="0" type="PackedDecimalType"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>			
+							<xs:element name="TransactionRecord_97">
+								<xs:complexType id="TransactionRecord_97">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="97" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_97.05">
+								<xs:complexType id="TransactionRecord_97.05">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="97" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderAmountForeign" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reserved" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_97.06">
+								<xs:complexType id="TransactionRecord_97.06">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="97" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderAmountForeign" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reserved" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_97.13">
+								<xs:complexType id="TransactionRecord_97.13">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="97" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:sequence maxOccurs="unbounded">
+											<xs:choice>
+												<xs:element name="SubStringType" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="TenderType" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="TenderAmount" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="Negative" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="NegativeTenderType" minOccurs="0"
+													type="PackedDecimalType" />
+												<xs:element name="NegativeTenderAmount"
+													minOccurs="0" type="PackedDecimalType" />
+												<xs:element name="UserValue" minOccurs="0"
+													type="xs:string" />
+											</xs:choice>
+										</xs:sequence>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_98">
+								<xs:complexType id="TransactionRecord_98">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="98" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99">
+								<xs:complexType id="TransactionRecord_99">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.0">
+								<xs:complexType id="TransactionRecord_99.0.0">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Date" minOccurs="0" type="xs:string" />
+										<xs:element name="EntryMethod" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ShortDate" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.1">
+								<xs:complexType id="TransactionRecord_99.0.1">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.2">
+								<xs:complexType id="TransactionRecord_99.0.2">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.3">
+								<xs:complexType id="TransactionRecord_99.0.3">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TenderEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SignatureLength" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SignatureData" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Reserved" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.4">
+								<xs:complexType id="TransactionRecord_99.0.4">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TenderEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SignatureType" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="SignatureSource" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="SignatureFormat" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="StoreName" minOccurs="0" type="xs:string" />
+										<xs:element name="SignatureKey" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.00.06">
+								<xs:complexType id="TransactionRecord_99.00.06">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="PrescriptionId" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.9">
+								<xs:complexType id="TransactionRecord_99.0.9">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemSubTypeValue" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemSubTypeData" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.10">
+								<xs:complexType id="TransactionRecord_99.0.10">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Quantity" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="RainCheckPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OriginalPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.11">
+								<xs:complexType id="TransactionRecord_99.0.11">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="BarCodeType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="BarCodeData" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="PrimaryPurchaseQuantity"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="SecondaryPurchaseQuantity"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="TertiaryPurchaseQuantity"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							
+							<xs:element name="TransactionRecord_99.0.21">
+								<xs:complexType id="TransactionRecord_99.0.21">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="SubType" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="PromotionServiceID" minOccurs="0" type="xs:string"/>
+										<xs:element name="PromotionServiceCouponID" minOccurs="0" type="xs:string"/>
+										<xs:element name="DiscountType" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="DiscountAmount" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="PromotionServiceUserData" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="MatchingItemTotal" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="MatchingItemOrdinalNumber" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="MatchingItemDiscountAmount" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="MatchingItemOriginalPrice" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.22">
+								<xs:complexType id="TransactionRecord_99.0.22">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="SubType" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="MatchingItemOrdinalNumber" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="MatchingItemDiscountAmount" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="MatchingItemOriginalPrice" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							
+							<xs:element name="TransactionRecord_99.0.50">
+								<xs:complexType id="TransactionRecord_99.0.50">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="RefundReason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.51">
+								<xs:complexType id="TransactionRecord_99.0.51">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="PriceOverrideReason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.52">
+								<xs:complexType id="TransactionRecord_99.0.52">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="VoidReason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.70">
+								<xs:complexType id="TransactionRecord_99.0.70">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ActionFlag" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DataSourceFlag" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Controller" minOccurs="0" type="xs:string" />
+										<xs:element name="OriginalTerminalID" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OriginalTransactionNumber"
+											minOccurs="0" type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="GrossPositive" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="GrossNegative" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.78">
+								<xs:complexType id="TransactionRecord_99.0.78">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountRate" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OriginalPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SoldAtPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountGroupNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.79">
+								<xs:complexType id="TransactionRecord_99.0.79">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountRate" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OriginalPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SoldAtPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DepartmentNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							
+							<xs:element name="TransactionRecord_99.0.80">
+								<xs:complexType id="TransactionRecord_99.0.80">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="SubType" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="Prescription" minOccurs="0" type="xs:string"/>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.0.81">
+								<xs:complexType id="TransactionRecord_99.0.81">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="SubType" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="Data" minOccurs="0" type="PackedDecimalType"/>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							
+							<xs:element name="TransactionRecord_99.0.96">
+								<xs:complexType id="TransactionRecord_99.0.96">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Plan" minOccurs="0" type="xs:string" />
+										<xs:element name="AccountType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="RequestType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Amount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Sequence" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0" type="xs:string" />
+										<xs:element name="AccountNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="EntryMethod" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserField" minOccurs="0" type="xs:string" />
+										<xs:element name="Track1" minOccurs="0" type="xs:string" />
+										<xs:element name="Track2" minOccurs="0" type="xs:string" />
+										<xs:element name="Track3" minOccurs="0" type="xs:string" />
+										<xs:element name="ApprovalCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ApprovalCodeSource" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ResponseCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Flags" minOccurs="0" type="xs:string"/>
+										
+										<xs:element name="PromotionServiceID" minOccurs="0" type="xs:string"/>
+										<xs:element name="PromotionServiceGiftCardID" minOccurs="0" type="xs:string"/>
+										<xs:element name="LotteryItemRRN" minOccurs="0" type="xs:string" />
+										<xs:element name="LotteryPlayerNumber" minOccurs="0" type="xs:string"/>
+										
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.01">
+								<xs:complexType id="TransactionRecord_20.01">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Indicat1" minOccurs="0" type="xs:string" />
+										<xs:element name="Amount" minOccurs="0" type="xs:string" />
+										<xs:element name="SaleMeasure" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="FileDeal" minOccurs="0" type="xs:string" />
+										<xs:element name="FilePrice" minOccurs="0" type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="EnteredReasonCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="VoidReasonCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="AltPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="BarCode" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.02">
+								<xs:complexType id="TransactionRecord_20.02">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountAmount" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="DiscountTaxExemptAmount"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="DiscountRate" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DiscountGroup" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="PreferredCustomer" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="TaxExemptID" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.03">
+								<xs:complexType id="TransactionRecord_20.03">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TenderType" minOccurs="0" type="xs:string" />
+										<xs:element name="TenderVariety" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Account" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="AmountTender" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountBalance" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="PreferredCust" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.04">
+								<xs:complexType id="TransactionRecord_20.04">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="VoidAmount" minOccurs="0" type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="VoidTrc" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.05">
+								<xs:complexType id="TransactionRecord_20.05">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="Indicat1" minOccurs="0" type="xs:string" />
+										<xs:element name="TenderAmount" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.06">
+								<xs:complexType id="TransactionRecord_20.06">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="TenderType" minOccurs="0" type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.07">
+								<xs:complexType id="TransactionRecord_20.07">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Type" minOccurs="0" type="xs:string" />
+										<xs:element name="NumberOfTransactions" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="GrossPositive" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="GrossNegative" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="NumberOfPriceChanges" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.08">
+								<xs:complexType id="TransactionRecord_20.08">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="BarCode" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.09">
+								<xs:complexType id="TransactionRecord_20.09">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="NewDealQuantity" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="NewPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OldDealQuantity" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OldPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Batch" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.11">
+								<xs:complexType id="TransactionRecord_20.11">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="Password1" minOccurs="0" type="xs:string" />
+										<xs:element name="Password2" minOccurs="0" type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.12">
+								<xs:complexType id="TransactionRecord_20.12">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="TransactionData" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.13">
+								<xs:complexType id="TransactionRecord_20.13">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="AmountCash" minOccurs="0" type="xs:string" />
+										<xs:element name="AmountCheck" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountFoodStamps" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountMiscellaneous1" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountMiscellaneous2" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountMiscellaneous3" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountManufacturerCoupons"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="AmountStoreCoupons" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OverrideReason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.14">
+								<xs:complexType id="TransactionRecord_20.14">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="AmountCash" minOccurs="0" type="xs:string" />
+										<xs:element name="AmountCheck" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountFoodStamps" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountMiscellaneous1" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountMiscellaneous2" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountMiscellaneous3" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountManufacturerCoupons"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="AmountStoreCoupons" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OverrideReason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.15">
+								<xs:complexType id="TransactionRecord_20.15">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="Indicat1" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.16">
+								<xs:complexType id="TransactionRecord_20.16">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.17">
+								<xs:complexType id="TransactionRecord_20.17">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.18">
+								<xs:complexType id="TransactionRecord_20.18">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat0" minOccurs="0" type="xs:string" />
+										<xs:element name="TenderAmount" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountCash" minOccurs="0" type="xs:string" />
+										<xs:element name="AmountCheck" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountFoodStamps" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountMiscellaneous1" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountMiscellaneous2" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountMiscellaneous3" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="AmountManufacturerCoupons"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="AmountStoreCoupons" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.19">
+								<xs:complexType id="TransactionRecord_20.19">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserData" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Reason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.82">
+								<xs:complexType id="TransactionRecord_20.82">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OverrideReason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="PreferredCustomer" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.83">
+								<xs:complexType id="TransactionRecord_20.83">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Override" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="OverrideReason" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Index" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Initials" minOccurs="0" type="xs:string" />
+										<xs:element name="UserExit" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.89.0.50">
+								<xs:complexType id="TransactionRecord_20.89.0.50">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="RefundReasonCode" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.89.10.1">
+								<xs:complexType id="TransactionRecord_20.89.10.1">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemDescription" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.89.10.2">
+								<xs:complexType id="TransactionRecord_20.89.10.2">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemDescription" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.89.21.1">
+								<xs:complexType id="TransactionRecord_20.89.21.1">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemDescription" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.89.21.2">
+								<xs:complexType id="TransactionRecord_20.89.21.2">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemDescription" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.89.21.3">
+								<xs:complexType id="TransactionRecord_20.89.21.3">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemDescription" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.89.21.4">
+								<xs:complexType id="TransactionRecord_20.89.21.4">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemDescription" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_20.89.21.5">
+								<xs:complexType id="TransactionRecord_20.89.21.5">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="20" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Operator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemDescription" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+
+							<xs:element name="TransactionRecord_80">
+								<xs:complexType id="TransactionRecord_80">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="80" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.1">
+								<xs:complexType id="TransactionRecord_99.10.1">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SaleQuantity" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Price" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.2">
+								<xs:complexType id="TransactionRecord_99.10.2">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CustomerNumberAsEntered"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.3">
+								<xs:complexType id="TransactionRecord_99.10.3">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemCode" minOccurs="0" type="xs:string" />
+										<xs:element name="SalePrice" minOccurs="0" type="xs:string" />
+										<xs:element name="AdPrice" minOccurs="0" type="xs:string" />
+										<xs:element name="ScannedPrice" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="Quantity" minOccurs="0" type="xs:string" />
+										<xs:element name="TaxablePrice" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.4">
+								<xs:complexType id="TransactionRecord_99.10.4">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="RxTransactionNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="CustomerEsignatureType"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="HostIndicator" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="PharmacyItemSequenceNumber"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="DateTime" minOccurs="0" type="xs:string" />
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="OperatorID" minOccurs="0" type="xs:string" />
+										<xs:element name="eSigType" minOccurs="0" type="xs:string" />
+										<xs:element name="eSigName" minOccurs="0" type="xs:string" />
+										<xs:element name="HostResponseCode" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TotalAmount" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="InsuranceAmount" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="NetDue" minOccurs="0" type="xs:string" />
+										<xs:element name="Barcode" minOccurs="0" type="xs:string" />
+										<xs:element name="RefillNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="PartialFillSequenceNumber"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="StoreNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.7">
+								<xs:complexType id="TransactionRecord_99.10.7">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0" type="xs:string" />
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="OperatorNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="CateringSystemContractNumber"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="NumberItems" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TotalPrice" minOccurs="0" type="xs:string" />
+										<xs:element name="VoidIndicator" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.8">
+								<xs:complexType id="TransactionRecord_99.10.8">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Unknown" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.8.2">
+								<xs:complexType id="TransactionRecord_99.10.8.2">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="EmbeddedStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="MultiPricingGroup" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DealQuantity" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="PricingMethod" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SaleQuantity" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SalePrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="QtyOrWgtOrVol" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat1" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.8.1">
+								<xs:complexType id="TransactionRecord_99.10.8.1">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="EmbeddedStringType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ItemCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ExtendedPrice" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DepartmentNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CouponFamilyNumber" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat1" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+													<xs:element name="Bit16" type="xs:boolean" />
+													<xs:element name="Bit17" type="xs:boolean" />
+													<xs:element name="Bit18" type="xs:boolean" />
+													<xs:element name="Bit19" type="xs:boolean" />
+													<xs:element name="Bit20" type="xs:boolean" />
+													<xs:element name="Bit21" type="xs:boolean" />
+													<xs:element name="Bit22" type="xs:boolean" />
+													<xs:element name="Bit23" type="xs:boolean" />
+													<xs:element name="Bit24" type="xs:boolean" />
+													<xs:element name="Bit25" type="xs:boolean" />
+													<xs:element name="Bit26" type="xs:boolean" />
+													<xs:element name="Bit27" type="xs:boolean" />
+													<xs:element name="Bit28" type="xs:boolean" />
+													<xs:element name="Bit29" type="xs:boolean" />
+													<xs:element name="Bit30" type="xs:boolean" />
+													<xs:element name="Bit31" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Indicat2" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Indicat3" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Indicat4" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Bit0" type="xs:boolean" />
+													<xs:element name="Bit1" type="xs:boolean" />
+													<xs:element name="Bit2" type="xs:boolean" />
+													<xs:element name="Bit3" type="xs:boolean" />
+													<xs:element name="Bit4" type="xs:boolean" />
+													<xs:element name="Bit5" type="xs:boolean" />
+													<xs:element name="Bit6" type="xs:boolean" />
+													<xs:element name="Bit7" type="xs:boolean" />
+													<xs:element name="Bit8" type="xs:boolean" />
+													<xs:element name="Bit9" type="xs:boolean" />
+													<xs:element name="Bit10" type="xs:boolean" />
+													<xs:element name="Bit11" type="xs:boolean" />
+													<xs:element name="Bit12" type="xs:boolean" />
+													<xs:element name="Bit13" type="xs:boolean" />
+													<xs:element name="Bit14" type="xs:boolean" />
+													<xs:element name="Bit15" type="xs:boolean" />
+													<xs:element name="Bit16" type="xs:boolean" />
+													<xs:element name="Bit17" type="xs:boolean" />
+													<xs:element name="Bit18" type="xs:boolean" />
+													<xs:element name="Bit19" type="xs:boolean" />
+													<xs:element name="Bit20" type="xs:boolean" />
+													<xs:element name="Bit21" type="xs:boolean" />
+													<xs:element name="Bit22" type="xs:boolean" />
+													<xs:element name="Bit23" type="xs:boolean" />
+													<xs:element name="Bit24" type="xs:boolean" />
+													<xs:element name="Bit25" type="xs:boolean" />
+													<xs:element name="Bit26" type="xs:boolean" />
+													<xs:element name="Bit27" type="xs:boolean" />
+													<xs:element name="Bit28" type="xs:boolean" />
+													<xs:element name="Bit29" type="xs:boolean" />
+													<xs:element name="Bit30" type="xs:boolean" />
+													<xs:element name="Bit31" type="xs:boolean" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.9">
+								<xs:complexType id="TransactionRecord_99.10.9">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0" type="xs:string" />
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="OperatorNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="CheckCartResponse" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.10">
+								<xs:complexType id="TransactionRecord_99.10.10">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TenderEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="MaskedAccount" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.11">
+								<xs:complexType id="TransactionRecord_99.10.11">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0" type="xs:string" />
+										<xs:element name="TerminalNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TransactionNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="QhcpSubtotal" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="QhcpDiscountTotal" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="QhcpSalesTax" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="QhcpTotal" minOccurs="0" type="xs:string" />
+										<xs:element name="TransactionSubtotal" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TransactionDiscountTotal"
+											minOccurs="0" type="xs:string" />
+										<xs:element name="TransactionSalesTax" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="TransactionTotal" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.12">
+								<xs:complexType id="TransactionRecord_99.10.12">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CAUPC" minOccurs="0" type="xs:string" />
+										<xs:element name="Void" minOccurs="0" type="xs:string" />
+										<xs:element name="ServiceDeptUPC" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ServiceDept" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="NumItems" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.13">
+								<xs:complexType id="TransactionRecord_99.10.13">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TenderEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CAUPC" minOccurs="0" type="xs:string" />
+										<xs:element name="NumItems" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.14">
+								<xs:complexType id="TransactionRecord_99.10.14">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="CAUPC" minOccurs="0" type="xs:string" />
+										<xs:element name="Item" minOccurs="0" type="xs:string" />
+										<xs:element name="Quantity" minOccurs="0" type="xs:string" />
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<xs:element name="TransactionRecord_99.10.96">
+								<xs:complexType id="TransactionRecord_99.10.96">
+									<xs:sequence>
+										<xs:element name="StringType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="99" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ItemEntrySequenceNumber"
+											minOccurs="1" maxOccurs="1" type="xs:nonNegativeInteger" />
+										<xs:element name="Originator" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="SubType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Plan" minOccurs="0" type="xs:string" />
+										<xs:element name="AccountType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="RequestType" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Amount" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Sequence" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="DateTime" minOccurs="0" type="xs:string" />
+										<xs:element name="AccountNumber" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="EntryMethod" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="UserField" minOccurs="0" type="xs:string" />
+										<xs:element name="Track1" minOccurs="0" type="xs:string" />
+										<xs:element name="Track2" minOccurs="0" type="xs:string" />
+										<xs:element name="Track3" minOccurs="0" type="xs:string" />
+										<xs:element name="ApprovalCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="ApprovalCodeSource" minOccurs="0"
+											type="xs:string" />
+										<xs:element name="ResponseCode" minOccurs="0"
+											type="PackedDecimalType" />
+										<xs:element name="Flags" minOccurs="0" type="xs:string" />
+										
+										<xs:element name="PromotionServiceID" minOccurs="0" type="xs:string"/>
+										<xs:element name="PromotionServiceGiftCardID" minOccurs="0" type="xs:string"/>
+										<xs:element name="LotteryItemRRN" minOccurs="0" type="xs:string" />
+										<xs:element name="LotteryPlayerNumber" minOccurs="0" type="xs:string"/>
+										
+										<xs:element name="UserValue" minOccurs="0" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

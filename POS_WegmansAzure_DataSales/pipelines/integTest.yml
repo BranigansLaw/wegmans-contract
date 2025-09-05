@@ -1,0 +1,67 @@
+parameters:
+  - name: zipAfterPublish
+    type: boolean
+    default: false
+
+jobs:
+- job: Build
+  displayName: Build Tests
+  pool:
+    vmImage: windows-latest
+    
+  variables:
+    buildConfiguration: release
+
+- deployment: Release
+  displayName: Deploy and Run Tests
+  environment: AUT_ELERA_TESTS
+
+  strategy:
+    runOnce:
+      deploy: #deploy task will auto-inject the download artifacts task
+        steps:
+        - checkout: self
+
+        - task: NuGetToolInstaller@1
+          displayName: Nuget Installer
+          inputs:
+            versionSpec: 5.4.x
+    
+        - task: UseDotNet@2
+          displayName: Setting DotNet 6.0.x
+          inputs:
+            packageType: sdk
+            includePreviewVersions: true
+            version: 6.0.x
+        
+        - task: NuGetAuthenticate@0
+          displayName: Restore packages
+          inputs:
+            command: restore
+            projects: './Wegmans.POS.DataHub/Wegmans.POS.DataHub.IntegTests/Wegmans.POS.DataHub.IntegTests.csproj'
+            script: nuget restore './Wegmans.POS.DataHub/Wegmans.POS.DataHub.IntegTests/Wegmans.POS.DataHub.IntegTests.csproj'
+
+        - task: DotNetCoreCLI@2
+          displayName: Build
+          inputs:
+            command: build
+            projects: './Wegmans.POS.DataHub/Wegmans.POS.DataHub.IntegTests/Wegmans.POS.DataHub.IntegTests.csproj'
+            arguments: >-
+              --configuration release
+              --no-incremental
+
+        - task: AzureCLI@2
+          displayName: Run IntegTest
+          inputs:
+            azureSubscription: Azure (POS - Point of Sale - NON-PROD)
+            scriptType: pscore
+            scriptLocation: inlineScript
+            inlineScript: |
+              dotnet test './Wegmans.POS.DataHub/Wegmans.POS.DataHub.IntegTests/Wegmans.POS.DataHub.IntegTests.csproj' --configuration release
+
+        - task: PublishTestResults@2
+          displayName: Publish Test Results
+          condition: succeededOrFailed()
+          inputs:
+            testRunner: VSTest
+            testResultsFiles: '**/*.trx'

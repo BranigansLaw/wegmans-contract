@@ -1,0 +1,1984 @@
+openapi: 3.0.1
+info:
+  title: Customers
+  description: "Provides the ability to create, find, get, and update customers through the lifecycle of their personal data within Wegmans.\n"
+  contact:
+    name: BASS1
+    email: bass1@wegmans.com
+  version: '2022-08-01'
+servers:
+  - url: https://api.wegmans.io/customers
+  - url: https://nonprod.api.wegmans.io/customers
+paths:
+  /:
+    get:
+      summary: Find Customers
+      description: 'Finds a customer based on the filter parameter, at least one parameter is required; using multiple parameters produces an `AND` filter to the specific customer.'
+      operationId: find-customers
+      parameters:
+        - name: phoneNumber
+          in: query
+          description: "Format - phoneNumber. The customer phone number, formatted as numeric, no special characters or spaces.\n"
+          schema:
+            type: string
+            format: phoneNumber
+          example: 5555551234
+        - name: keyTag
+          in: query
+          description: "The customer key tag number, 10-12 digits, formatted as numeric, no special characters or spaces.\n"
+          schema:
+            type: string
+          example: 5000000055
+        - name: cardNumber
+          in: query
+          description: "The customer card number, 16-18 digits, formatted as numeric, no special characters or spaces.\n"
+          schema:
+            type: string
+          example: 5555555000000055
+        - name: email
+          in: query
+          description: Format - email. The customer email address.
+          schema:
+            type: string
+            format: email
+          example: user@domain.com
+        - name: loyaltyNumber
+          in: query
+          description: The customer loyalty number.
+          schema:
+            type: string
+          example: 123456780
+      responses:
+        '200':
+          description: The customer(s) that matched the filter parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerCollection'
+              example:
+                count: 1
+                values:
+                  - id: 0202ea7b-550a-4a05-9313-520af0182428
+                    loyaltyNumber: '1234567890'
+                    cardNumber:
+                      value: '600229123456789005'
+                    email:
+                      value: user@domain.com
+                    phoneNumber:
+                      value: '5555555555'
+                      isVerified: false
+                    firstName: John
+                    middleInitial: X
+                    lastName: Doe
+                    mailingAddress:
+                      type: street
+                      street: 100 Wegmans Market St
+                      apartmentNumber: 4A
+                      city: Rochester
+                      state: NY
+                      postalCode: '14624'
+                      country: USA
+                    birthDate: '1916-01-31'
+                    isBusiness: false
+                    isTaxExempt: false
+                    isConsumerMobileAppDenied: false
+                    isConsumerMobileAppFraudRisk: false
+                    timestamp: '1916-01-31T08:30:00.0000000+00:00'
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/bad-request
+                title: Bad Request
+                status: 400
+                detail: The request is not valid.
+                instance: https://api.wegmans.io/
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+    post:
+      summary: Create Customer
+      description: Creates a customer profile.
+      operationId: create-customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customer'
+            examples:
+              Customer with Phone Verification:
+                value:
+                  email:
+                    value: user@domain.com
+                  phoneNumber:
+                    value: '5555555555'
+                    verificationCode: '123456'
+                  firstName: John
+                  middleInitial: X
+                  lastName: Doe
+                  mailingAddress:
+                    type: street
+                    street: 100 Wegmans Market St
+                    apartmentNumber: 4A
+                    city: Rochester
+                    state: NY
+                    postalCode: '14624'
+                    country: USA
+              Customer without Phone Verification:
+                value:
+                  email:
+                    value: user@domain.com
+                  phoneNumber:
+                    value: '5555555555'
+                  firstName: John
+                  middleInitial: X
+                  lastName: Doe
+                  mailingAddress:
+                    type: street
+                    street: 100 Wegmans Market St
+                    apartmentNumber: 4A
+                    city: Rochester
+                    state: NY
+                    postalCode: '14624'
+                    country: USA
+              Customer with Post Office Box:
+                value:
+                  email:
+                    value: user@domain.com
+                  phoneNumber:
+                    value: '5555555555'
+                  firstName: John
+                  middleInitial: X
+                  lastName: Doe
+                  mailingAddress:
+                    type: postOffice
+                    poBox: 146A
+                    city: Rochester
+                    state: NY
+                    postalCode: '14624'
+                    country: USA
+      responses:
+        '200':
+          description: The customer profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+              example:
+                id: 0202ea7b-550a-4a05-9313-520af0182428
+                loyaltyNumber: '1234567890'
+                cardNumber:
+                  value: '600229123456789005'
+                email:
+                  value: user@domain.com
+                  isVerified: false
+                phoneNumber:
+                  value: '5555555555'
+                  isVerified: false
+                firstName: John
+                middleInitial: X
+                lastName: Doe
+                mailingAddress:
+                  type: street
+                  street: 100 Wegmans Market St
+                  apartmentNumber: 4A
+                  city: Rochester
+                  state: NY
+                  postalCode: '14624'
+                  country: USA
+                birthDate: '1916-01-31'
+                isBusiness: false
+                isTaxExempt: false
+                isConsumerMobileAppDenied: false
+                isConsumerMobileAppFraudRisk: false
+                timestamp: '1916-01-31T08:30:00.0000000+00:00'
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              examples:
+                Bad Request:
+                  value:
+                    type: https://api.wegmans.io/errors/bad-request
+                    title: Bad Request
+                    status: '400'
+                    detail: The request is not valid.
+                    instance: https://api.wegmans.io/
+                Phone Number Verification Failed:
+                  value:
+                    type: https://api.wegmans.io/phone-number-verification-failed
+                    title: Phone Number Verification Failed
+                    status: '400'
+                    detail: The phone number verification code for the specified phone number is not valid.
+                    instance: https://api.wegmans.io/customers
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '409':
+          description: The requested resource already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/conflict
+                title: Conflict
+                status: 409
+                detail: The resource already exists.
+                instance: https://api.wegmans.io/
+        '424':
+          description: The request failed because a dependency reported a failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/failed-dependency
+                title: Failed Dependency
+                status: 424
+                detail: The request could not be completed because a dependency reported a failure.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+  '/{id}':
+    get:
+      summary: Get Customer
+      description: Returns the customer profile.
+      operationId: get-customer
+      parameters:
+        - name: id
+          in: path
+          description: Format - uuid. The customer identifier.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 0202ea7b-550a-4a05-9313-520af0182428
+      responses:
+        '200':
+          description: The customer profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+              example:
+                id: 0202ea7b-550a-4a05-9313-520af0182428
+                loyaltyNumber: '1234567890'
+                cardNumber:
+                  value: '600229123456789005'
+                email:
+                  value: user@domain.com
+                  isVerified: false
+                phoneNumber:
+                  value: '5555555555'
+                  isVerified: false
+                firstName: John
+                middleInitial: X
+                lastName: Doe
+                mailingAddress:
+                  type: street
+                  street: 100 Wegmans Market St
+                  apartmentNumber: 4A
+                  city: Rochester
+                  state: NY
+                  postalCode: '14624'
+                  country: USA
+                birthDate: '1916-01-31'
+                isBusiness: false
+                isTaxExempt: false
+                isConsumerMobileAppDenied: false
+                isConsumerMobileAppFraudRisk: false
+                timestamp: '1916-01-31T08:30:00.0000000+00:00'
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/bad-request
+                title: Bad Request
+                status: 400
+                detail: The request is not valid.
+                instance: https://api.wegmans.io/
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '404':
+          description: The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/not-found
+                title: Not Found
+                status: 404
+                detail: The resource could not be found.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+    put:
+      summary: Update Customer
+      description: Update the customer profile.
+      operationId: update-customer
+      parameters:
+        - name: id
+          in: path
+          description: Format - uuid. The customer identifier.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 0202ea7b-550a-4a05-9313-520af0182428
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customer'
+            examples:
+              Customer with Phone Verification:
+                value:
+                  email:
+                    value: user@domain.com
+                  phoneNumber:
+                    value: '5555555555'
+                    verificationCode: '123456'
+                  firstName: John
+                  middleInitial: X
+                  lastName: Doe
+                  mailingAddress:
+                    type: street
+                    street: 100 Wegmans Market St
+                    apartmentNumber: 4A
+                    city: Rochester
+                    state: NY
+                    postalCode: '14624'
+                    country: USA
+              Customer without Phone Verification:
+                value:
+                  email:
+                    value: user@domain.com
+                  phoneNumber:
+                    value: '5555555555'
+                  firstName: John
+                  middleInitial: X
+                  lastName: Doe
+                  mailingAddress:
+                    type: street
+                    street: 100 Wegmans Market St
+                    apartmentNumber: 4A
+                    city: Rochester
+                    state: NY
+                    postalCode: '14624'
+                    country: USA
+              Customer with Post Office Box:
+                value:
+                  email:
+                    value: user@domain.com
+                  phoneNumber:
+                    value: '5555555555'
+                  firstName: John
+                  middleInitial: X
+                  lastName: Doe
+                  mailingAddress:
+                    type: postOffice
+                    poBox: 146A
+                    city: Rochester
+                    state: NY
+                    postalCode: '14624'
+                    country: USA
+      responses:
+        '200':
+          description: The customer profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+              example:
+                id: 0202ea7b-550a-4a05-9313-520af0182428
+                loyaltyNumber: '1234567890'
+                cardNumber:
+                  value: '600229123456789005'
+                email:
+                  value: user@domain.com
+                  isVerified: false
+                phoneNumber:
+                  value: '5555555555'
+                  isVerified: false
+                firstName: John
+                middleInitial: X
+                lastName: Doe
+                mailingAddress:
+                  type: street
+                  street: 100 Wegmans Market St
+                  apartmentNumber: 4A
+                  city: Rochester
+                  state: NY
+                  postalCode: '14624'
+                  country: USA
+                birthDate: '1916-01-31'
+                isBusiness: false
+                isTaxExempt: false
+                isConsumerMobileAppDenied: false
+                isConsumerMobileAppFraudRisk: false
+                timestamp: '1916-01-31T08:30:00.0000000+00:00'
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              examples:
+                Bad Request:
+                  value:
+                    type: https://api.wegmans.io/errors/bad-request
+                    title: Bad Request
+                    status: '400'
+                    detail: The request is not valid.
+                    instance: https://api.wegmans.io/
+                Phone Number Verification Failed:
+                  value:
+                    type: https://api.wegmans.io/phone-number-verification-failed
+                    title: Phone Number Verification Failed
+                    status: '400'
+                    detail: The phone number verification code for the specified phone number is not valid.
+                    instance: https://api.wegmans.io/customers
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '404':
+          description: The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/not-found
+                title: Not Found
+                status: 404
+                detail: The resource could not be found.
+                instance: https://api.wegmans.io/
+        '409':
+          description: The requested resource already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/conflict
+                title: Conflict
+                status: 409
+                detail: The resource already exists.
+                instance: https://api.wegmans.io/
+        '424':
+          description: The request failed because a dependency reported a failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/failed-dependency
+                title: Failed Dependency
+                status: 424
+                detail: The request could not be completed because a dependency reported a failure.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+  /verification:
+    post:
+      summary: Create Verification
+      description: 'Contacts the customer via phone or email with a unique code used to create or update their profile, based upon the provided type.'
+      operationId: create-verification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/verification'
+            examples:
+              Create Phone Verification with text method:
+                value:
+                  type: phone
+                  phoneNumber: '5555555555'
+                  method: Text
+                  value: sms
+              Create Phone Verification with voice method:
+                value:
+                  type: phone
+                  phoneNumber: '5555555555'
+                  method: Voice
+              Create Email Verification:
+                value:
+                  type: email
+                  email: user@domain.com
+      responses:
+        '204':
+          description: The verification code has been sent.
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/bad-request
+                title: Bad Request
+                status: 400
+                detail: The request is not valid.
+                instance: https://api.wegmans.io/
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '409':
+          description: The requested resource already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/conflict
+                title: Conflict
+                status: 409
+                detail: The resource already exists.
+                instance: https://api.wegmans.io/
+        '424':
+          description: The request failed because a dependency reported a failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/failed-dependency
+                title: Failed Dependency
+                status: 424
+                detail: The request could not be completed because a dependency reported a failure.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+  /business:
+    post:
+      summary: Create Business Customer
+      description: Creates a business customer profile.
+      operationId: create-business-customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/business'
+            examples:
+              Business Customer with Street Addresss:
+                value:
+                  email:
+                    value: user@domain.com
+                    verificationCode: '123456'
+                  phoneNumber:
+                    value: '5555555555'
+                  firstName: John
+                  middleInitial: X
+                  lastName: Doe
+                  businessName: Acme
+                  mailingAddress:
+                    type: street
+                    street: 100 Wegmans Market St
+                    apartmentNumber: 4A
+                    city: Rochester
+                    state: NY
+                    postalCode: '14624'
+                    country: USA
+                  isTaxExempt: 'true'
+              Business Customer with Post Office Box:
+                value:
+                  email:
+                    value: user@domain.com
+                    verificationCode: '123456'
+                  phoneNumber:
+                    value: '5555555555'
+                  firstName: John
+                  middleInitial: X
+                  lastName: Doe
+                  businessName: Acme
+                  mailingAddress:
+                    type: postOffice
+                    poBox: 146A
+                    city: Rochester
+                    state: NY
+                    postalCode: '14624'
+                    country: USA
+                  isTaxExempt: 'true'
+      responses:
+        '200':
+          description: The customer profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+              example:
+                id: 0202ea7b-550a-4a05-9313-520af0182428
+                loyaltyNumber: '1234567890'
+                cardNumber:
+                  value: '600229123456789005'
+                email:
+                  value: user@domain.com
+                  isVerified: false
+                phoneNumber:
+                  value: '5555555555'
+                  isVerified: false
+                firstName: John
+                middleInitial: X
+                lastName: Doe
+                mailingAddress:
+                  type: street
+                  street: 100 Wegmans Market St
+                  apartmentNumber: 4A
+                  city: Rochester
+                  state: NY
+                  postalCode: '14624'
+                  country: USA
+                birthDate: '1916-01-31'
+                isBusiness: false
+                isTaxExempt: false
+                isConsumerMobileAppDenied: false
+                isConsumerMobileAppFraudRisk: false
+                timestamp: '1916-01-31T08:30:00.0000000+00:00'
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              examples:
+                Bad Request:
+                  value:
+                    type: https://api.wegmans.io/errors/bad-request
+                    title: Bad Request
+                    status: '400'
+                    detail: The request is not valid.
+                    instance: https://api.wegmans.io/
+                Email Verification Failed:
+                  value:
+                    type: https://api.wegmans.io/email-verification-failed
+                    title: Email Verification Failed
+                    status: '400'
+                    detail: The email verification code for the specified email is not valid.
+                    instance: https://api.wegmans.io/customers
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '409':
+          description: The requested resource already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/conflict
+                title: Conflict
+                status: 409
+                detail: The resource already exists.
+                instance: https://api.wegmans.io/
+        '424':
+          description: The request failed because a dependency reported a failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/failed-dependency
+                title: Failed Dependency
+                status: 424
+                detail: The request could not be completed because a dependency reported a failure.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+  /health:
+    head:
+      tags:
+        - Health
+      summary: Get Health Probe
+      description: 'Gets the health probe status; does not indicate if the service is healthy, only that is it reachable.'
+      operationId: health-probe
+      responses:
+        '204':
+          description: The service is reachable.
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+    get:
+      tags:
+        - Health
+      summary: Get Health Check
+      description: 'Gets the health check report of the service that will indicate if it is healthy, degraded, or unhealthy.'
+      operationId: health-check
+      responses:
+        '200':
+          description: The service health status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthCheck'
+              example:
+                timestamp: '2021-01-01T12:00:00.0000000+00:00'
+                status: Healthy
+                totalDuration: '2024-02-08T12:00:00.0000000+00:00'
+                entries:
+                  componentName:
+                    status: Healthy
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '424':
+          description: The request failed because a dependency reported a failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/failed-dependency
+                title: Failed Dependency
+                status: 424
+                detail: The request could not be completed because a dependency reported a failure.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+        '503':
+          description: The service is unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/service-unavailable
+                title: Service Unavailable
+                status: 503
+                detail: 'The resource service is unavailable, please try again or contact support.'
+                instance: https://api.wegmans.io/
+  '/{id}/securityPreferences':
+    get:
+      summary: Get Security Prefences
+      description: Gets only the security preferences for the selected custoemr.
+      operationId: get-security-preferences
+      parameters:
+        - name: id
+          in: path
+          description: Format - uuid. The customer identifier.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 0202ea7b-550a-4a05-9313-520af0182428
+      responses:
+        '200':
+          description: The customers Security Preferences.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/securityPreferences'
+              example:
+                mfaEnabled: true
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/bad-request
+                title: Bad Request
+                status: 400
+                detail: The request is not valid.
+                instance: https://api.wegmans.io/
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '404':
+          description: The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/not-found
+                title: Not Found
+                status: 404
+                detail: The resource could not be found.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+    put:
+      summary: Update Security Preferences
+      description: Update the customers Security preferences.
+      operationId: update-security-preferences
+      parameters:
+        - name: id
+          in: path
+          description: Format - uuid. The customer identifier.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 0202ea7b-550a-4a05-9313-520af0182428
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/securityPreferences'
+            examples:
+              Update Web Preferences:
+                value:
+                  mfaEnabled: 'true'
+      responses:
+        '200':
+          description: The customers Security Preferences.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/securityPreferences'
+              example:
+                mfaEnabled: true
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/bad-request
+                title: Bad Request
+                status: 400
+                detail: The request is not valid.
+                instance: https://api.wegmans.io/
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '404':
+          description: The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/not-found
+                title: Not Found
+                status: 404
+                detail: The resource could not be found.
+                instance: https://api.wegmans.io/
+        '409':
+          description: The requested resource already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/conflict
+                title: Conflict
+                status: 409
+                detail: The resource already exists.
+                instance: https://api.wegmans.io/
+        '424':
+          description: The request failed because a dependency reported a failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/failed-dependency
+                title: Failed Dependency
+                status: 424
+                detail: The request could not be completed because a dependency reported a failure.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+  /unverified:
+    post:
+      summary: Create Unverified Customer
+      description: Creates an unverified customer profile.
+      operationId: create-unverified-customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createUnverifiedCustomerRequest'
+            examples:
+              Create Unverified Customer example:
+                value:
+                  email: user@domain.com
+                  phoneNumber: '5555555555'
+                  firstName: John
+                  middleInitial: X
+                  lastName: Doe
+                  mailingAddress:
+                    type: street
+                    street: 100 Wegmans Market St
+                    apartmentNumber: 4A
+                    city: Rochester
+                    state: NY
+                    postalCode: '14624'
+                    country: USA
+      responses:
+        '200':
+          description: The customer profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+              example:
+                id: 0202ea7b-550a-4a05-9313-520af0182428
+                loyaltyNumber: '1234567890'
+                cardNumber:
+                  value: '600229123456789005'
+                email:
+                  value: user@domain.com
+                  isVerified: false
+                phoneNumber:
+                  value: '5555555555'
+                  isVerified: false
+                firstName: John
+                middleInitial: X
+                lastName: Doe
+                mailingAddress:
+                  type: street
+                  street: 100 Wegmans Market St
+                  apartmentNumber: 4A
+                  city: Rochester
+                  state: NY
+                  postalCode: '14624'
+                  country: USA
+                birthDate: '1916-01-31'
+                isBusiness: false
+                isTaxExempt: false
+                isConsumerMobileAppDenied: false
+                isConsumerMobileAppFraudRisk: false
+                timestamp: '1916-01-31T08:30:00.0000000+00:00'
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/bad-request
+                title: Bad Request
+                status: 400
+                detail: The request is not valid.
+                instance: https://api.wegmans.io/
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '409':
+          description: The requested resource already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/conflict
+                title: Conflict
+                status: 409
+                detail: The resource already exists.
+                instance: https://api.wegmans.io/
+        '424':
+          description: The request failed because a dependency reported a failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/failed-dependency
+                title: Failed Dependency
+                status: 424
+                detail: The request could not be completed because a dependency reported a failure.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+  '/{id}/mfa-requests':
+    post:
+      summary: Create Verification
+      description: 'Contacts the customer via voice, sms, or email with a unique code used for multifactor authentication.'
+      operationId: create-mfa-request
+      parameters:
+        - name: id
+          in: path
+          description: Format - uuid. The customer identifier.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 0202ea7b-550a-4a05-9313-520af0182428
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mfaRequestType'
+            examples:
+              Create MFA Verification with text method:
+                value:
+                  value: sms
+      responses:
+        '204':
+          description: The verification code has been sent.
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/bad-request
+                title: Bad Request
+                status: 400
+                detail: The request is not valid.
+                instance: https://api.wegmans.io/
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '409':
+          description: The requested resource already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/conflict
+                title: Conflict
+                status: 409
+                detail: The resource already exists.
+                instance: https://api.wegmans.io/
+        '424':
+          description: The request failed because a dependency reported a failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/failed-dependency
+                title: Failed Dependency
+                status: 424
+                detail: The request could not be completed because a dependency reported a failure.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+    put:
+      summary: Check MFA Verification
+      description: Verifies the Multifactor authentication code.
+      operationId: validate-mfa-request
+      parameters:
+        - name: id
+          in: path
+          description: Format - uuid. The customer identifier.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 0202ea7b-550a-4a05-9313-520af0182428
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mfaRequest'
+            examples:
+              Check Phone Verification:
+                value:
+                  verificationCode: '123456'
+      responses:
+        '204':
+          description: The verification code has been verified.
+        '400':
+          description: The request is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/bad-request
+                title: Bad Request
+                status: 400
+                detail: The request is not valid.
+                instance: https://api.wegmans.io/
+        '401':
+          description: 'The request requires authorization, the specified bearer token was not provided or is not valid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: The request must have a valid Authorization header.
+                instance: https://api.wegmans.io/
+        '403':
+          description: The authorized principal is forbidden to access this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/forbidden
+                title: Forbidden
+                status: 403
+                detail: The request is not authorized to access the resource.
+                instance: https://api.wegmans.io/
+                principalId: e35c316e-4be0-41f4-b0dc-4dcfbac2717d
+                roles:
+                  - Api.Role
+                allowedRoles:
+                  - Api.RoleName
+        '409':
+          description: The requested resource already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/conflict
+                title: Conflict
+                status: 409
+                detail: The resource already exists.
+                instance: https://api.wegmans.io/
+        '424':
+          description: The request failed because a dependency reported a failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problemDetails'
+              example:
+                type: https://api.wegmans.io/errors/failed-dependency
+                title: Failed Dependency
+                status: 424
+                detail: The request could not be completed because a dependency reported a failure.
+                instance: https://api.wegmans.io/
+        '429':
+          description: The client has made too many requests and must wait before making more requests; see the Retry-After header for how long to wait before trying again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsProblemDetails'
+              example:
+                type: https://api.wegmans.io/errors/too-many-requests
+                title: Too Many Requests
+                status: 429
+                detail: 'The throttling/quota policy has been violated, please wait and try again.'
+                instance: https://api.wegmans.io/
+                retryAfter: 300
+components:
+  schemas:
+    email:
+      required:
+        - value
+      type: object
+      properties:
+        value:
+          maxLength: 256
+          type: string
+          format: emailAddress
+        isVerified:
+          type: boolean
+          readOnly: true
+        verificationCode:
+          type: string
+          nullable: true
+          writeOnly: true
+      additionalProperties: false
+    cardNumber:
+      required:
+        - value
+      type: object
+      properties:
+        value:
+          type: string
+          format: integer
+      additionalProperties: false
+      readOnly: true
+    phoneNumber:
+      required:
+        - value
+      type: object
+      properties:
+        value:
+          maxLength: 32
+          type: string
+          format: phoneNumber
+        isVerified:
+          type: boolean
+          readOnly: true
+        verificationCode:
+          type: string
+          nullable: true
+          writeOnly: true
+      additionalProperties: false
+      nullable: true
+    address:
+      required:
+        - type
+      type: object
+      anyOf:
+        - $ref: '#/components/schemas/streetAddress'
+        - $ref: '#/components/schemas/postOfficeAddress'
+      properties:
+        type:
+          enum:
+            - street
+            - postOffice
+          type: string
+        city:
+          maxLength: 128
+          type: string
+        state:
+          maxLength: 128
+          type: string
+        postalCode:
+          maxLength: 16
+          type: string
+        country:
+          maxLength: 128
+          type: string
+      additionalProperties: false
+      nullable: true
+      discriminator:
+        propertyName: type
+        mapping:
+          street: '#/components/schemas/streetAddress'
+          postOffice: '#/components/schemas/postOfficeAddress'
+    streetAddress:
+      allOf:
+        - $ref: '#/components/schemas/address'
+        - required:
+            - street
+          type: object
+          properties:
+            street:
+              maxLength: 128
+              type: string
+            apartmentNumber:
+              maxLength: 128
+              type: string
+              nullable: true
+          additionalProperties: false
+    postOfficeAddress:
+      allOf:
+        - $ref: '#/components/schemas/address'
+        - required:
+            - poBox
+          type: object
+          properties:
+            poBox:
+              maxLength: 128
+              type: string
+          additionalProperties: false
+    mfaRequestType:
+      required:
+        - value
+      type: object
+      properties:
+        value:
+          enum:
+            - voice
+            - sms
+            - email
+          type: string
+      additionalProperties: false
+    verification:
+      required:
+        - type
+      type: object
+      anyOf:
+        - $ref: '#/components/schemas/phoneVerification'
+        - $ref: '#/components/schemas/emailVerification'
+      properties:
+        type:
+          enum:
+            - phone
+            - email
+          type: string
+      additionalProperties: false
+      discriminator:
+        propertyName: type
+        mapping:
+          phone: '#/components/schemas/phoneVerification'
+          email: '#/components/schemas/emailVerification'
+    phoneVerification:
+      allOf:
+        - $ref: '#/components/schemas/verification'
+        - required:
+            - phoneNumber
+            - method
+          type: object
+          properties:
+            phoneNumber:
+              maxLength: 32
+              type: string
+              format: phoneNumber
+            method:
+              enum:
+                - Text
+                - Voice
+              type: string
+          additionalProperties: false
+    emailVerification:
+      allOf:
+        - $ref: '#/components/schemas/verification'
+        - required:
+            - email
+          type: object
+          properties:
+            email:
+              maxLength: 256
+              type: string
+              format: emailAddress
+          additionalProperties: false
+    mfaRequest:
+      type: object
+      properties:
+        verificationCode:
+          type: string
+        type:
+          enum:
+            - phone
+            - email
+          type: string
+      additionalProperties: false
+    securityPreferences:
+      type: object
+      properties:
+        mfaEnabled:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    customer:
+      required:
+        - firstName
+        - lastName
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        loyaltyNumber:
+          type: string
+          format: integer
+          nullable: true
+          readOnly: true
+        cardNumber:
+          $ref: '#/components/schemas/cardNumber'
+        email:
+          $ref: '#/components/schemas/email'
+        phoneNumber:
+          $ref: '#/components/schemas/phoneNumber'
+        firstName:
+          maxLength: 64
+          type: string
+        middleInitial:
+          maxLength: 1
+          type: string
+          nullable: true
+        lastName:
+          maxLength: 64
+          minLength: 0
+          type: string
+        mailingAddress:
+          $ref: '#/components/schemas/address'
+        birthDate:
+          type: string
+          format: date
+          nullable: true
+        isTaxExempt:
+          type: boolean
+          readOnly: true
+        isBusiness:
+          type: boolean
+          readOnly: true
+        isConsumerMobileAppFraudRisk:
+          type: boolean
+          readOnly: true
+        isConsumerMobileAppDenied:
+          type: boolean
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      additionalProperties: false
+    createUnverifiedCustomerRequest:
+      required:
+        - firstName
+        - lastName
+        - email
+      type: object
+      properties:
+        email:
+          maxLength: 256
+          type: string
+          format: emailAddress
+        phoneNumber:
+          maxLength: 32
+          type: string
+          format: phoneNumber
+          nullable: true
+        firstName:
+          maxLength: 64
+          type: string
+        middleInitial:
+          maxLength: 1
+          type: string
+          nullable: true
+        lastName:
+          maxLength: 64
+          minLength: 0
+          type: string
+        mailingAddress:
+          $ref: '#/components/schemas/address'
+        birthDate:
+          type: string
+          format: date
+          nullable: true
+      additionalProperties: false
+    business:
+      required:
+        - firstName
+        - lastName
+        - businessName
+        - isTaxExempt
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        loyaltyNumber:
+          type: string
+          format: integer
+          nullable: true
+          readOnly: true
+        cardNumber:
+          $ref: '#/components/schemas/cardNumber'
+        email:
+          $ref: '#/components/schemas/email'
+        phoneNumber:
+          $ref: '#/components/schemas/phoneNumber'
+        firstName:
+          maxLength: 64
+          type: string
+        middleInitial:
+          maxLength: 1
+          type: string
+          nullable: true
+        lastName:
+          maxLength: 64
+          minLength: 0
+          type: string
+        businessName:
+          maxLength: 64
+          minLength: 0
+          type: string
+        mailingAddress:
+          $ref: '#/components/schemas/address'
+        birthDate:
+          type: string
+          format: date
+          nullable: true
+        isTaxExempt:
+          type: boolean
+      additionalProperties: false
+    customerCollection:
+      required:
+        - count
+        - values
+      type: object
+      properties:
+        count:
+          type: integer
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/customer'
+      additionalProperties: false
+    problemDetails:
+      required:
+        - type
+        - status
+        - title
+        - detail
+        - instance
+      type: object
+      properties:
+        type:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
+        error:
+          type: object
+          nullable: true
+    forbiddenProblemDetails:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/problemDetails'
+        - type: object
+          properties:
+            principalId:
+              type: string
+              format: uuid
+            roles:
+              type: array
+              items:
+                type: string
+            allowedRoles:
+              type: array
+              items:
+                type: string
+    tooManyRequestsProblemDetails:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/problemDetails'
+        - type: object
+          properties:
+            retryAfter:
+              type: integer
+    healthCheck:
+      required:
+        - timestamp
+        - status
+        - totalDuration
+        - entries
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          enum:
+            - Healthy
+            - Degraded
+            - Unhealthy
+          type: string
+        totalDuration:
+          pattern: ^\d\d:\d\d:\d\d(\.\d+)?$
+          type: string
+        entries:
+          type: object
+      additionalProperties: false

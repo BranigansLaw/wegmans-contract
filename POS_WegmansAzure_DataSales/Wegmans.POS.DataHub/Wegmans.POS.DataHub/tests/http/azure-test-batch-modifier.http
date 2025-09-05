@@ -1,0 +1,11 @@
+### Request sent to Batch Modifier HTTP endpoint
+POST https://possalesdatahub-test-eastus2.azurewebsites.net/api/BatchModifierHttpEndpoint?code=<AZURE_FUNCTION_KEY>
+Content-Type: application/json
+
+{
+   "itemPaths": [
+      "https://possalesdatahubtest.blob.core.windows.net/transactions/v1/2020/05/28/08/281_0001_0001.json",
+      "https://possalesdatahubtest.blob.core.windows.net/transactions/v1/2020/05/28/08/281_0009_0001.json"
+   ],
+   "modifiersToRun": ["UpdateQuantity"]
+}

@@ -1,0 +1,17 @@
+### Request sent to Batch Modifier HTTP endpoint
+POST http://localhost:7071/api/BatchModifierHttpEndpoint
+Content-Type: application/json
+
+{
+   "itemPaths": [
+      "http://127.0.0.1:10000/devstoreaccount1/transactions/v1/2024/04/05/04/1_0081_0001.json",
+      "http://127.0.0.1:10000/devstoreaccount1/transactions/v1/2024/04/05/04/1_0082_0001.json",
+      "http://127.0.0.1:10000/devstoreaccount1/transactions/v1/2024/04/05/04/1_0083_0001.json",
+      "http://127.0.0.1:10000/devstoreaccount1/transactions/v1/2024/04/05/04/1_0084_0001.json",
+      "http://127.0.0.1:10000/devstoreaccount1/transactions/v1/2024/04/05/04/1_0085_0001.json",
+      "http://127.0.0.1:10000/devstoreaccount1/transactions/v1/2024/04/05/04/1_0086_0001.json",
+      "http://127.0.0.1:10000/devstoreaccount1/transactions/v1/2024/04/05/04/3_0081_0006.json",
+      "http://127.0.0.1:10000/devstoreaccount1/transactions/v1/2024/04/05/04/3_0082_0001.json"
+   ],
+   "modifiersToRun": ["UpdateQuantity", "UpdateQuantity", "UpdateQuantity"]
+}

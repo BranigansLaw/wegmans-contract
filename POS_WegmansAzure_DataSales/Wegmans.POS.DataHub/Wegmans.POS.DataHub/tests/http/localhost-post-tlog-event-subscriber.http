@@ -1,0 +1,42 @@
+### Request sent to Queue
+POST http://localhost:7071/admin/functions/PublishTransactionV1BlobCreatedEvent
+Content-Type: application/json
+
+{
+  "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/transactions/v1/2021/08/11/10/0_0001_0037.json\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x195994C4500E120\\\"\",\n    \"contentType\": \"text/json\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/store-close-events/v1/2022/01/17/272_c84e7c7d-6196-4017-87ec-39f285db4aa3.json\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+### Request sent to Queue
+POST http://localhost:7071/admin/functions/PublishTransactionV1BlobCreatedEvent
+Content-Type: application/json
+
+{
+  "input":
+  "[
+    {
+      \"topic\": \"/subscriptions/7394d5e6-1beb-4226-8a88-4ff72ab3db2c/resourceGroups/smc-possalesdatahub/providers/Microsoft.Storage/storageAccounts/smcpossalesdatahub\",
+      \"subject\": \"/blobServices/default/containers/transactions/v1/2021/08/11/10/0_0001_0037.json\",
+      \"eventType\": \"Microsoft.Storage.BlobCreated\",
+      \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",
+      \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",
+      \"data\":
+      {
+        \"api\": \"PutBlockList\",
+        \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",
+        \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",
+        \"eTag\": \"\\\"0x195994C4500E120\\\"\",
+        \"contentType\": \"text/json\",
+        \"contentLength\": 67875,
+        \"blobType\": \"BlockBlob\",
+        \"url\": \"http://127.0.0.1:10000/devstoreaccount1/transactions/v1/2024/02/07/12/297_0011_0039.json\",
+        \"sequencer\": \"00000000000004420000000000028963\",
+        \"storageDiagnostics\":
+        {
+          \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"
+        }
+      },
+      \"dataVersion\": \"\",
+      \"metadataVersion\": \"1\"
+    }
+  ]"
+}

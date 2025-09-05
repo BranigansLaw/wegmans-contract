@@ -1,0 +1,66 @@
+parameters:
+- name: azureSubscription
+  type: string
+- name: deployment
+  type: string
+- name: displayName
+  type: string
+- name: environment
+  type: string
+- name: what_env
+  type: string
+- name: isProduction
+  type: boolean
+- name: usergroupid
+  type: string
+
+jobs:
+- job: DeployInfrastructure
+  displayName: Deploy Infrastructure
+  pool: 
+    vmImage: windows-latest
+  steps:
+    - checkout: none
+    - download: current
+      displayName: Download Artifacts
+      artifact: bicepTemplates
+    - task: AzureCLI@2
+      displayName: 'Azure Deployment of Resources(BICEP) on $(resourceGroupName)'
+      name: ArmTemplateOutputs
+      inputs:
+        azureSubscription: '${{ parameters.azureSubscription }}'
+        scriptType: pscore
+        scriptLocation: inlineScript
+        inlineScript: |
+          az --version
+          az account show
+          az group create --name $(resourceGroupName) --location $(location)
+          $SubnetId = az network private-endpoint show -n $(storageAccountName) -g $(resourceGroupName) --query subnet.id --output tsv 
+          az network vnet subnet show --ids $SubnetId --query ipConfigurations[].id --output tsv | ForEach-Object {  
+            az tag create --resource-id $_ --tags wfm-application='Point of Sale Data Hub' wfm-data-classification=Regulatory wfm-data-classification-ephi=true wfm-data-classification-pci=false wfm-data-classification-pi=false wfm-data-classification-employee=true wfm-data-classification-customer=true wfm-data-encrypted=false wfm-data-sharing=Internal wfm-data-protection='$(dataProtectionTag)' wfm-data-usage=Permanent
+          }
+          az deployment group create --resource-group $(resourceGroupName) --template-file '$(Pipeline.Workspace)/bicepTemplates/environment/posAzureDataSales.bicep' -p storageAccountName=$(storageAccountName) function_app_name=$(function_app_name) workspaceName=$(workspaceName) applicationInsightsName=$(applicationInsightsName) principalId=${{parameters.usergroupid}} builtInRoleType=StorageBlobDataReader EventGridEndpoint=$(wegmans-cloud-events-endpoint) EventGridKey=$(wegmans-cloud-events-key) CloudEventSource__Name=$(wegmans-cloud-events-source) vnetName=$(vnetName) privateLinkAddressPrefix=$(privateLinkAddressPrefix) subnetName=$(subnetName) vnetResourceGroupName=$(vnetResourceGroupName) what_env=${{parameters.what_env}} customerClientServerAddress=$(customerClientServerAddress) productApiConfigApiKey=$(productApiConfigApiKey) productApiConfigBaseAddress=$(productApiConfigBaseAddress) priceApiConfigApiKey=$(priceApiConfigApiKey) priceApiConfigBaseAddress=$(priceApiConfigBaseAddress) itemFunctionAppURL=$(itemFunctionAppURL) priceFunctionAppURL=$(priceFunctionAppURL) possalesdatahubfunctionkey=$(possalesdatahubfunctionkey)
+- job: DeployFunctionApp
+  displayName: Deploy Function App
+  dependsOn: 
+  - DeployInfrastructure
+  variables:
+    functionAppName: $(function_app_name)
+    CR_Service: 'Infrastructure Service'
+    ${{ if eq(parameters.isProduction, true) }}:
+      injectCR: true
+  pool:
+    vmImage: windows-latest
+  steps:
+    - checkout: none
+    - download: current
+      displayName: Download Function App Artifacts
+      artifact: function-app-code  
+    - task: AzureFunctionApp@1
+      displayName: 'Deploy FunctionApp'
+      inputs:
+        azureSubscription: ${{parameters.azureSubscription}}
+        appType: functionApp
+        appName: $(function_app_name)
+        deploymentMethod: runFromPackage
+        package: $(Pipeline.Workspace)/function-app-code/Wegmans.POS.DataHub.zip

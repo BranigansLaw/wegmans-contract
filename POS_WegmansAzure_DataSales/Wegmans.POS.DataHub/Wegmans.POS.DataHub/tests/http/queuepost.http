@@ -1,0 +1,255 @@
+##
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0111_0066_0004_2107211307_1626888754612.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0111_0066_0004_2107211307_1626888754612.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+#####
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0112_0066_0004_2107211307_1626888754612.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0112_0066_0004_2107211307_1626888754612.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+####
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0113_0066_0004_2107211307_1626888754612.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0113_0066_0004_2107211307_1626888754612.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0114_0066_0004_2107211307_1626888754612.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0114_0066_0004_2107211307_1626888754612.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0288_0808_0000_1630210238626_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0288_0808_0000_1630210238626_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0297_0066_0004_2107211307_1626888754612.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0297_0066_0004_2107211307_1626888754612.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0277_0066_0057_1631044435653_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0277_0066_0057_1631044435653_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0277_0393_0004_1632253014725_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0277_0058_0001_1633522456301_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0000_0058_0001_1633522456301_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0277_0045_0001_1634144034932_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0277_0044_0039_1634145876325_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/0277_0045_0028_1634144387634_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/9999_9999_9999_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/Tlogs/9999_9999_9999_0000_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0276_0045_0011_1634843269992_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0277_0066_0003_1635180303290_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0277_0066_0011_1635274882492_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0011_0016_0236_1636493956777_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0277_0066_0001_1636726988014_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0016_0089_0036_1636478375549_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0277_0066_0031_1637265475637_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0277_0200_0026_1634923427788_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0058_0010_0005_1637593430193_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/input/0045_0020_0005_1638569711656_corrected_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/raw-tlog/0124_0005_0032_1709585729019_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/raw-tlog/0034_0008_0058_1723131824585_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+
+
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/raw-tlog/0046_0500_0039_1697219757914_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/raw-tlog/0045_0500_0001_1696761012189_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+
+
+###
+POST http://localhost:7071/admin/functions/TransactionSubscriber
+Content-Type: application/json
+
+{
+    "input": "[{\n  \"topic\": \"/subscriptions/2a19ee82-f2f4-4fe3-b08b-58f92a7c69d2/resourceGroups/Storage/providers/Microsoft.Storage/storageAccounts/playingaroundstorage\",\n  \"subject\": \"/blobServices/default/containers/raw-tlog/Tlogs/0222_0066_0001_1631210673634_transaction.xml\",\n  \"eventType\": \"Microsoft.Storage.BlobCreated\",\n  \"eventTime\": \"2021-07-02T18:41:00.9584103Z\",\n  \"id\": \"831e1650-001e-001b-66ab-eeb76e069631\",\n  \"data\": {\n    \"api\": \"PutBlockList\",\n    \"clientRequestId\": \"6d79dbfb-0e37-4fc4-981f-442c9ca65760\",\n    \"requestId\": \"831e1650-001e-001b-66ab-eeb76e000000\",\n    \"eTag\": \"\\\"0x8D4BCC2E4835CD0\\\"\",\n    \"contentType\": \"text/xml\",\n    \"contentLength\": 67875,\n    \"blobType\": \"BlockBlob\",\n    \"url\": \"http://127.0.0.1:10000/devstoreaccount1/raw-tlog/0045_0500_0014_1697287528829_transaction.xml\",\n    \"sequencer\": \"00000000000004420000000000028963\",\n    \"storageDiagnostics\": {\n      \"batchId\": \"b68529f3-68cd-4744-baa4-3c0498ec19f0\"\n    }\n  },\n  \"dataVersion\": \"\",\n  \"metadataVersion\": \"1\"\n}]"
+}
+
+
+

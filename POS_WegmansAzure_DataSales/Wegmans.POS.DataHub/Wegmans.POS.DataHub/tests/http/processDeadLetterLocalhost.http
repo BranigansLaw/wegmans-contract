@@ -1,0 +1,5 @@
+### Run the dead letter processing
+### The dead letter processor is an async durable function. You can check on the status by running the second command once you get a response.
+
+# @name deadLetter
+GET http://localhost:7071/api/TlogProcessDeadLetters

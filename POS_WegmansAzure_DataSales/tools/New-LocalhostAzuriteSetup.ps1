@@ -1,0 +1,9 @@
+$localStorageContext = New-AzStorageContext -ConnectionString 'AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;'
+New-AzStorageContainer -Name 'raw-tlog-deadletter' -Context $localStorageContext
+New-AzStorageContainer -Name 'raw-tlog' -Context $localStorageContext
+New-AzStorageContainer -Name 'transactions' -Context $localStorageContext
+New-AzStorageContainer -Name 'event-publishing-deadletter' -Context $localStorageContext
+New-AzStorageContainer -Name 'store-close-events' -Context $localStorageContext
+New-AzStorageQueue -Name 'raw-tlog-transactions' -Context $localStorageContext
+New-AzStorageQueue -Name 'event-publisher' -Context $localStorageContext
+New-AzStorageQueue -Name 'raw-tlog-store-close-events' -Context $localStorageContext
