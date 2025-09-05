@@ -1,0 +1,27 @@
+﻿<in>
+	<table>
+		<title>Conversation Fact {3:yyyyMMdd}</title>
+		<sdesc>Conversation Fact</sdesc>
+		<cols>
+			<th name="message_key" type="f" format="type:nocommas;width:8" desc="Unique identifier of the message from the CPS Messages table that this conversation belongs to">Message`Key</th>
+			<th name="convo_text" type="a" format="type:char;width:20" desc="The conversation that was added as a Follow-Up in CPS">Conversation Text</th>
+			<th name="sent_date" type="i" format="type:date;width:8;dec:0" desc="Date the conversation was added into the Follow-Up">Sent Date</th>
+			<th name="sender" type="a" format="type:char;width:15" desc="User who added the Follow-Up about the CPS message">Sender Emp</th>
+			<th name="convo_num" type="f" format="type:nocommas;width:8" desc="A unique identifier for this particular Follow-Up Conversation">Convo Num</th>
+			<th name="due_date" type="i" format="type:date;width:8;dec:0" desc="Date the conversation was originally set to be due">Due Date</th>
+			<th name="followup_resp" type="a" format="type:char;width:20" desc="The text that was entered as the response to the follow-up in CPS">Follow-Up`Response</th>
+		</cols>
+		<data>{0}</data>
+	</table>
+	<name mode="{1}">{2}.{4}.d{3:yyyyMMdd}</name>
+	<users>
+		<user>wegmans_cjmccarthy</user>
+		<user>wegmans_vndtoptaltxf</user>
+		<user>wegmans_rx_batch</user>
+		<user>wegmans_rx_batch1</user>
+		<user>wegmans_rx_batch2</user>
+		<user>wegmans_rx_batch_pool</user>
+		<user>wegmans_rx_batch_inn</user>
+		<user>wegmans_internal</user>
+	</users>
+</in>

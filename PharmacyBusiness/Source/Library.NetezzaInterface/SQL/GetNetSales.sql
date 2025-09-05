@@ -1,0 +1,82 @@
+﻿SELECT 
+  "V_STORE"."LOCATION_NBR" "StoreNum"
+, "V_LOGICAL_DATE"."LOGICAL_DATE_KEY" "DateSold"
+, trim(both from cast("V_TIME"."DISPLAY_TIME" as char( 8 ))) "DisplayTime"
+, trim(both from cast("V_SALES"."TRANSACTION_NBR" as char( 8 ))) "TxNum"
+, trim(both from cast("V_REGISTER"."REGISTER_ADDR_NBR" as char( 8 ))) "RegNum"
+, sum("V_SALES"."NET_SALES_AMT") "NetSalesAmt"
+, sum("V_SALES"."GROSS_PROFIT_AMT") "GpAmt"
+, sum("V_SALES"."NORMAL_QUANTITY") "Qty"
+, sum("V_SALES"."NET_ITEM_CNT") "NetCnt"
+, trim(both from cast("V_ITEM"."ITEM_NBR" as char( 8 ))) "ItemNum"
+, trim(both from cast("V_ITEM"."ITEM_DESC_LONG" as char( 64 ))) "ItemDesc"
+, trim(both from cast("V_ITEM"."DEPARTMENT_NBR" as char( 2 ))) "DeptNum"
+, trim(both from cast("V_ITEM"."DEPARTMENT_NAME" as char( 16 ))) "DeptName"
+, trim(both from cast("V_PL"."PL_DEPT_NAME" as char( 16 ))) "PlName"
+, trim(both from cast("V_STORE"."LOCATION_NAME_FULL" as char( 64 ))) "StoreName"
+, trim(both from cast("V_REGISTER"."REGISTER_LOCATION" as char( 64 ))) "RegDesc"
+, trim(both from cast("V_OPERATOR"."OPERATOR_NBR" as char( 8 ))) "CashNum"
+, trim(both from cast("V_PL"."PL_DEPT_CODE" as char( 8 ))) "PlCode"
+, trim(both from cast("V_COUPON_WEG_PAPER"."CPN_WEG_OR_MFG_DESC" as char( 16 ))) "CouponDescWp"
+, trim(both from cast("V_COUPON_MFG"."CPN_WEG_OR_MFG_DESC" as char( 16 ))) "CouponDescMfg"
+, sum("V_SALES"."REFUND_ITEM_AMT") "RefundAmt"
+, "tender_stuff"."Tender_Amount" "TenderAmt"
+, trim(both from cast("tender_stuff"."Tender_Type_POS" as char( 8 ))) "TenderType"
+, trim(both from cast("tender_stuff"."Tender_Type_Description" as char( 16 ))) "TenderTypeDesc"
+, trim(both from cast("V_SALES_TRANSACTION_TYPE_LKUP"."SALES_TRANSACTION_TYPE" as char( 8 ))) "TxType"
+, trim(both from cast("V_SALES_TRANSACTION_TYPE_LKUP"."SALES_TRANSACTION_TYPE_NAME" as char( 16 ))) "TxTypeDesc"
+, trim(both from cast("tender_stuff"."Tender_Status_Description" as char( 16 ))) "TenderDesc"
+FROM "WEGEDWADM"."V_SALES" "V_SALES"
+     INNER JOIN "WEGEDWADM"."V_ITEM" "V_ITEM" on "V_ITEM"."ITEM_HISTORY_RETAIL_KEY" = "V_SALES"."ITEM_HISTORY_RETAIL_KEY"
+     INNER JOIN "WEGEDWADM"."V_B_LOCATION" "V_B_LOCATION" on "V_B_LOCATION"."LOCATION_HISTORY_KEY" = "V_SALES"."LOCATION_HISTORY_KEY"
+     INNER JOIN "WEGEDWADM"."V_STORE" "V_STORE" on "V_STORE"."LOCATION_HISTORY_KEY" = "V_B_LOCATION"."LOCATION_CURRENT_KEY"
+     INNER JOIN "WEGEDWADM"."V_LOGICAL_DATE" "V_LOGICAL_DATE" on "V_LOGICAL_DATE"."LOGICAL_DATE_KEY" = "V_SALES"."LOGICAL_DATE_KEY"
+     INNER JOIN "WEGEDWADM"."V_OPERATOR" "V_OPERATOR" on "V_OPERATOR"."OPERATOR_KEY" = "V_SALES"."OPERATOR_KEY"
+     INNER JOIN "WEGEDWADM"."V_PL" "V_PL" on "V_PL"."PL_HISTORY_KEY" = "V_SALES"."PL_HISTORY_KEY"
+     INNER JOIN "WEGEDWADM"."V_REGISTER" "V_REGISTER" on "V_REGISTER"."REGISTER_KEY" = "V_SALES"."REGISTER_KEY"
+     INNER JOIN "WEGEDWADM"."V_TIME" "V_TIME" on "V_TIME"."TIME_KEY" = "V_SALES"."TIME_KEY"
+     INNER JOIN "WEGEDWADM"."V_SALES_TRANSACTION_TYPE_LKUP" "V_SALES_TRANSACTION_TYPE_LKUP" on "V_SALES_TRANSACTION_TYPE_LKUP"."SALES_TRANSACTION_TYPE_KEY" = "V_SALES"."SALES_TRANSACTION_TYPE_KEY"
+     LEFT OUTER JOIN (
+            SELECT  
+                "V_TENDER"."TRANSACTION_KEY",
+                Max("V_TENDER_STATUS"."TENDER_STATUS_DESC") "Tender_Status_Description",
+                Max("V_TENDER_TYPE"."TENDER_TYPE_POS") "Tender_Type_POS",
+                Max("V_TENDER_TYPE"."TENDER_TYPE_DESC") "Tender_Type_Description",
+                Sum("V_TENDER"."TENDER_AMT") "Tender_Amount"
+            FROM "WEGEDWADM"."V_TENDER" "V_TENDER"
+                 INNER JOIN "WEGEDWADM"."V_TENDER_STATUS" "V_TENDER_STATUS" on "V_TENDER_STATUS"."TENDER_STATUS_KEY" = "V_TENDER"."TENDER_STATUS_KEY"
+                 INNER JOIN "WEGEDWADM"."V_TENDER_TYPE" "V_TENDER_TYPE" on "V_TENDER_TYPE"."TENDER_TYPE_KEY" = "V_TENDER"."TENDER_TYPE_KEY"
+            GROUP BY
+                "V_TENDER"."TRANSACTION_KEY"
+           ) "tender_stuff" on "tender_stuff"."TRANSACTION_KEY" = "V_SALES"."TRANSACTION_KEY"
+     LEFT OUTER JOIN "WEGEDWADM"."V_COUPON_MFG" "V_COUPON_MFG" on "V_SALES"."MFG_COUPON_KEY" = "V_COUPON_MFG"."MFG_COUPON_KEY"
+     LEFT OUTER JOIN "WEGEDWADM"."V_COUPON_WEG_PAPER" "V_COUPON_WEG_PAPER" on "V_SALES"."WEG_COUPON_KEY" = "V_COUPON_WEG_PAPER"."WEG_COUPON_KEY"
+WHERE "V_PL"."PL_DEPT_CODE" in (7, 99)
+  AND "V_ITEM"."DEPARTMENT_NBR" in (19, 7)
+  AND "V_STORE"."IS_STORE_RX_FLG" in ('Y')
+  AND "V_LOGICAL_DATE"."LOGICAL_DATE_KEY" = @QueryDateNbr
+GROUP BY 
+  "V_SALES"."TRANSACTION_NBR"
+, "V_LOGICAL_DATE"."LOGICAL_DATE_KEY"
+, "V_STORE"."LOCATION_NBR"
+, "V_TIME"."DISPLAY_TIME"
+, "V_LOGICAL_DATE"."DISPLAY_DATE"
+, "V_STORE"."LOCATION_NAME_FULL"
+, trim(both from cast("V_ITEM"."ITEM_NBR" as char( 8 )))
+, "V_PL"."PL_DEPT_CODE"
+, "V_ITEM"."ITEM_DESC_LONG"
+, "V_PL"."PL_DEPT_NAME"
+, "tender_stuff"."Tender_Amount"
+, "V_SALES_TRANSACTION_TYPE_LKUP"."SALES_TRANSACTION_TYPE_NAME"
+, "tender_stuff"."Tender_Type_Description"
+, "V_ITEM"."DEPARTMENT_NAME"
+, "V_ITEM"."DEPARTMENT_NBR"
+, "V_REGISTER"."REGISTER_ADDR_NBR"
+, "V_REGISTER"."REGISTER_LOCATION"
+, "V_OPERATOR"."OPERATOR_NBR"
+, "V_SALES_TRANSACTION_TYPE_LKUP"."SALES_TRANSACTION_TYPE"
+, "tender_stuff"."Tender_Type_POS"
+, "V_COUPON_WEG_PAPER"."CPN_WEG_OR_MFG_DESC"
+, "V_COUPON_MFG"."CPN_WEG_OR_MFG_DESC"
+, "tender_stuff"."Tender_Status_Description"
+ORDER BY "V_STORE"."LOCATION_NBR" Asc , "V_SALES"."TRANSACTION_NBR" Asc

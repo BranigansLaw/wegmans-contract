@@ -1,0 +1,31 @@
+﻿<in>
+	<table>
+		<title>New Tag Patient Groups {3:yyyyMMdd}</title>
+		<sdesc>New Tagged Patient Groups</sdesc>
+		<cols>
+			<th name="pt_add_date" type="i" format="type:date;width:8;dec:0">Tagged`Date</th>
+			<th name="store_num" type="i" format="type:nocommas;width:3;dec:0">Store #</th>
+			<th name="patient_num" type="f" format="type:nocommas;width:19">Patient #</th>
+			<th name="group_num" type="i" format="type:nocommas;width:7;dec:0">Group #</th>
+			<th name="group_name" type="a" format="type:char;width:10">Group`Name</th>
+			<th name="group_desc" type="a" format="type:char;width:10">Group`Desc</th>
+			<th name="emp_username" type="a" format="type:char;width:7">Employee`Login</th>
+			<th name="emp_fname" type="a" format="type:char;width:10">Employee`F Name</th>
+			<th name="emp_lname" type="a" format="type:char;width:16">Employee`L Name</th>
+			<th name="event" type="a" format="type:char;width:7">Event</th>
+			<th name="group_start_date" type="i" format="type:date;width:8;dec:0">Group`Start Date</th>
+		</cols>
+		<data>{0}</data>
+	</table>
+	<name mode="{1}">{2}.{4}.d{3:yyyyMMdd}</name>
+	<users>
+		<user>wegmans_cjmccarthy</user>
+		<user>wegmans_vndtoptaltxf</user>
+		<user>wegmans_rx_batch</user>
+		<user>wegmans_rx_batch1</user>
+		<user>wegmans_rx_batch2</user>
+		<user>wegmans_rx_batch_pool</user>
+		<user>wegmans_rx_batch_inn</user>
+		<user>wegmans_internal</user>
+	</users>
+</in>

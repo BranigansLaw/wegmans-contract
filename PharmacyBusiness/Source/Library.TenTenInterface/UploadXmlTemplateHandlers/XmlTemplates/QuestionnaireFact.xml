@@ -1,0 +1,31 @@
+﻿<in>
+	<table>
+		<title>Questionnaire Fact {3:yyyyMMdd}</title>
+		<sdesc>Questionnaire Fact</sdesc>
+		<cols>
+			<th name="patient_num" type="f" format="type:nocommas;width:19" desc="A unique number assigned to each patient in DataWarehouse">Patient #</th>
+			<th name="store_num" type="i" format="type:nocommas;width:3;dec:0" desc="Identifies the store where the questionnaire information was collected">Store #</th>
+			<th name="resolve_date" type="i" format="type:date;width:8;dec:0" desc="Date the questionnaire was resolved">Date`Resolved</th>
+			<th name="due_date_orig" type="i" format="type:date;width:8;dec:0">Due Date (original)</th>
+			<th name="due_date_edit" type="i" format="type:date;width:8;dec:0">Due Date (updated)</th>
+			<th name="updated_by_emp" type="a" format="type:char;width:13" desc="User who updated the questionnaire">UpdatedBy`Employee</th>
+			<th name="program_name" type="a" format="type:char;width:31" desc="Name of the CPS program that triggered this questionnaire">Program`Name</th>
+			<th name="message_key" type="f" format="type:nocommas;width:8" desc="Unique identifier key for this particular message, in the message fact table">Message`Key</th>
+			<th name="message_num" type="f" format="type:nocommas;dec:0" desc="Unique identifier key for this particular message, in the message fact table">Message`Num</th>
+			<th name="ques_key" type="f" format="type:nocommas;width:8" desc="A unique key assigned to each Questionnaire">Question`Key</th>
+			<th name="ques_num" type="f" format="type:nocommas;width:8" desc="A unique number assigned to each Questionnaire">Question`Num</th>
+		</cols>
+		<data>{0}</data>
+	</table>
+	<name mode="{1}">{2}.{4}.d{3:yyyyMMdd}</name>
+	<users>
+		<user>wegmans_cjmccarthy</user>
+		<user>wegmans_vndtoptaltxf</user>
+		<user>wegmans_rx_batch</user>
+		<user>wegmans_rx_batch1</user>
+		<user>wegmans_rx_batch2</user>
+		<user>wegmans_rx_batch_pool</user>
+		<user>wegmans_rx_batch_inn</user>
+		<user>wegmans_internal</user>
+	</users>
+</in>

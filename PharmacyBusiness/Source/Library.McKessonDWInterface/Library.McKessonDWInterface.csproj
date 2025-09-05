@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="sql\SelectAstuteAdherenceDispenses.sql" />
+    <None Remove="sql\SelectImmunizations.sql" />
+    <None Remove="SQL\SelectNewTagPatientGroups.sql" />
+    <None Remove="SQL\SelectOmnisysClaim.sql" />
+    <None Remove="SQL\SelectRxErp.sql" />
+    <None Remove="SQL\SelectSoldDetail.sql" />
+    <None Remove="SQL\SelectStoreInventoryHistory.sql" />
+    <None Remove="sql\SelectSureScriptsMedicalHistory.sql" />
+    <None Remove="sql\SelectSureScriptsPhysicianNotificationLetters.sql" />
+    <None Remove="sql\SelectThirdPartyClaimsBase.sql" />
+    <None Remove="sql\SelectThirdPartyClaimsLookupAcquisitionCost.sql" />
+    <None Remove="SQL\SelectTurnaroundTime.sql" />
+    <None Remove="SQL\SelectWorkloadBalance.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SQL\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.130" />
+    <PackageReference Include="Polly" Version="8.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Library.LibraryUtilities\Library.LibraryUtilities.csproj" />
+    <ProjectReference Include="..\Library.McKessonCPSInterface\Library.McKessonCPSInterface.csproj" />
+    <ProjectReference Include="..\Library.TenTenInterface\Library.TenTenInterface.csproj" />
+  </ItemGroup>
+
+</Project>

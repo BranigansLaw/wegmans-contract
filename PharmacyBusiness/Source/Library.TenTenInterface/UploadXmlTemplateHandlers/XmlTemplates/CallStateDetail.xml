@@ -1,0 +1,28 @@
+﻿<in>
+  <table>
+    <title>Call State Detail {3:yyyyMMdd}</title>
+    <sdesc>Call State Detail</sdesc>
+    <cols>
+      <th name="agent_name" type="a" format="type:char" desc="Field 1">Agent name</th>
+      <th name="agent_login_id" type="a" format="type:char" desc="Field 2">Agent Login</th>
+      <th name="agent_extension" type="a" format="type:char" desc="Field 3">Agent Ext</th>
+      <th name="transition_time" type="f" format="type:datehms24" desc="Field 4">Transition`Time</th>
+      <th name="agent_state" type="a" format="type:char" desc="Field 5">Agent State</th>
+      <th name="reason_code" type="a" format="type:char" desc="Field 6">Reason Code</th>
+      <th name="duration" type="f" format="type:num" desc="Field 7">Call`Duration</th>
+      <th name="latestsynchedtime" type="a" format="type:char" desc="Field 8">latestsynchedtime</th>
+    </cols>
+    <data>{0}</data>
+  </table>
+  <name mode="{1}">{2}.{4}.d{3:yyyyMMdd}</name>
+  <users>
+    <user>wegmans_cjmccarthy</user>
+    <user>wegmans_vndtoptaltxf</user>
+    <user>wegmans_rx_batch</user>
+    <user>wegmans_rx_batch1</user>
+    <user>wegmans_rx_batch2</user>
+    <user>wegmans_rx_batch_pool</user>
+    <user>wegmans_rx_batch_inn</user>
+    <user>wegmans_internal</user>
+  </users>
+</in>

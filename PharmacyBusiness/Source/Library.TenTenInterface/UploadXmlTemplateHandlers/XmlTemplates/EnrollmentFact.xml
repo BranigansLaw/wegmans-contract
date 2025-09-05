@@ -1,0 +1,31 @@
+﻿<in>
+	<table>
+		<title>Enrollment Fact {3:yyyyMMdd}</title>
+		<sdesc>Enrollment Fact</sdesc>
+		<cols>
+			<th name="patient_num" type="f" format="type:nocommas;width:19" desc="A unique number assigned to each patient in DataWarehouse">Patient#</th>
+			<th name="store_num" type="i" format="type:nocommas;width:3;dec:0" desc="Store where the patient enrolled">Store#</th>
+			<th name="status_update_date" type="i" format="type:date;width:8;dec:0" desc="Date the CPS patient enrollment status was last updated (trigger field for this table)">Status`Update`Date</th>
+			<th name="pt_enroll_status" type="a" format="type:char" desc="Patient enrollment status as of the status update date">Patient`Enroll`Status</th>
+			<th name="program_name" type="a" format="type:char" desc="Name of the CPS program that triggered this message in workflow">Program`Name</th>
+			<th name="program_tag" type="a" format="type:char" desc="Tag to help identify the Program">Program`Tag</th>
+			<th name="program_type" type="a" format="type:char" desc="Type of clinical program such as Self-Directed Program or Vendor Program">Program`Type</th>
+			<th name="enroll_type" type="a" format="type:char" desc="Type of enrollments allowed in this program such as Patient Enrollment or No Enrollment">Enroll`Type</th>
+			<th name="program_num" type="f" format="type:nocommas;width:19" desc="A unique key assigned to this program within CPS">Program`Num</th>
+			<th name="patient_status_num" type="f" format="type:nocommas;width:19" desc="A unique key assigned to this patient for this program">Patient`StatusNum</th>
+			<th name="updated_by_emp" type="a" format="type:char" desc="User who enrolled the patient">UpdatedBy`Employee</th>
+		</cols>
+		<data>{0}</data>
+	</table>
+	<name mode="{1}">{2}.{4}.d{3:yyyyMMdd}</name>
+	<users>
+		<user>wegmans_cjmccarthy</user>
+		<user>wegmans_vndtoptaltxf</user>
+		<user>wegmans_rx_batch</user>
+		<user>wegmans_rx_batch1</user>
+		<user>wegmans_rx_batch2</user>
+		<user>wegmans_rx_batch_pool</user>
+		<user>wegmans_rx_batch_inn</user>
+		<user>wegmans_internal</user>
+	</users>
+</in>

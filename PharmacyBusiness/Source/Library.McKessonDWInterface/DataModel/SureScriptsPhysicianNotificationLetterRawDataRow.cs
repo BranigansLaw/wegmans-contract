@@ -1,0 +1,72 @@
+﻿namespace Library.McKessonDWInterface.DataModel
+{
+    public class SureScriptsPhysicianNotificationLetterRawDataRow
+    {
+        public long? RecordSequenceNumber { get; set; }
+        public long? ParticipantPatientId { get; set; }
+        public string? PatientLastName { get; set; }
+        public string? PatientFirstName { get; set; }
+        public string? PatientMiddleName { get; set; }
+        public string? PatientPhoneAreaCode { get; set; }
+        public string? PatientPhoneNumber { get; set; }
+        public DateTime? PatientDateOfBirth { get; set; }
+        public string? PatientGender { get; set; }
+        public string? PatientAddress1 { get; set; }
+        public string? PatientAddress2 { get; set; }
+        public string? PatientCity { get; set; }
+        public string? PatientState { get; set; }
+        public string? PatientZipCode { get; set; }
+        public string? PrimaryCareProviderNpi { get; set; }
+        public long? InternalPrimaryCareProviderId { get; set; }
+        public string? TransactionPrecriberLastName { get; set; }
+        public string? PrimaryCareProviderLastName { get; set; }
+        public string? TransactionPrecriberFirstName { get; set; }
+        public string? PrimaryCareProviderFirstName { get; set; }
+        public string? PrimaryCareProviderAddress1 { get; set; }
+        public string? PrimaryCareProviderCity { get; set; }
+        public string? PrimaryCareProviderState { get; set; }
+        public string? PrimaryCareProviderZipCode { get; set; }
+        public string? PrimaryCareProviderPhoneAreaCode { get; set; }
+        public string? PrimaryCareProviderPhoneNumber { get; set; }
+        public string? PrimaryCareProviderFaxAreaCode { get; set; }
+        public string? PrimaryCareProviderFaxNumber { get; set; }
+        public string? VaccineCvxCode { get; set; }
+        public string? VaccineManufacturerName { get; set; }
+        public string? VaccineName { get; set; }
+        public string? VaccineLotNumber { get; set; }
+        public DateTime? VaccineExpirationDate { get; set; }
+        public string? VaccineInformationStatementName { get; set; }
+        public decimal? AdministeredDate { get; set; }
+        public decimal? AdministeredAmount { get; set; }
+        public string? AdministeredUnits { get; set; }
+        public string? RouteOfAdministrationDescription { get; set; }
+        public string? FacilityNpi { get; set; }
+        public string? OtherFacilityIdentification { get; set; }
+        public string? FacilityAddress1 { get; set; }
+        public string? FacilityAddress2 { get; set; }
+        public string? FacilityCity { get; set; }
+        public string? FacilityState { get; set; }
+        public string? FacilityZipCode { get; set; }
+        public string? FacilityPhoneNumber { get; set; }
+        public string? ProfessionalConsultationComplete { get; set; }
+        public string? Logic_DrugNdc { get; set; }
+        public long? Logic_FillFactKey { get; set; }
+        public long? Logic_FillFactPatientKey { get; set; }
+        public long? Logic_FacilityIdNum { get; set; }
+        public DateTime? Logic_FacilityIdDatestamp { get; set; }
+        public string? Logic_PatientAddrUsage { get; set; }
+        public DateTime? Logic_PatientAddrCreateDate { get; set; }
+        public long? Logic_PresPhoneKey { get; set; }
+        public string? Logic_PresPhoneStatus { get; set; }
+        public string? Logic_PresPhoneSourceCode { get; set; }
+        public decimal? Logic_PresPhoneHLevel { get; set; }
+        public long? Logic_PresFaxKey { get; set; }
+        public string? Logic_PresFaxStatus { get; set; }
+        public string? Logic_PresFaxSourceCode { get; set; }
+        public decimal? Logic_PresFaxHLevel { get; set; }
+        public long? Logic_PresNpiPresKey { get; set; }
+        public decimal? Logic_PresNpiHLevel { get; set; }
+        public long? Logic_FpfOrderNum { get; set; }
+        public decimal? Logic_FpfRespPartyKey { get; set; }
+    }
+}

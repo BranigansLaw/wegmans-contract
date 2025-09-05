@@ -1,0 +1,95 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "type": "string",
+      "minLength": 1,
+      "allowedValues": [
+        "loc",
+        "dev",
+        "test",
+        "cert",
+        "prod"
+      ],
+      "metadata": {
+        "description": "Describes the environment in which we are deploying to."
+      }
+    },
+    "geographicalRegions": {
+      "type": "array",
+      "minLength": 1,
+      "allowedValues": [
+        "eastus",
+        "centralus",
+        "westus",
+        "eastus2",
+        "northcentralus",
+        "southcentralus",
+        "westcentralus",
+        "westus2"
+      ],
+      "metadata": {
+        "description": "Datacenter regions available. Check details at https://azure.microsoft.com/en-us/regions/services/"
+      }
+    },
+    "productName": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "Describes the base name of the product."
+      }
+    },
+    "taggingEnvironment": {
+      "type": "string",
+      "minLength": 1,
+      "allowedValues": [
+        "Production",
+        "Non-Production",
+        "Certification",
+        "Test",
+        "Staging",
+        "Development"
+      ],
+      "metadata": {
+        "description": "Describes the environment for resource tagging."
+      }
+    }
+  },
+  "variables": {
+    "applicationInsights": {
+      "name": "[concat(parameters('productName'), '-ai-', parameters('environmentName'), '-', parameters('geographicalRegions')[0])]"
+    }
+  },
+  "resources": [
+    {
+      "name": "[variables('applicationInsights').name]",
+      "type": "Microsoft.Insights/components",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-05-01",
+      "tags": {
+        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('applicationInsights').name)]": "Resource",
+        "displayName": "[concat(variables('applicationInsights').name, '-component')]",
+        "wfm-team": "Pharmacy",
+        "wfm-service":"Pharmacy",
+        "wfm-environment": "[parameters('taggingEnvironment')]",
+        "wfm-application": "Pharmacy Reports",
+        "wfm-data-classification": "Proprietary",
+        "wfm-data-classification-ephi": "false",
+        "wfm-data-classification-pci": "false",
+        "wfm-data-classification-pi": "false",
+        "wfm-data-classification-employee": "false",
+        "wfm-data-classification-customer": "false",
+        "wfm-data-protection": "Administrative",
+        "wfm-data-usage": "Permanent",
+        "wfm-data-encrypted": "false",
+        "wfm-data-sharing": "None"
+      },
+      "properties": {
+        "Application_Type": "web"
+      }
+    }
+  ],
+  "outputs": {
+  }
+}

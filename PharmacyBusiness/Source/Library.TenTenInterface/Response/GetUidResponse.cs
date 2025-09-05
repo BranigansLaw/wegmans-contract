@@ -1,0 +1,17 @@
+﻿using System.Xml.Serialization;
+
+namespace Library.TenTenInterface.Response
+{
+    [XmlRoot(ElementName = "out", IsNullable = false)]
+    public class GetUidResponse : ITenTenResponse
+    {
+        [XmlElement(ElementName = "rc")]
+        public int ResponseCode { get; set; }
+
+        [XmlElement(ElementName = "msg")]
+        public string? Message { get; set; }
+
+        [XmlElement(ElementName = "uid")]
+        public string? UserId { get; set; }
+    }
+}

@@ -1,0 +1,204 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SnowflakeSQL\CustomerQuery.sql" />
+    <None Remove="SnowflakeSQL\PetPtNums_YYYYMMDD.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SnowflakeSQL\CustomerQuery.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SnowflakeSQL\PetPtNums_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+    <PackageReference Include="Polly" Version="8.5.0" />
+    <PackageReference Include="Snowflake.Data" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Library.LibraryUtilities\Library.LibraryUtilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SnowflakeSQL\Alternative_Payments_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\AtebMaster_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\CC_Payments_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\DailyDrug.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\Deceased_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\DurConflict_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\ETLCheck_Oracle_DW.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\ETLInfoForLogging_Oracle_DW.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\EXTENDED_DRUG_FILE_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\FDS_Pharmacies.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\FDS_Prescriptions.SQL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\FillFactTest.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\GetClaims.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\GetEnterpriseRxDataByPatientNum.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\GetFillFacts.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\GetPOAudit_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\GetPOFact_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\GetSmartOrderPointsMinMax.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\GetSpecialtyDispenses.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\GettHipaaClaimElements.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\Get_IVR_Outbound_Calls.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\InvAdj_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\McKesson_DW_Naloxone.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\McKessonImmunizations.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\MightBeRefundTransactions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\MightBeSoldTransactions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\Omnisys_Claim_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\Patients_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\Patient_Addresses_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\PetPtNums_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\PRESCRIBERADDRESS_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\PRESCRIBER_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\RxTransfer_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\RX_READY_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectERxUnauthorized.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectNewTagPatientGroups.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectRxErp.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectSoldDetail.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectStoreInventoryHistory.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectSureScriptsMedicalHistory.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectSureScriptsPhysicianNotificationLetters.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectThirdPartyClaimsBase.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectThirdPartyClaimsLookupAcquisitionCost.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectTurnaroundTime.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SelectWorkloadBalance.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\Super_Duper_Claim_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\Super_Workflow_Steps_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\SupplierPriceDrugFile_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\TagPatientGroups_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\TEMP_WORKFLOW_STEP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\VeriFone_Payments_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\Wegmans_HPOne_Pharmacies_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\Wegmans_HPOne_Prescriptions_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\WEG_086_YYYYMMDD_01.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\WEG_086_YYYYMMDD_01_For198.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SnowflakeSQL\WorkersCompMonthly_YYYYMMDD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

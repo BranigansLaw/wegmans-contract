@@ -1,0 +1,100 @@
+﻿namespace Library.McKessonDWInterface.DataModel
+{
+    /// <summary>
+    /// The properties listed here related to data types and data requirements within McKesson DW data source rather than from data destination (1010data).
+    /// </summary>
+    public class RxErpRow
+    {
+        public required DateTime? RxErpChangeDate { get; set; }
+        public required decimal? PatientNbr { get; set; }
+        public required int? StoreNbr { get; set; }
+        public required int? RxNbr { get; set; }
+        public required string? RxNbrTxt { get; set; }
+        public required string? NdcWithoutDashes { get; set; }
+        public required string? DrugName { get; set; }
+        public required decimal? DaysSupply { get; set; }
+        public required int? RefillsAuthorized { get; set; }
+        public required DateTime? LastFillDate { get; set; }
+        public required DateTime? ErpOrigTargetDate { get; set; }
+        public required DateTime? ErpTargetDate { get; set; }
+        public required string? ErpEnrollStatus { get; set; }
+        public required DateTime? ErpEnrollStatusDateTime { get; set; }
+        public required string? ErpEnrollReason { get; set; }
+        public required string? ErpExcludeReason { get; set; }
+        public required string? ErpDeliveryMethod { get; set; }
+        public required string? ErpDeliveryMethodPersist { get; set; }
+        public required string? IsConsentToFill { get; set; }
+        public required string? UserConsentToFill { get; set; }
+        public required DateTime? DateConsentToFill { get; set; }
+        public required DateTime? RxRecordEffectiveStartDateTime { get; set; }
+        public required string? RecordType { get; set; }
+        public required DateTime? ErpUsermodifiedTargetDate { get; set; }
+        public required string? ErpModifiedUserType { get; set; }
+        public required string? ErpModifiedUser { get; set; }
+        public required string? ErpUserModifiedRecordType { get; set; }
+        public required DateTime? ErpUserModifiedOnDate { get; set; }
+        public required int? RecordUpdates { get; set; }
+        public required string? PatientAutofillEnrollStatus { get; set; }
+        public required string? PatientErpEnrollStatus { get; set; }
+        public required DateTime? PatientErpEnrollDate { get; set; }
+        public required string? PatientAutoEnrollFutureRxs { get; set; }
+        public required string? PatientPreferredDeliveryMethod { get; set; }
+        public required string? PatientPrefersMailDelivery { get; set; }
+        public required string? PatientErpPaymentMethod { get; set; }
+        public required string? PatientRequestConsentToFill { get; set; }
+        public required string? PatientRequestConsentToErp { get; set; }
+        public required string? PatientExternalId { get; set; }
+        public required string? ProhibitRenewalRequest { get; set; }
+        public required string? CsrDiagnosisCode { get; set; }
+        public required string? DrugForm { get; set; }
+        public required decimal? QtyAuthorized { get; set; }
+        public required decimal? RefillQty { get; set; }
+        public required DateTime? ExpireDate { get; set; }
+        public required string? ReassignedRxNum { get; set; }
+        public required DateTime? RxCreatedDate { get; set; }
+        public required string? RxCreatedUser { get; set; }
+        public required string? RxOriginCode { get; set; }
+        public required string? RxStatus { get; set; }
+        public required decimal? RxRecordNum { get; set; }
+        public required decimal? FirstFillQty { get; set; }
+        public required DateTime? DatePrescribed { get; set; }
+        public required string? OriginalNdcWithoutDashes { get; set; }
+        public required string? OriginalDrugName { get; set; }
+        public required decimal? OriginalQty { get; set; }
+        public required string? Serial { get; set; }
+        public required string? DawCode { get; set; }
+        public required string? SelectedUpc { get; set; }
+        public required string? AckCode { get; set; }
+        public required string? LetterOnFile { get; set; }
+        public required string? EmployeeLoginName { get; set; }
+        public required DateTime? LastAckChangeDate { get; set; }
+        public required string? LastAckChangeUser { get; set; }
+        public required string? LastAckChangeUserName { get; set; }
+        public required DateTime? OriginalFillDate { get; set; }
+        public required decimal? TotalDailyDose { get; set; }
+        public required decimal? TotalQtyDispensed { get; set; }
+        public required decimal? TotalQtyTransferred { get; set; }
+        public required decimal? LegalFills { get; set; }
+        public required decimal? LatestFill { get; set; }
+        public required decimal? LatestFillDuration { get; set; }
+        public required decimal? LatestFillNonInprocess { get; set; }
+        public required decimal? LatestFillCanceled { get; set; }
+        public required decimal? LastDispFill { get; set; }
+        public required decimal? LastFillRefill { get; set; }
+        public required decimal? LastFillReleased { get; set; }
+        public required decimal? LastSoldFill { get; set; }
+        public required DateTime? ProfileIncludeDate { get; set; }
+        public required decimal? FirstFill { get; set; }
+        public required decimal? FirstRefill { get; set; }
+        public required DateTime? EarliestFillDate { get; set; }
+        public required decimal? PrevFillReleased { get; set; }
+        public required DateTime? SyncDate { get; set; }
+        public required string? IsLinked { get; set; }
+        public required string? CancelReason { get; set; }
+        public required decimal? PrescriberNum { get; set; }
+        public required decimal? PrescriberAddressNum { get; set; }
+        public required string? PrescriberOrderNbr { get; set; }
+        public required string? IsEPCS { get; set; }
+        public required string? RrrDenied { get; set; }
+    }
+}

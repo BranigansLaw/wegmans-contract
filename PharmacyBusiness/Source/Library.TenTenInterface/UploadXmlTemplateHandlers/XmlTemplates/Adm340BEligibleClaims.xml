@@ -1,0 +1,49 @@
+﻿<in>
+	<table>
+		<title>ADM 340B Eligible Claims {3:yyyyMMdd}</title>
+		<sdesc>Eligible claims for alternate delivery model</sdesc>
+		<cols>
+			<th name="claim_id" type="a" format="type:char;width:8">Claim Id</th>
+			<th name="type" type="a" format="type:char;width:8">Type</th>
+			<th name="claim_date" type="i" format="type:date;width:8;dec:0">Claim Date</th>
+			<th name="date_of_service" type="i" format="type:date;width:8;dec:0">Date of Service</th>
+			<th name="refill_num" type="i" format="type:nocommas;width:2;dec:0">Refill Number</th>
+			<th name="rx_num" type="i" format="type:nocommas;width:8">Rx Number</th>
+			<th name="drug_name" type="a" format="type:char;width:28">Drug Name</th>
+			<th name="drug_pack_size" type="f" format="type:nocommas;width:17">Package Size</th>
+			<th name="package_qty" type="i" format="type:nocommas;dec:0;width:3">Package Quantity</th>
+			<th name="qty_per_uoi" type="f" format="type:nocommas;width:16;dec:2">Quantity per Uoi</th>
+			<th name="ndc_wo" type="a" format="type:char;width:13">Ndc wo</th>
+			<th name="qty_dispensed" type="f" format="type:nocommas;width:6">Quantity</th>
+			<th name="days_supply" type="f" format="type:nocommas;width:4">Days Supply</th>
+			<th name="brand_generic" type="a" format="type:char;width:7">Brand/Generic</th>
+			<th name="cash_thirdparty" type="a" format="type:char;width:11">Cash/Third Party</th>
+			<th name="claim_type" type="a" format="type:char;width:7">Claim Type</th>
+			<th name="sales_tax" type="f" format="type:num;width:11;dec:2">Pbm Sales Tax</th>
+			<th name="co_pay" type="f" format="type:num;width:11;dec:2">In Patient Copay</th>
+			<th name="tp_pay" type="f" format="type:num;width:11;dec:2">TP Pay</th>
+			<th name="hc_facility_fee" type="f" format="type:num;width:11;dec:2">Healthcare Fee</th>
+			<th name="amt_due_hc_facility" type="f" format="type:num;width:11;dec:2">Pharmacy Due Hospital</th>
+			<th name="pharm_name" type="a" format="type:char;width:50">Pharmacy Name</th>
+			<th name="hc_facility" type="a" format="type:char;width:50">Contracted Entity</th>
+			<th name="unique_claim_id" type="a" format="type:char;width:8">Unique Claim ID</th>
+			<th name="contract_id" type="a" format="type:char;width:6">Contract ID</th>
+			<th name="store_num" type="i" format="type:nocommas;dec:0;width:6">Store Nbr</th>
+			<th name="drug_ndc" type="a" format="type:char;width:13">NDC</th>
+			<th name="run_date" type="i" format="type:date;width:10">Run Date</th>
+			<th name="process_date" type="i" format="type:date;width:10">Process Date</th>
+		</cols>
+		<data>{0}</data>
+	</table>
+	<name mode="{1}">{2}.{4}.d{3:yyyyMMdd}</name>
+	<users>
+		<user>wegmans_cjmccarthy</user>
+		<user>wegmans_vndtoptaltxf</user>
+		<user>wegmans_rx_batch</user>
+		<user>wegmans_rx_batch1</user>
+		<user>wegmans_rx_batch2</user>
+		<user>wegmans_rx_batch_pool</user>
+		<user>wegmans_rx_batch_inn</user>
+		<user>wegmans_internal</user>
+	</users>
+</in>

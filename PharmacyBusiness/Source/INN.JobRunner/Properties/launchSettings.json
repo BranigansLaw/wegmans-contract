@@ -1,0 +1,291 @@
+{
+  "profiles": {
+    "JobRunner-Help": {
+      "commandName": "Project"
+    },
+    "JobRunner-IntegrationTestRunner": {
+      "commandName": "Project",
+      "commandLineArgs": "integration-tests"
+    },
+    "JobRunner-GenerateSnowflakeDataMappings": {
+      "commandName": "Project",
+      "commandLineArgs": "generate-snowflake-datamappings"
+    },
+    "JobRunner-EmplifiImportJpapEligibilityFromIbm": {
+      "commandName": "Project",
+      "commandLineArgs": "emplifi-jpap-eligibility-from-ibm --run-for-filename CarePath_Wegmans_EligibilityFeed_20241114142400.txt"
+    },
+    "JobRunner-EmplifiImportJpapTriageFromIbm": {
+      "commandName": "Project",
+      "commandLineArgs": "emplifi-import-jpap-triage-from-ibm --run-for-filename Wegmans_CarePath_PDE_Triage_20240729031352.txt"
+    },
+    "JobRunner-EmplifiImportOncologyTriageFromIbm": {
+      "commandName": "Project",
+      "commandLineArgs": "emplifi-import-oncology-triage-from-ibm --run-for-filename CarePath_DelayDenial_Triage_20241001040011.txt"
+    },
+    "JobRunner-EmplifiImportVerificationOfBenefitsFromIbm": {
+      "commandName": "Project",
+      "commandLineArgs": "emplifi-import-verification-of-benefits-from-ibm"
+    },
+    "JobRunner-ExportAstuteAdherenceCallsFromMcKesson": {
+      "commandName": "Project",
+      "commandLineArgs": "export-astute-adherence-calls-from-mckesson"
+    },
+    "JobRunner-ExportDelayAndDenialStatusFromEmplifi": {
+      "commandName": "Project",
+      "commandLineArgs": "export-delay-and-denial-status-from-emplifi --run-for-datetime \"07/16/2024 08:30:01\""
+    },
+    "JobRunner-ExportImmunizationsFromMcKesson": {
+      "commandName": "Project",
+      "commandLineArgs": "export-immunizations-from-mckesson"
+    },
+    "JobRunner-ExportInvAdjustmentFromMcKessonSnowflake": {
+      "commandName": "Project",
+      "commandLineArgs": "export-inv-adjustment-from-mckesson-snowflake --run-for \"05/31/2024\""
+    },
+    "JobRunner-ExportPetPtNumsFromMcKessonSnowflake": {
+      "commandName": "Project",
+      "commandLineArgs": "export-pet-pt-nums-from-mckesson-snowflake"
+    },
+    "JobRunner-ExportRxTransferFromMcKessonSnowflake": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-rx-transfer-export"
+    },
+    "JobRunner-ExportSureScriptsReportsFromMcKessonDW": {
+      "commandName": "Project",
+      "commandLineArgs": "export-sure-scripts-reports-from-mckesson-dw"
+    },
+    "JobRunner-ExportSoldDetailFromMcKessonSnowflake": {
+      "commandName": "Project",
+      "commandLineArgs": "export-sold-detail-from-mckesson-snowflake --run-for \"07/03/2024\""
+    },
+    "JobRunner-JanssenImportOncologyVoucherTriageFromIbm": {
+      "commandName": "Project",
+      "commandLineArgs": "janssen-import-oncology-voucher-triage-from-ibm --run-for-filename Wegmans_CarePath_Voucher_Triage_20241108123100.txt"
+    },
+    "JobRunner-TenTenImportAdm340BEligibleClaimsFromTCGFile": {
+      "commandName": "Project",
+      "commandLineArgs": "import-adm-340b-eligible-claims-from-tcg-file"
+    },
+    "JobRunner-TenTenExportAdm340BOrderToTCGFile": {
+      "commandName": "Project",
+      "commandLineArgs": "export-adm-340b-order-to-tcg-file"
+    },
+    "JobRunner-TenTenImportAdm340BInvoicingFromTCGFile": {
+      "commandName": "Project",
+      "commandLineArgs": "import-adm-340b-invoicing-from-tcg-file"
+    },
+    "JobRunner-TenTenImportAdm340BOpportunityFromTCGFile": {
+      "commandName": "Project",
+      "commandLineArgs": "import-adm-340b-opportunity-from-tcg-file"
+    },
+    "JobRunner-TenTenImportAdm340BPurchasesFromTCGFile": {
+      "commandName": "Project",
+      "commandLineArgs": "import-adm-340b-purchases-from-tcg-file"
+    },
+    "JobRunner-TenTenImportCallRecordDetailFromCisco": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-call-record-detail-from-cisco"
+    },
+    "JobRunner-TenTenImportCallStateDetailFromCisco": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-call-state-detail-from-cisco"
+    },
+    "JobRunner-TenTenImportConversationFactFromMcKessonCPS": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-conversation-fact-from-mckesson-cps"
+    },
+    "JobRunner-TenTenImportEnrollmentFactFromMcKessonCPS": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-enrollment-fact-from-mckesson-cps"
+    },
+    "JobRunner-TenTenImportIvrOutboundCallsFromOmnicellFile": {
+      "commandName": "Project",
+      "commandLineArgs": "import-ivr-outbound-calls-from-omnicell-file"
+    },
+    "JobRunner-TenTenImportMeasureFactFromMcKessonCPS": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-measure-fact-from-mckesson-cps"
+    },
+    "JobRunner-TenTenImportMedicareAutoshipFromEnlivenHealth": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-medicare-autoship-from-enlivenhealth"
+    },
+    "JobRunner-TenTenImportMessageFactFromMcKessonCPS": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-message-fact-from-mckesson-cps"
+    },
+    "JobRunner-TenTenImportNetSalesFromNetezza": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-net-sales-from-netezza"
+    },
+    "JobRunner-TenTenImportNewTagPatientGroupsFromMcKessonDW": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-new-tag-patient-groups-from-mckesson-dw"
+    },
+    "JobRunner-TenTenImportPCSPrefFromMcKessonCPS": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-pcs-pref-from-mckesson-cps"
+    },
+    "JobRunner-TenTenImportPCSPrefFullFromMcKessonCPS": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-pcs-pref-full-from-mckesson-cps"
+    },
+    "JobRunner-TenTenImportProjectionDetail": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-projection-detail"
+    },
+    "JobRunner-TenTenImportQuestionnaireFactFromMcKessonCPS": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-questionnaire-fact-from-mckesson-cps"
+    },
+    "JobRunner-TenTenImportRxErpFromMcKessonDW": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-rx-erp-from-mckesson-dw"
+    },
+    "JobRunner-TenTenImportSoldDetailFromMcKessonDW": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-sold-detail-from-mckesson-dw"
+    },
+    "JobRunner-TenTenImportStoreInventoryHistoryFromMcKessonDW": {
+      "commandName": "Project",
+      "commandLineArgs": "tenten-import-store-inventory-history-from-mckesson-dw"
+    },
+    "JobRunner-TenTenImportVaccineAppointmentBookingFromOmnicellFile": {
+      "commandName": "Project",
+      "commandLineArgs": "import-vaccine-appointment-booking-from-omnicell-file"
+    },
+    "JobRunner-ExportOmnisysClaimFromMcKessonDW": {
+      "commandName": "Project",
+      "commandLineArgs": "export-omnisys-claim-from-mckesson-dw"
+    },
+    "JobRunner-ExportTurnaroundTimesFromMcKessonDW": {
+      "commandName": "Project",
+      "commandLineArgs": "export-turnaround-times-from-mckesson-dw"
+    },
+    "JobRunner-ScriptsWorkloadBalancing": {
+      "commandName": "Project",
+      "commandLineArgs": "scripts-workload-balancing"
+    },
+    "JobRunner-SnowflakeDeceasedExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-deceased-export"
+    },
+    "JobRunner-SnowflakeDurConflictExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-dur-conflict-export"
+    },
+    "JobRunner-SnowflakeFdsPharmaciesExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-fds-pharmacies-export"
+    },
+    "JobRunner-SnowflakeGetSmartOrderPointsMinMaxExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-get-smart-order-points-min-max-export"
+    },
+    "JobRunner-SnowflakeHpOnePharmaciesExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-hp-one-pharmacies-export"
+    },
+    "JobRunner-SnowflakeOmnisysClaimExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-omnisys-claim-export"
+    },
+    "JobRunner-SnowflakeSelectSoldDetailExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-select-sold-detail-export"
+    },
+    "JobRunner-SnowflakeMedicareFeedsExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-medicare-feeds-export"
+    },
+    "JobRunner-SnowflakeToTenTenDataSftpExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-to-tenten-data-sftp-export"
+    },
+    "JobRunner-SnowflakeAlternativePaymentsExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-alternative-payments-export"
+    },
+    "JobRunner-SnowflakeAtebMasterExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-ateb-master-export"
+    },
+    "JobRunner-SnowflakeCreditCardPaymentsExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-credit-card-payments-export"
+    },
+    "JobRunner-SnowflakeDailyDrugExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-daily-drug-export"
+    },
+    "JobRunner-SnowflakeErxUnauthorizedExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-erx-unauthorized-export"
+    },
+    "JobRunner-SnowflakeGetClaimsExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-get-claims-export"
+    },
+    "JobRunner-SnowflakeGetEnterpriseRxDataByPatientNumExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-enterprise-rx-data-by-patient-num-export"
+    },
+    "JobRunner-SnowflakeGetPOAuditExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-po-audit-export"
+    },
+    "JobRunner-SnowflakeGetPOFactExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-po-fact-export"
+    },
+    "JobRunner-SnowflakeIqviaAndImiExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-inqvia-and-imi-export"
+    },
+    "JobRunner-SnowflakeMcKessonNaloxoneExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-mckesson-naloxone-export"
+    },
+    "JobRunner-SnowflakeMightBeExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-mail-sales-export"
+    },
+    "JobRunner-SnowflakePatientAddressesExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-patient-addresses-export"
+    },
+    "JobRunner-SnowflakePatientsExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-patients-export"
+    },
+    "JobRunner-SnowflakeSuperDuperClaimExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-super-duper-claim-export"
+    },
+    "JobRunner-SnowflakeSuperWorkflowExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-super-workflow-export"
+    },
+    "JobRunner-SnowflakeVerifonePaymentsExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-verifone-payments-export"
+    },
+    "JobRunner-SnowflakeWorkersCompMonthlyExport": {
+      "commandName": "Project",
+      "commandLineArgs": "snowflake-workers-comp-monthly-export"
+    },
+    "JobRunner-ThirdPartyClaims": {
+      "commandName": "Project",
+      "commandLineArgs": "third-party-claims"
+    },
+    "JobRunner-TestReprocessingOfVendorDataFile": {
+      "commandName": "Project",
+      "commandLineArgs": "test-reprocessing-of-vendor-data-file"
+    },
+    "JobRunner-ExportJpapStatusFromEmplifi": {
+      "commandName": "Project",
+      "commandLineArgs": "export-jpap-status-from-emplifi --run-for-datetime \"12/19/2024 14:30:00\""
+    }
+  }
+}

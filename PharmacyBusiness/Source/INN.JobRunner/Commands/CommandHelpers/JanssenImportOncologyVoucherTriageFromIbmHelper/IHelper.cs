@@ -1,0 +1,18 @@
+﻿using Library.DataFileInterface.VendorFileDataModels;
+using Library.EmplifiInterface.DataModel;
+using Library.TenTenInterface.DataModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace INN.JobRunner.Commands.CommandHelpers.JanssenImportOncologyVoucherTriageFromIbmHelper
+{
+    public interface IHelper
+    {
+        OncologyVoucherTriage MapOncologyVoucherTriage(
+            IbmOncologyVoucherTriageRow ibmOncologyVoucherTriage,
+            IEnumerable<CompleteSpecialtyItemRow> completeSpecialtyItemRows);
+    }
+}
